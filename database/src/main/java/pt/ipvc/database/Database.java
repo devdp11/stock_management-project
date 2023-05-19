@@ -9,7 +9,7 @@ import jakarta.persistence.Query;
 public class Database {
 
     private static final String PERSISTENCE_UNIT_NAME = "VEGETABLE-COMPANY" ;
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     private static EntityManager entityManager = factory.createEntityManager();
 
     public static EntityManager getEntityManager() {

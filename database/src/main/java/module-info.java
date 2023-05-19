@@ -6,6 +6,6 @@ module vegetable.company.database.main {
     requires com.fasterxml.classmate;
     requires net.bytebuddy;
     opens pt.ipvc.dal to org.hibernate.orm.core;
-    //exports pt.ipvc.bll;
+    exports pt.ipvc.bll;
     exports pt.ipvc.dal;
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class UsersBLL {
 
     public static List<UsersEntity> index() {
-        return Database.query("users.index").getResultList();
+        return Database.query("user.index").getResultList();
     }
 
     public static UsersEntity get(Long id) {
