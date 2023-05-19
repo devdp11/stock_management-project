@@ -3,10 +3,10 @@ package pt.ipvc.dal;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
-@Table(name = "seeds", schema = "public", catalog = "vegetable-managment-company")
-public class SeedsEntity {
+public class Seeds {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -26,6 +26,8 @@ public class SeedsEntity {
     @Basic
     @Column(name = "date")
     private Date date;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Production> productionsById;
 
     public int getId() {
         return id;
@@ -80,14 +82,14 @@ public class SeedsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SeedsEntity that = (SeedsEntity) o;
+        Seeds seeds = (Seeds) o;
 
-        if (id != that.id) return false;
-        if (idSupplier != that.idSupplier) return false;
-        if (idManager != that.idManager) return false;
-        if (quantityRequested != that.quantityRequested) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (id != seeds.id) return false;
+        if (idSupplier != seeds.idSupplier) return false;
+        if (idManager != seeds.idManager) return false;
+        if (quantityRequested != seeds.quantityRequested) return false;
+        if (description != null ? !description.equals(seeds.description) : seeds.description != null) return false;
+        if (date != null ? !date.equals(seeds.date) : seeds.date != null) return false;
 
         return true;
     }
@@ -101,5 +103,13 @@ public class SeedsEntity {
         result = 31 * result + quantityRequested;
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
+    }
+
+    public Collection<Production> getProductionsById() {
+        return productionsById;
+    }
+
+    public void setProductionsById(Collection<Production> productionsById) {
+        this.productionsById = productionsById;
     }
 }

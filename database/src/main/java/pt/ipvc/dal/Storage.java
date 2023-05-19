@@ -2,9 +2,10 @@ package pt.ipvc.dal;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
-@Table(name = "storage", schema = "public", catalog = "vegetable-managment-company")
-public class StorageEntity {
+public class Storage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -18,6 +19,8 @@ public class StorageEntity {
     @Basic
     @Column(name = "location")
     private String location;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Stock> stocksById;
 
     public int getId() {
         return id;
@@ -56,12 +59,12 @@ public class StorageEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StorageEntity that = (StorageEntity) o;
+        Storage storage = (Storage) o;
 
-        if (id != that.id) return false;
-        if (street != null ? !street.equals(that.street) : that.street != null) return false;
-        if (door != null ? !door.equals(that.door) : that.door != null) return false;
-        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (id != storage.id) return false;
+        if (street != null ? !street.equals(storage.street) : storage.street != null) return false;
+        if (door != null ? !door.equals(storage.door) : storage.door != null) return false;
+        if (location != null ? !location.equals(storage.location) : storage.location != null) return false;
 
         return true;
     }
@@ -73,5 +76,13 @@ public class StorageEntity {
         result = 31 * result + (door != null ? door.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         return result;
+    }
+
+    public Collection<Stock> getStocksById() {
+        return stocksById;
+    }
+
+    public void setStocksById(Collection<Stock> stocksById) {
+        this.stocksById = stocksById;
     }
 }

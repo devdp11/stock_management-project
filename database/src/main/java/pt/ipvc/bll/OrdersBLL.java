@@ -1,7 +1,5 @@
 package pt.ipvc.bll;
-
-import org.hibernate.criterion.Order;
-import pt.ipvc.dal.OrdersEntity;
+import pt.ipvc.dal.Orders;
 import pt.ipvc.database.Database;
 
 import java.util.List;
@@ -9,28 +7,28 @@ import java.util.List;
 
 public class OrdersBLL {
 
-    public static List<OrdersEntity> index() {
+    public static List<Orders> index() {
         return Database.query("orders.index").getResultList();
     }
 
-    public static OrdersEntity get(Long id) {
-        return Database.find(OrdersEntity.class, id);
+    public static Orders get(Long id) {
+        return Database.find(Orders.class, id);
     }
 
-    public static void create(OrdersEntity entity) {
+    public static void create(Orders entity) {
         Database.beginTransaction();
         Database.insert(entity);
         Database.commitTransaction();
     }
 
-    public static void update(OrdersEntity entity) {
+    public static void update(Orders entity) {
         Database.beginTransaction();
         Database.update(entity);
         Database.commitTransaction();
     }
 
     public static void remove(Long id) {
-        OrdersEntity entity = get(id);
+        Orders entity = get(id);
 
         Database.beginTransaction();
         Database.delete(entity);

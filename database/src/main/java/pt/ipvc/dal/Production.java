@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "production", schema = "public", catalog = "vegetable-managment-company")
-public class ProductionEntity {
+public class Production {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -102,7 +101,7 @@ public class ProductionEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ProductionEntity that = (ProductionEntity) o;
+        Production that = (Production) o;
 
         if (id != that.id) return false;
         if (idSeeds != that.idSeeds) return false;

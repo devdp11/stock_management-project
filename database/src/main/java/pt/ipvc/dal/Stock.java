@@ -3,10 +3,10 @@ package pt.ipvc.dal;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
-@Table(name = "stock", schema = "public", catalog = "vegetable-managment-company")
-public class StockEntity {
+public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -26,6 +26,11 @@ public class StockEntity {
     @Basic
     @Column(name = "id_storage")
     private int idStorage;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Orders> ordersById;
+    @ManyToOne
+    @JoinColumn(name = "id_production", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
+    private Production productionByIdProduction;
 
     public int getId() {
         return id;
@@ -80,14 +85,14 @@ public class StockEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StockEntity that = (StockEntity) o;
+        Stock stock = (Stock) o;
 
-        if (id != that.id) return false;
-        if (producedQuantity != that.producedQuantity) return false;
-        if (idProduction != that.idProduction) return false;
-        if (idStorage != that.idStorage) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (id != stock.id) return false;
+        if (producedQuantity != stock.producedQuantity) return false;
+        if (idProduction != stock.idProduction) return false;
+        if (idStorage != stock.idStorage) return false;
+        if (description != null ? !description.equals(stock.description) : stock.description != null) return false;
+        if (date != null ? !date.equals(stock.date) : stock.date != null) return false;
 
         return true;
     }
@@ -101,5 +106,21 @@ public class StockEntity {
         result = 31 * result + idProduction;
         result = 31 * result + idStorage;
         return result;
+    }
+
+    public Collection<Orders> getOrdersById() {
+        return ordersById;
+    }
+
+    public void setOrdersById(Collection<Orders> ordersById) {
+        this.ordersById = ordersById;
+    }
+
+    public Production getProductionByIdProduction() {
+        return productionByIdProduction;
+    }
+
+    public void setProductionByIdProduction(Production productionByIdProduction) {
+        this.productionByIdProduction = productionByIdProduction;
     }
 }

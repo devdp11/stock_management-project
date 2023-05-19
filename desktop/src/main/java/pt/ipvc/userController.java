@@ -1,32 +1,21 @@
 package pt.ipvc;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.net.URL;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
-import pt.ipvc.bll.UsersBLL;
-import pt.ipvc.dal.UsersEntity;
-import pt.ipvc.view.Session;
+
+
+import pt.ipvc.dal.Users;
 
 import java.util.*;
 
@@ -37,22 +26,21 @@ public class userController {
     private Parent root;
 
     @FXML
-    private TableView<UsersEntity> dataView;
+    private TableView<Users> dataView;
     @FXML
-    private TableColumn<UsersEntity, Integer> numUserColumn;
+    private TableColumn<Users, Integer> numUserColumn;
     @FXML
-    private TableColumn<UsersEntity, String> nameUserColumn;
+    private TableColumn<Users, String> nameUserColumn;
     @FXML
-    private TableColumn<UsersEntity, String> phoneUserColumn;
+    private TableColumn<Users, String> phoneUserColumn;
     @FXML
-    private TableColumn<UsersEntity, String> emailUserColumn;
+    private TableColumn<Users, String> emailUserColumn;
     @FXML
-    private TableColumn<UsersEntity, String> passwordUserColumn;
+    private TableColumn<Users, String> passwordUserColumn;
     @FXML
-    private TableColumn<UsersEntity, String> roleUserColumn;
+    private TableColumn<Users, String> roleUserColumn;
     @FXML
     private TextField searchBar;
-    private final UsersEntity currentUser = Session.getInstance().getCurrentUser();
 
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {

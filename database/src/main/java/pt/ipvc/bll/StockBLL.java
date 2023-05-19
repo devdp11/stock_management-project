@@ -1,35 +1,33 @@
 package pt.ipvc.bll;
-
-
-import pt.ipvc.dal.StockEntity;
+import pt.ipvc.dal.Stock;
 import pt.ipvc.database.Database;
 
 import java.util.List;
 
 public class StockBLL {
 
-    public static List<StockEntity> index() {
+    public static List<Stock> index() {
         return Database.query("stock.index").getResultList();
     }
 
-    public static StockEntity get(Long id) {
-        return Database.find(StockEntity.class, id);
+    public static Stock get(Long id) {
+        return Database.find(Stock.class, id);
     }
 
-    public static void create(StockEntity entity) {
+    public static void create(Stock entity) {
         Database.beginTransaction();
         Database.insert(entity);
         Database.commitTransaction();
     }
 
-    public static void update(StockEntity entity) {
+    public static void update(Stock entity) {
         Database.beginTransaction();
         Database.update(entity);
         Database.commitTransaction();
     }
 
     public static void remove(Long id) {
-        StockEntity entity = get(id);
+        Stock entity = get(id);
 
         Database.beginTransaction();
         Database.delete(entity);

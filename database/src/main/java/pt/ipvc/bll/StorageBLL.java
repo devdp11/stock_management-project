@@ -1,34 +1,35 @@
 package pt.ipvc.bll;
 
-import pt.ipvc.dal.StorageEntity;
+
+import pt.ipvc.dal.Storage;
 import pt.ipvc.database.Database;
 
 import java.util.List;
 
 public class StorageBLL {
 
-    public static List<StorageEntity> index() {
+    public static List<Storage> index() {
         return Database.query("storage.index").getResultList();
     }
 
-    public static StorageEntity get(Long id) {
-        return Database.find(StorageEntity.class, id);
+    public static Storage get(Long id) {
+        return Database.find(Storage.class, id);
     }
 
-    public static void create(StorageEntity entity) {
+    public static void create(Storage entity) {
         Database.beginTransaction();
         Database.insert(entity);
         Database.commitTransaction();
     }
 
-    public static void update(StorageEntity entity) {
+    public static void update(Storage entity) {
         Database.beginTransaction();
         Database.update(entity);
         Database.commitTransaction();
     }
 
     public static void remove(Long id) {
-        StorageEntity entity = get(id);
+        Storage entity = get(id);
 
         Database.beginTransaction();
         Database.delete(entity);

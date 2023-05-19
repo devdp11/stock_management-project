@@ -1,42 +1,41 @@
 package pt.ipvc.bll;
-
-import pt.ipvc.dal.RoleEntity;
+import pt.ipvc.dal.Role;
 import pt.ipvc.database.Database;
 
 import java.util.List;
 
 public class RoleBLL {
 
-    public static List<RoleEntity> index() {
+    public static List<Role> index() {
         return Database.query("role.index").getResultList();
     }
 
-    public static RoleEntity get(int id) {
-        return Database.find(RoleEntity.class, id);
+    public static Role get(int id) {
+        return Database.find(Role.class, id);
     }
 
-    public static void create(RoleEntity entity) {
+    public static void create(Role entity) {
         Database.beginTransaction();
         Database.insert(entity);
         Database.commitTransaction();
     }
 
-    public static void update(RoleEntity entity) {
+    public static void update(Role entity) {
         Database.beginTransaction();
         Database.update(entity);
         Database.commitTransaction();
     }
 
     public static void remove(int id) {
-        RoleEntity entity = get(id);
+        Role entity = get(id);
 
         Database.beginTransaction();
         Database.delete(entity);
         Database.commitTransaction();
     }
 
-    public static RoleEntity getbydescription(String description){
-        return (RoleEntity) Database.query("role.getbydescription")
+    public static Role getbydescription(String description){
+        return (Role) Database.query("role.getbydescription")
                 .setParameter("description", description)
                 .getResultStream().findFirst().orElse(null);
 

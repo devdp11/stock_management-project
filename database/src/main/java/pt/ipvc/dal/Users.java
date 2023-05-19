@@ -2,9 +2,10 @@ package pt.ipvc.dal;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
-@Table(name = "users", schema = "public", catalog = "vegetable-managment-company")
-public class UsersEntity {
+public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -31,11 +32,19 @@ public class UsersEntity {
     @Column(name = "location")
     private String location;
     @Basic
-    @Column(name = "postal")
-    private String postal;
-    @Basic
     @Column(name = "id_role")
     private int idRole;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Orders> ordersById;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Production> productionsById;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Seeds> seedsById;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Seeds> seedsById_0;
+    @ManyToOne
+    @JoinColumn(name = "id_role", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
+    private Role roleByIdRole;
 
     public int getId() {
         return id;
@@ -101,14 +110,6 @@ public class UsersEntity {
         this.location = location;
     }
 
-    public String getPostal() {
-        return postal;
-    }
-
-    public void setPostal(String postal) {
-        this.postal = postal;
-    }
-
     public int getIdRole() {
         return idRole;
     }
@@ -122,18 +123,17 @@ public class UsersEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UsersEntity that = (UsersEntity) o;
+        Users users = (Users) o;
 
-        if (id != that.id) return false;
-        if (idRole != that.idRole) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (street != null ? !street.equals(that.street) : that.street != null) return false;
-        if (door != null ? !door.equals(that.door) : that.door != null) return false;
-        if (location != null ? !location.equals(that.location) : that.location != null) return false;
-        if (postal != null ? !postal.equals(that.postal) : that.postal != null) return false;
+        if (id != users.id) return false;
+        if (idRole != users.idRole) return false;
+        if (name != null ? !name.equals(users.name) : users.name != null) return false;
+        if (phone != null ? !phone.equals(users.phone) : users.phone != null) return false;
+        if (email != null ? !email.equals(users.email) : users.email != null) return false;
+        if (password != null ? !password.equals(users.password) : users.password != null) return false;
+        if (street != null ? !street.equals(users.street) : users.street != null) return false;
+        if (door != null ? !door.equals(users.door) : users.door != null) return false;
+        if (location != null ? !location.equals(users.location) : users.location != null) return false;
 
         return true;
     }
@@ -148,8 +148,47 @@ public class UsersEntity {
         result = 31 * result + (street != null ? street.hashCode() : 0);
         result = 31 * result + (door != null ? door.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
-        result = 31 * result + (postal != null ? postal.hashCode() : 0);
         result = 31 * result + idRole;
         return result;
+    }
+
+    public Collection<Orders> getOrdersById() {
+        return ordersById;
+    }
+
+    public void setOrdersById(Collection<Orders> ordersById) {
+        this.ordersById = ordersById;
+    }
+
+    public Collection<Production> getProductionsById() {
+        return productionsById;
+    }
+
+    public void setProductionsById(Collection<Production> productionsById) {
+        this.productionsById = productionsById;
+    }
+
+    public Collection<Seeds> getSeedsById() {
+        return seedsById;
+    }
+
+    public void setSeedsById(Collection<Seeds> seedsById) {
+        this.seedsById = seedsById;
+    }
+
+    public Collection<Seeds> getSeedsById_0() {
+        return seedsById_0;
+    }
+
+    public void setSeedsById_0(Collection<Seeds> seedsById_0) {
+        this.seedsById_0 = seedsById_0;
+    }
+
+    public Role getRoleByIdRole() {
+        return roleByIdRole;
+    }
+
+    public void setRoleByIdRole(Role roleByIdRole) {
+        this.roleByIdRole = roleByIdRole;
     }
 }
