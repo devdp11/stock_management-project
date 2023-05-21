@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipvc.seedAddController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipvc.seedAddController">
    <top>
       <AnchorPane prefHeight="80.0" prefWidth="400.0" style="-fx-background-color: #088B2D;" BorderPane.alignment="CENTER">
          <children>
@@ -30,24 +30,26 @@
    <center>
       <AnchorPane prefHeight="353.0" prefWidth="396.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="29.0" layoutY="51.0" prefHeight="38.0" prefWidth="67.0" text="Description*" textAlignment="CENTER" />
-            <Label layoutX="33.0" layoutY="122.0" prefHeight="38.0" prefWidth="59.0" text="Quantity*" textAlignment="CENTER" />
-            <Label layoutX="33.0" layoutY="190.0" prefHeight="38.0" prefWidth="59.0" text="Date*" textAlignment="CENTER" />
-            <TextField fx:id="descriptionTextField" layoutX="99.0" layoutY="52.0" prefHeight="36.0" prefWidth="278.0" promptText="Description" />
-            <TextField fx:id="quantityTextField" layoutX="99.0" layoutY="123.0" prefHeight="36.0" prefWidth="278.0" promptText="Quantity" />
-            <Label layoutX="33.0" layoutY="255.0" prefHeight="38.0" prefWidth="59.0" text="Supplier*" textAlignment="CENTER" />
-            <ComboBox fx:id="supplierComboBox" layoutX="99.0" layoutY="256.0" prefHeight="36.0" prefWidth="278.0" promptText="Supplier" />
-            <Button layoutX="217.0" layoutY="336.0" mnemonicParsing="false" onAction="#onRequestButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="REQUEST" textFill="#53aa3e">
+            <Label layoutX="30.0" layoutY="38.0" prefHeight="38.0" prefWidth="67.0" text="Description*" textAlignment="CENTER" />
+            <Label layoutX="34.0" layoutY="109.0" prefHeight="38.0" prefWidth="59.0" text="Quantity*" textAlignment="CENTER" />
+            <Label layoutX="34.0" layoutY="177.0" prefHeight="38.0" prefWidth="59.0" text="Date*" textAlignment="CENTER" />
+            <TextField fx:id="descriptionTextField" layoutX="100.0" layoutY="39.0" prefHeight="36.0" prefWidth="278.0" promptText="Description" />
+            <TextField fx:id="quantityTextField" layoutX="100.0" layoutY="110.0" prefHeight="36.0" prefWidth="278.0" promptText="Quantity" />
+            <Label layoutX="33.0" layoutY="315.0" prefHeight="38.0" prefWidth="59.0" text="Supplier*" textAlignment="CENTER" />
+            <ComboBox fx:id="supplierComboBox" layoutX="100.0" layoutY="315.0" prefHeight="36.0" prefWidth="278.0" promptText="Supplier" />
+            <Button layoutX="217.0" layoutY="399.0" mnemonicParsing="false" onAction="#onRequestButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="REQUEST" textFill="#53aa3e">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button layoutX="46.0" layoutY="336.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: E33F3F;" text="CANCEL" textFill="WHITE">
+            <Button layoutX="46.0" layoutY="399.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: E33F3F;" text="CANCEL" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <TextField fx:id="dateTextField" layoutX="99.0" layoutY="190.0" prefHeight="36.0" prefWidth="278.0" promptText="yyyy-mm-dd" />
+            <TextField fx:id="dateTextField" layoutX="100.0" layoutY="178.0" prefHeight="36.0" prefWidth="278.0" promptText="Date" />
+            <Label layoutX="33.0" layoutY="245.0" prefHeight="38.0" prefWidth="59.0" text="Manager*" textAlignment="CENTER" />
+            <ComboBox fx:id="managerComboBox" layoutX="100.0" layoutY="246.0" prefHeight="36.0" prefWidth="278.0" promptText="Manager" />
          </children>
       </AnchorPane>
    </center>

@@ -6,12 +6,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
+
 public class orderController {
     private Stage stage;
     private Scene scene;
@@ -52,8 +58,22 @@ public class orderController {
         stage.show();
     }
     @FXML
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        System.out.println();
+    public void onLogoutButtonClick(ActionEvent event) throws IOException{
+        ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit the application?", continueButtonType, cancelButtonType);
+        alert.setTitle("Logout");
+        alert.setHeaderText(null);
+        DialogPane alertDialog = alert.getDialogPane();
+        alertDialog.getStyleClass().add("alert");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == continueButtonType) {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login_example.fxml")));
+            Scene loginScene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(loginScene);
+            stage.show();
+        }
     }
     @FXML
     public void onAddOrderButtonClick(ActionEvent event) throws IOException {

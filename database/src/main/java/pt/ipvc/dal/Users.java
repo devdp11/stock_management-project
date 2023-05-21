@@ -8,6 +8,8 @@ import java.util.Collection;
 @NamedQueries({
         @NamedQuery(name = "user.getByPhone", query = "Select users from Users users where users.phone LIKE :phone"),
         @NamedQuery(name = "user.getByEmail", query = "select users from Users users where users.email  LIKE :email"),
+        @NamedQuery(name = "user.getLogin", query = "SELECT users FROM Users users WHERE users.email LIKE :email AND users.password LIKE :password"),
+        //@NamedQuery(name = "user.getByRole", query = "select users from Users users where users.idRole LIKE :roleByIdRole"),
 })
 public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

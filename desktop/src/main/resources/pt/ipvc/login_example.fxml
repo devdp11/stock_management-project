@@ -26,7 +26,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="loginButton" layoutX="225.0" layoutY="542.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="40.0" prefWidth="200.0" text="Login" />
+            <Button layoutX="225.0" layoutY="542.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="40.0" prefWidth="200.0" text="Login" />
+         <Label fx:id="label" layoutX="177.0" layoutY="443.0" prefHeight="40.0" prefWidth="300.0" textFill="RED">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font></Label>
       </AnchorPane>
    </right>
 </BorderPane>

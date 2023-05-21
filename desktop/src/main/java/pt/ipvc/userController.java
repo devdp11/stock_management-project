@@ -45,19 +45,19 @@ public class userController {
     @FXML
     private TextField searchBar;
 
-    /*@FXML
+
+     @FXML
     private void initialize(){
-        List<Users> users = UsersBLL.index();
-        Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
+        /*List<Users> users = UsersBLL.index();
         ObservableList<Users> data = FXCollections.observableArrayList(users);
 
         dataView.setItems(data);
-        nameUserColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        nameUserColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPhone())));
         emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getEmail())));
         passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPassword())));
-        roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getRoleByIdRole().getDescription())));
-    } */
+        roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getRoleByIdRole().getDescription()))); */
+    }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
@@ -91,8 +91,22 @@ public class userController {
         stage.show();
     }
     @FXML
-    public void onLogoutButtonClick(ActionEvent event) throws IOException {
-        System.out.println();
+    public void onLogoutButtonClick(ActionEvent event) throws IOException{
+        ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit the application?", continueButtonType, cancelButtonType);
+        alert.setTitle("Logout");
+        alert.setHeaderText(null);
+        DialogPane alertDialog = alert.getDialogPane();
+        alertDialog.getStyleClass().add("alert");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == continueButtonType) {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login_example.fxml")));
+            Scene loginScene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(loginScene);
+            stage.show();
+        }
     }
     @FXML
     public void onAddUserButtonClick(ActionEvent event) throws IOException {

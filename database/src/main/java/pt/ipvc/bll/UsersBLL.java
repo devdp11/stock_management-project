@@ -17,6 +17,11 @@ public class UsersBLL {
         return Database.find(Users.class, id);
     }
 
+    public static Users getLogin(String email, String password) { return (Users) Database.query("user.getLogin").
+            setParameter("email", email)
+            .setParameter("password",password)
+            .getResultStream().findFirst().orElse(null); }
+
     public static Users getByPhone(String phone) {
         List<Users>users = Database.query("user.getByPhone").setParameter("phone", phone).getResultList();
         return users.isEmpty()? null:users.get(0);
@@ -50,6 +55,11 @@ public class UsersBLL {
 
     public static int count() {
         return ((Long) Database.query("users.count").getSingleResult()).intValue();
+    }
+
+    public static boolean checkLogin(String email, String password){
+        Users users = getLogin(email, password);
+        return users != null;
     }
     public static boolean checkPhone(String phone){
         Users users = getByPhone(phone);
