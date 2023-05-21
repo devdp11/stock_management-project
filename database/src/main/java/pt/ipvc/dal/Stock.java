@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.util.Collection;
 
 @Entity
+@NamedQueries({
+})
 public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

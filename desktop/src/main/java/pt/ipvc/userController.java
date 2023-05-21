@@ -1,5 +1,7 @@
 package pt.ipvc;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,13 +10,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 
-
+import pt.ipvc.bll.RoleBLL;
+import pt.ipvc.bll.UsersBLL;
+import pt.ipvc.dal.Role;
 import pt.ipvc.dal.Users;
 
 import java.util.*;
@@ -28,8 +33,6 @@ public class userController {
     @FXML
     private TableView<Users> dataView;
     @FXML
-    private TableColumn<Users, Integer> numUserColumn;
-    @FXML
     private TableColumn<Users, String> nameUserColumn;
     @FXML
     private TableColumn<Users, String> phoneUserColumn;
@@ -42,6 +45,19 @@ public class userController {
     @FXML
     private TextField searchBar;
 
+    /*@FXML
+    private void initialize(){
+        List<Users> users = UsersBLL.index();
+        Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
+        ObservableList<Users> data = FXCollections.observableArrayList(users);
+
+        dataView.setItems(data);
+        nameUserColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPhone())));
+        emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getEmail())));
+        passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPassword())));
+        roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getRoleByIdRole().getDescription())));
+    } */
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
@@ -104,6 +120,8 @@ public class userController {
     }
     @FXML
     public void onDeleteUserButtonClick(ActionEvent event) throws IOException {
-        System.out.println("Click 2");
+      //  Users selectedUtilizador = dataView.getSelectionModel().getSelectedItem();
+      //  UsersBLL.remove(selectedUtilizador.getId());
+
     }
 }

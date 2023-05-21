@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
+@NamedQueries({
+})
 public class Storage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

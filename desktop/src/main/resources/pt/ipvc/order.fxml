@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipvc.orderController">
+   <top>
+      <AnchorPane prefHeight="120.0" prefWidth="1014.0" style="-fx-background-color: #088B2D;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="65.0" layoutY="32.0" text="VegetaMag" textFill="#79e45f">
+               <font>
+                  <Font name="System Bold" size="39.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1045.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="648.0" prefWidth="181.0" style="-fx-background-color: #6B6B6B;" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="21.0" layoutY="585.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #53AA3E;" text="Logout" textFill="WHITE" />
+            <Button layoutX="21.0" layoutY="109.0" mnemonicParsing="false" onAction="#onUsersButtonClick" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #53AA3E;" text="Users" textFill="WHITE" />
+            <Button layoutX="21.0" layoutY="176.0" mnemonicParsing="false" onAction="#onProductsButtonClick" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #53AA3E;" text="Products" textFill="WHITE" />
+            <Button layoutX="21.0" layoutY="245.0" mnemonicParsing="false" onAction="#onOrdersButtonClick" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #088B2D;" text="Orders" textFill="WHITE" />
+            <Button layoutX="21.0" layoutY="40.0" mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #53AA3E;" text="Home" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="648.0" prefWidth="207.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="25.0" layoutY="40.0" mnemonicParsing="false" onAction="#onAddOrderButtonClick" prefHeight="35.0" prefWidth="155.0" style="-fx-background-color: ffffff; -fx-border-color: #53AA3E; -fx-border-width: 1.5px;" text="ADD ORDER" textFill="#53aa3e">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button layoutX="25.0" layoutY="180.0" mnemonicParsing="false" onAction="#onListTotalBilledButtonClick" prefHeight="35.0" prefWidth="155.0" style="-fx-background-color: #53AA3E;" text="LIST TOTAL BILLED" textFill="WHITE" />
+            <Button layoutX="25.0" layoutY="110.0" mnemonicParsing="false" onAction="#onEditOrderButtonClick" prefHeight="35.0" prefWidth="155.0" style="-fx-background-color: ffffff; -fx-border-color: FFB545; -fx-border-width: 1.5px;" text="EDIT ORDER" textFill="#ffb545">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="listOrders" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
+               <columns>
+                  <TableColumn prefWidth="95.0" text="ID BATCH" />
+                  <TableColumn prefWidth="95.0" text="ID ORDER" />
+                  <TableColumn prefWidth="95.0" text="ID CLIENT" />
+                  <TableColumn prefWidth="95.0" text="PRICE" />
+                  <TableColumn prefWidth="95.0" text="QUANTITY" />
+                  <TableColumn prefWidth="95.0" text="START DATE" />
+                  <TableColumn prefWidth="95.0" text="END DATE" />
+                  <TableColumn prefWidth="102.0" text="STATE" />
+               </columns>
+            </TableView>
+            <TextField layoutX="605.0" layoutY="40.0" prefHeight="35.0" prefWidth="175.0" promptText="state" />
+            <Line endX="40.0" endY="467.0" layoutX="773.0" layoutY="148.0" startX="40.0" startY="-119.0" style="-fx-opacity: 0.2px;" />
+         </children></AnchorPane>
+   </center>
+</BorderPane>

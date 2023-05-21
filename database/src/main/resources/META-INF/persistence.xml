@@ -4,13 +4,13 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>pt.ipvc.dal.OrdersEntity</class>
-        <class>pt.ipvc.dal.ProductionEntity</class>
-        <class>pt.ipvc.dal.RoleEntity</class>
-        <class>pt.ipvc.dal.SeedsEntity</class>
-        <class>pt.ipvc.dal.StockEntity</class>
-        <class>pt.ipvc.dal.StorageEntity</class>
-        <class>pt.ipvc.dal.UsersEntity</class>
+        <class>pt.ipvc.dal.Orders</class>
+        <class>pt.ipvc.dal.Production</class>
+        <class>pt.ipvc.dal.Role</class>
+        <class>pt.ipvc.dal.Seeds</class>
+        <class>pt.ipvc.dal.Stock</class>
+        <class>pt.ipvc.dal.Storage</class>
+        <class>pt.ipvc.dal.Users</class>
 
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>

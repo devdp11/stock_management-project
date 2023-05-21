@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipvc.productionScheduleController">
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="400.0" style="-fx-background-color: #088B2D;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="302.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="25.0" layoutY="27.0" text="Scheduling Production...">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="353.0" prefWidth="396.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="29.0" layoutY="34.0" prefHeight="38.0" prefWidth="67.0" text="Seeds*" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="93.0" prefHeight="63.0" prefWidth="97.0" text="Wanted Quantity" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="33.0" layoutY="249.0" prefHeight="38.0" prefWidth="59.0" text="Date*" textAlignment="CENTER" />
+            <TextField fx:id="wantedQuantityTextField" layoutX="112.0" layoutY="106.0" prefHeight="36.0" prefWidth="265.0" promptText="Wanted Quantity" />
+            <Label alignment="CENTER" layoutX="33.0" layoutY="314.0" prefHeight="38.0" prefWidth="59.0" text="State*" textAlignment="CENTER" />
+            <ComboBox fx:id="stateComboBox" layoutX="112.0" layoutY="315.0" prefHeight="36.0" prefWidth="265.0" promptText="State" />
+            <Button layoutX="217.0" layoutY="395.0" mnemonicParsing="false" onAction="#onScheduleButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="SCHEDULE" textFill="#53aa3e">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="46.0" layoutY="395.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: E33F3F;" text="CANCEL" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <TextField fx:id="dateTextField" layoutX="112.0" layoutY="249.0" prefHeight="36.0" prefWidth="265.0" promptText="yyyy-mm-dd" />
+            <ComboBox fx:id="seedsComboBox" layoutX="112.0" layoutY="35.0" prefHeight="36.0" prefWidth="265.0" promptText="Seeds" />
+            <TextField fx:id="seedsQuantityTextField" layoutX="112.0" layoutY="174.0" prefHeight="36.0" prefWidth="265.0" promptText="Seeds Quantity" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="161.0" prefHeight="63.0" prefWidth="97.0" text="Seeds Quantity*" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "user.getByPhone", query = "Select users from Users users where users.phone LIKE :phone"),
+        @NamedQuery(name = "user.getByEmail", query = "select users from Users users where users.email  LIKE :email"),
+})
 public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

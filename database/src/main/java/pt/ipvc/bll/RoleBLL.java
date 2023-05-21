@@ -38,8 +38,6 @@ public class RoleBLL {
         return (Role) Database.query("role.getbydescription")
                 .setParameter("description", description)
                 .getResultStream().findFirst().orElse(null);
-
-
     }
 
     public static int count() {

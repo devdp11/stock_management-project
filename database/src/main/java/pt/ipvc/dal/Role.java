@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "role.getbydescription", query = "SELECT role FROM Role role WHERE role.description LIKE :description"),
+        @NamedQuery(name = "role.index", query = "SELECT role from Role role"),
 })
 
 public class Role {

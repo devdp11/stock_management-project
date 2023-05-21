@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 
+
 @Entity
+@NamedQueries({
+})
 public class Production {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

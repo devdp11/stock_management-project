@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
+@NamedQueries({
+})
 public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
