@@ -75,7 +75,7 @@
             </TableView>
             <TextField fx:id="searchBar" layoutX="605.0" layoutY="40.0" prefHeight="35.0" prefWidth="175.0" promptText="name" />
             <Line endX="40.0" endY="467.0" layoutX="773.0" layoutY="148.0" startX="40.0" startY="-119.0" style="-fx-opacity: 0.2px;" />
-            <ComboBox layoutX="437.0" layoutY="40.0" prefHeight="35.0" prefWidth="150.0" promptText="role" />
+            <ComboBox fx:id="roleFilter" layoutX="437.0" layoutY="40.0" prefHeight="35.0" prefWidth="150.0" promptText="role" />
          </children></AnchorPane>
    </center>
 </BorderPane>

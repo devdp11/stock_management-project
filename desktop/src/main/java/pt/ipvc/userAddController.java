@@ -10,7 +10,6 @@ import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.dal.Role;
 import pt.ipvc.dal.Users;
 
-import java.nio.channels.Pipe;
 import java.util.List;
 import java.util.Optional;
 

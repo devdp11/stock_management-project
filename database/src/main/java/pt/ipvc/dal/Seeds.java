@@ -7,6 +7,7 @@ import java.util.Collection;
 
 @Entity
 @NamedQueries({
+        @NamedQuery(name = "seed.getbydescription", query = "SELECT seeds from Seeds seeds WHERE seeds.description LIKE :description"),
 })
 public class Seeds {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -43,21 +43,32 @@ public class userController {
     @FXML
     private TableColumn<Users, String> roleUserColumn;
     @FXML
+    private ComboBox<String> roleFilter;
+    @FXML
     private TextField searchBar;
 
 
      @FXML
     private void initialize(){
-        /*List<Users> users = UsersBLL.index();
-        ObservableList<Users> data = FXCollections.observableArrayList(users);
+         List<Role> roles = RoleBLL.index();
+         ObservableList<String> tUser = FXCollections.observableArrayList();
+         for (Role tp: roles){
+             tUser.add(tp.getDescription());
+         }
+         roleFilter.setItems(tUser);
 
-        dataView.setItems(data);
-        nameUserColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPhone())));
-        emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getEmail())));
-        passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPassword())));
-        roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getRoleByIdRole().getDescription()))); */
-    }
+         List<Users> users = UsersBLL.index();
+         Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
+         ObservableList<Users> data = FXCollections.observableArrayList(users);
+
+         dataView.setItems(data);
+         nameUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getName())));
+         phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPhone())));
+         emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getEmail())));
+         passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPassword())));
+         roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getRoleByIdRole().getDescription())));
+
+     }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
@@ -119,6 +130,8 @@ public class userController {
         popupStage.setTitle("Adding User..");
         popupStage.setResizable(false);
         popupStage.show();
+        List<Users> users = UsersBLL.index();
+        update(users);
     }
     @FXML
     public void onEditUserButtonClick(ActionEvent event) throws IOException {
@@ -134,8 +147,32 @@ public class userController {
     }
     @FXML
     public void onDeleteUserButtonClick(ActionEvent event) throws IOException {
-      //  Users selectedUtilizador = dataView.getSelectionModel().getSelectedItem();
-      //  UsersBLL.remove(selectedUtilizador.getId());
+        Users selectedUser = dataView.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Alert");
+            alert.setHeaderText("Are you sure you want to delete'" + selectedUser.getName() + "'?");
 
+            ButtonType continueButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(continueButton, cancelButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == continueButton) {
+                //UsersBLL.remove(selectedUser.getId());
+
+                List<Users> users = UsersBLL.index();
+                update(users);
+            } else {
+                alert.close();
+            }
+        }
+
+    }
+    private void update(List<Users> users) {
+        Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
+        ObservableList<Users> data = FXCollections.observableArrayList(users);
+        dataView.setItems(data);
+        dataView.refresh();
     }
 }

@@ -1,5 +1,6 @@
 package pt.ipvc.bll;
 import pt.ipvc.dal.Seeds;
+import pt.ipvc.dal.Users;
 import pt.ipvc.database.Database;
 
 import java.util.List;
@@ -12,6 +13,11 @@ public class SeedsBLL {
 
     public static Seeds get(Long id) {
         return Database.find(Seeds.class, id);
+    }
+
+    public static Seeds getbydescription(String description){
+        List<Seeds>seeds = Database.query("seed.getbydescription").setParameter("description", description).getResultList();
+        return seeds.isEmpty()? null:seeds.get(0);
     }
 
     public static void create(Seeds entity) {
@@ -36,6 +42,11 @@ public class SeedsBLL {
 
     public static int count() {
         return ((Long) Database.query("seeds.count").getSingleResult()).intValue();
+    }
+
+    public static boolean checkDescription(String description){
+        Seeds seeds = getbydescription(description);
+        return seeds == null;
     }
 }
 

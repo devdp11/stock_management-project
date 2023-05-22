@@ -13,7 +13,7 @@ public class UsersBLL {
         return Database.query("users.index").getResultList();
     }
 
-    public static Users get(Long id) {
+    public static Users get(int id) {
         return Database.find(Users.class, id);
     }
 
@@ -30,7 +30,10 @@ public class UsersBLL {
         List<Users>users = Database.query("user.getByEmail").setParameter("email", email).getResultList();
         return users.isEmpty()? null:users.get(0);
     }
-
+    public static Users getByRole(String description){
+        List<Users> resultList = Database.query("user.getByRole").setParameter("description", description).getResultList();
+        return resultList.isEmpty() ? null : resultList.get(0);
+    }
 
     public static void create(Users entity) {
         Database.beginTransaction();
@@ -44,9 +47,7 @@ public class UsersBLL {
         Database.commitTransaction();
     }
 
-    public static void remove(Long id) {
-        Users entity = get(id);
-
+    public static void remove(Users entity) {
         Database.beginTransaction();
         Database.delete(entity);
         Database.commitTransaction();

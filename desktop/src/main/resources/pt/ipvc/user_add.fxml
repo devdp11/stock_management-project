@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="302.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icon.png" />
+                  <Image url="@pt\ipvc\assets\icon.png" />
                </image>
             </ImageView>
             <Label layoutX="26.0" layoutY="27.0" text="Adding User...">

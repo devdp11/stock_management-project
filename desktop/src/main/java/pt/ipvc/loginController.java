@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.dal.Users;
@@ -20,7 +19,6 @@ public class loginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     @FXML
     private TextField emailTextField;
     @FXML
