@@ -36,7 +36,60 @@ public class seedAddController {
 
     @FXML
     public void onRequestButtonClick(ActionEvent event){
+        if (!descriptionTextField.getText().isEmpty() && !quantityTextField.getText().isEmpty() && !dateTextField.getText().isEmpty() && !supplierComboBox.getSelectionModel().isEmpty() && !managerComboBox.getSelectionModel().isEmpty()){
+            boolean descriptionNotExist = SeedsBLL.checkDescription(descriptionTextField.getText());
+            if (!descriptionNotExist){
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, " Description already not valid | Edit the one that exists!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == continueButtonType) {
+                    alert.close();
+                }
+            }
+            else if (descriptionNotExist){
+                Seeds newSeed = new Seeds();
+                newSeed.setDescription(descriptionTextField.getText());
+                newSeed.setQuantityRequested(Integer.parseInt(String.valueOf(quantityTextField)));
 
+                String supplier = supplierComboBox.getSelectionModel().getSelectedItem();
+                Users UserS = UsersBLL.getByRole(supplier);
+                newSeed.setIdSupplier(UserS.getId());
+
+                String role = managerComboBox.getSelectionModel().getSelectedItem();
+                Role RoleM = RoleBLL.getbydescription(role);
+                newSeed.setIdManager(RoleM.getId());
+
+                SeedsBLL.create(newSeed);
+
+
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Created the user sucessfully!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == continueButtonType) {
+                    alert.close();
+                }
+            }
+
+        } else {
+            ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have to input information in the fields!", continueButtonType);
+            alert.setTitle("Alert");
+            alert.setHeaderText(null);
+            DialogPane alertDialog = alert.getDialogPane();
+            alertDialog.getStyleClass().add("alert");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == continueButtonType) {
+                alert.close();
+            }
+        }
 
     }
     @FXML

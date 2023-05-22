@@ -159,10 +159,7 @@ public class userController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == continueButton) {
-                //UsersBLL.remove(selectedUser.getId());
-
-                List<Users> users = UsersBLL.index();
-                update(users);
+                UsersBLL.remove(selectedUser.getId());
             } else {
                 alert.close();
             }

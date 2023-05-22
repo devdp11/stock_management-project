@@ -4,7 +4,6 @@ package pt.ipvc.bll;
 import pt.ipvc.dal.Users;
 import pt.ipvc.database.Database;
 
-import java.security.PublicKey;
 import java.util.List;
 
 public class UsersBLL {
@@ -31,8 +30,8 @@ public class UsersBLL {
         return users.isEmpty()? null:users.get(0);
     }
     public static Users getByRole(String description){
-        List<Users> resultList = Database.query("user.getByRole").setParameter("description", description).getResultList();
-        return resultList.isEmpty() ? null : resultList.get(0);
+        List<Users> users = Database.query("user.getByRole").setParameter("description", description).getResultList();
+        return users.isEmpty() ? null : users.get(0);
     }
 
     public static void create(Users entity) {
@@ -47,7 +46,8 @@ public class UsersBLL {
         Database.commitTransaction();
     }
 
-    public static void remove(Users entity) {
+    public static void remove(int id) {
+        Users entity = get(id);
         Database.beginTransaction();
         Database.delete(entity);
         Database.commitTransaction();
