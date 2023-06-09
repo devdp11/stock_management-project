@@ -1,4 +1,3 @@
 rootProject.name = 'vegetable-company'
 include 'database'
 include 'desktop'
-

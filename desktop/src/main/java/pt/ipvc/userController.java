@@ -47,7 +47,6 @@ public class userController {
     @FXML
     private TextField searchBar;
 
-
      @FXML
     private void initialize(){
          List<Role> roles = RoleBLL.index();
@@ -164,7 +163,6 @@ public class userController {
                 alert.close();
             }
         }
-
     }
     private void update(List<Users> users) {
         Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
