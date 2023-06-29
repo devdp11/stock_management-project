@@ -42,14 +42,7 @@ public class Users {
     @Basic
     @Column(name = "id_role")
     private int idRole;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Orders> ordersById;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Production> productionsById;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Seeds> seedsById;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Seeds> seedsById_0;
+
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
     private Role roleByIdRole;
@@ -158,38 +151,6 @@ public class Users {
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + idRole;
         return result;
-    }
-
-    public Collection<Orders> getOrdersById() {
-        return ordersById;
-    }
-
-    public void setOrdersById(Collection<Orders> ordersById) {
-        this.ordersById = ordersById;
-    }
-
-    public Collection<Production> getProductionsById() {
-        return productionsById;
-    }
-
-    public void setProductionsById(Collection<Production> productionsById) {
-        this.productionsById = productionsById;
-    }
-
-    public Collection<Seeds> getSeedsById() {
-        return seedsById;
-    }
-
-    public void setSeedsById(Collection<Seeds> seedsById) {
-        this.seedsById = seedsById;
-    }
-
-    public Collection<Seeds> getSeedsById_0() {
-        return seedsById_0;
-    }
-
-    public void setSeedsById_0(Collection<Seeds> seedsById_0) {
-        this.seedsById_0 = seedsById_0;
     }
 
     public Role getRoleByIdRole() {

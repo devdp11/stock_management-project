@@ -66,7 +66,6 @@ public class userController {
          emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getEmail())));
          passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPassword())));
          roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getRoleByIdRole().getDescription())));
-
      }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
@@ -130,9 +129,10 @@ public class userController {
         popupStage.setResizable(false);
         popupStage.show();
         List<Users> users = UsersBLL.index();
-        update(users);
+        updateDataView(users);
     }
-    @FXML
+
+    /*@FXML
     public void onEditUserButtonClick(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("user_edit.fxml"));
         Parent root = fxmlLoader.load();
@@ -143,7 +143,39 @@ public class userController {
         popupStage.setTitle("Editing User..");
         popupStage.setResizable(false);
         popupStage.show();
+    } */
+
+    public void onEditUserButtonClick(ActionEvent event) throws IOException {
+        Users selectedUser = dataView.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("user_edit.fxml"));
+            Parent parent = loader.load();
+            userEditController controller = loader.getController();
+            //controller.setUser(dataView.getSelectionModel().getSelectedItem());
+            Scene scene = new Scene(parent);
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            dialogStage.setTitle("Edit User");
+            dialogStage.setScene(scene);
+            dialogStage.showAndWait();
+            dataView.refresh();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Edit User");
+            alert.setHeaderText("To remove user, you have to select one!");
+
+            ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+
+            alert.getButtonTypes().setAll(okButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == okButton) {
+                alert.close();
+            }
+        }
     }
+
     @FXML
     public void onDeleteUserButtonClick(ActionEvent event) throws IOException {
         Users selectedUser = dataView.getSelectionModel().getSelectedItem();
@@ -164,7 +196,7 @@ public class userController {
             }
         }
     }
-    private void update(List<Users> users) {
+    private void updateDataView(List<Users> users) {
         Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
         ObservableList<Users> data = FXCollections.observableArrayList(users);
         dataView.setItems(data);
