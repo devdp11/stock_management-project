@@ -18,9 +18,6 @@ public class Seeds {
     @Column(name = "id_supplier")
     private int idSupplier;
     @Basic
-    @Column(name = "id_manager")
-    private int idManager;
-    @Basic
     @Column(name = "description")
     private String description;
     @Basic
@@ -46,14 +43,6 @@ public class Seeds {
 
     public void setIdSupplier(int idSupplier) {
         this.idSupplier = idSupplier;
-    }
-
-    public int getIdManager() {
-        return idManager;
-    }
-
-    public void setIdManager(int idManager) {
-        this.idManager = idManager;
     }
 
     public String getDescription() {
@@ -89,7 +78,6 @@ public class Seeds {
 
         if (id != seeds.id) return false;
         if (idSupplier != seeds.idSupplier) return false;
-        if (idManager != seeds.idManager) return false;
         if (quantityRequested != seeds.quantityRequested) return false;
         if (description != null ? !description.equals(seeds.description) : seeds.description != null) return false;
         if (date != null ? !date.equals(seeds.date) : seeds.date != null) return false;
@@ -101,7 +89,6 @@ public class Seeds {
     public int hashCode() {
         int result = id;
         result = 31 * result + idSupplier;
-        result = 31 * result + idManager;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + quantityRequested;
         result = 31 * result + (date != null ? date.hashCode() : 0);

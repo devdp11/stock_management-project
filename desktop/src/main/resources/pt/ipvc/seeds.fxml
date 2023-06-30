@@ -61,12 +61,10 @@
          <children>
             <TableView fx:id="listSeeds" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
               <columns>
-                <TableColumn prefWidth="128.0" text="ID SEEDS" />
-                  <TableColumn prefWidth="128.0" text="DESCRIPTION" />
-                  <TableColumn prefWidth="128.0" text="QUANTITY" />
-                  <TableColumn prefWidth="128.0" text="DATE" />
-                  <TableColumn prefWidth="128.0" text="SUPPLIER" />
-                  <TableColumn prefWidth="128.0" text="MANAGER" />
+                  <TableColumn fx:id="descriptionSeedsColumn" prefWidth="192.0" text="DESCRIPTION" />
+                  <TableColumn fx:id="quantitySeedsColumn" prefWidth="192.0" text="QUANTITY REQUESTED" />
+                  <TableColumn fx:id="dateSeedsColumn" prefWidth="192.0" text="REQUEST DATE" />
+                  <TableColumn fx:id="supplierSeedsColumn" prefWidth="192.0" text="SUPPLIER" />
               </columns>
             </TableView>
             <Line endX="40.0" endY="467.0" layoutX="773.0" layoutY="148.0" startX="40.0" startY="-119.0" style="-fx-opacity: 0.2px;" />

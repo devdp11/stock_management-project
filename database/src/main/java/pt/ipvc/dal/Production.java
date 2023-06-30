@@ -31,9 +31,6 @@ public class Production {
     @Basic
     @Column(name = "state")
     private String state;
-    @Basic
-    @Column(name = "id_manager")
-    private int idManager;
 
     public int getId() {
         return id;
@@ -91,14 +88,6 @@ public class Production {
         this.state = state;
     }
 
-    public int getIdManager() {
-        return idManager;
-    }
-
-    public void setIdManager(int idManager) {
-        this.idManager = idManager;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,7 +98,6 @@ public class Production {
         if (id != that.id) return false;
         if (idSeeds != that.idSeeds) return false;
         if (seedsQuantity != that.seedsQuantity) return false;
-        if (idManager != that.idManager) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (wantedQuantity != null ? !wantedQuantity.equals(that.wantedQuantity) : that.wantedQuantity != null)
             return false;
@@ -128,7 +116,6 @@ public class Production {
         result = 31 * result + seedsQuantity;
         result = 31 * result + (data != null ? data.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
-        result = 31 * result + idManager;
         return result;
     }
 }

@@ -3,6 +3,7 @@ package pt.ipvc.dal;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -42,10 +43,15 @@ public class Users {
     @Basic
     @Column(name = "id_role")
     private int idRole;
-
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
     private Role roleByIdRole;
+
+    /*@OneToMany(mappedBy = "user")
+    private List<Orders> ordersList;
+
+    @OneToMany(mappedBy = "user")
+    private List<Seeds> seedsList; */
 
     public int getId() {
         return id;

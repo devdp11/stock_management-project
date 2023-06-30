@@ -65,7 +65,11 @@ public class userController {
          phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPhone())));
          emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getEmail())));
          passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPassword())));
-         roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getRoleByIdRole().getDescription())));
+         roleUserColumn.setCellValueFactory(d -> {
+             Role role = d.getValue().getRoleByIdRole();
+             String description = (role != null && role.getDescription() != null) ? role.getDescription() : "";
+             return new SimpleStringProperty(description);
+         });
      }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
@@ -132,26 +136,13 @@ public class userController {
         updateDataView(users);
     }
 
-    /*@FXML
-    public void onEditUserButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("user_edit.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene popupScene = new Scene(root);
-        Stage popupStage = new Stage();
-        popupStage.setScene(popupScene);
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Editing User..");
-        popupStage.setResizable(false);
-        popupStage.show();
-    } */
-
     public void onEditUserButtonClick(ActionEvent event) throws IOException {
         Users selectedUser = dataView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("user_edit.fxml"));
             Parent parent = loader.load();
             userEditController controller = loader.getController();
-            //controller.setUser(dataView.getSelectionModel().getSelectedItem());
+            controller.setUser(dataView.getSelectionModel().getSelectedItem());
             Scene scene = new Scene(parent);
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
@@ -163,9 +154,9 @@ public class userController {
         }else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Edit User");
-            alert.setHeaderText("To remove user, you have to select one!");
+            alert.setHeaderText("You must select one user to edit");
 
-            ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
 
             alert.getButtonTypes().setAll(okButton);
 

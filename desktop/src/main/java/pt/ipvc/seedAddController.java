@@ -59,10 +59,6 @@ public class seedAddController {
                 Users UserS = UsersBLL.getByRole(supplier);
                 newSeed.setIdSupplier(UserS.getId());
 
-                String role = managerComboBox.getSelectionModel().getSelectedItem();
-                Role RoleM = RoleBLL.getbydescription(role);
-                newSeed.setIdManager(RoleM.getId());
-
                 SeedsBLL.create(newSeed);
 
 
