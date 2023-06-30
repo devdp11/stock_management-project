@@ -59,7 +59,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="listSeeds" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
+            <TableView fx:id="dataView" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
               <columns>
                   <TableColumn fx:id="descriptionSeedsColumn" prefWidth="192.0" text="DESCRIPTION" />
                   <TableColumn fx:id="quantitySeedsColumn" prefWidth="192.0" text="QUANTITY REQUESTED" />

@@ -5,11 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import pt.ipvc.bll.RoleBLL;
 import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.dal.Role;
 import pt.ipvc.dal.Users;
 
+import java.security.PrivateKey;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +84,7 @@ public class userAddController {
                 UsersBLL.create(newUser);
 
                 ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Created the user sucessfully!", continueButtonType);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Added the user sucessfully!", continueButtonType);
                 alert.setTitle("Alert");
                 alert.setHeaderText(null);
                 DialogPane alertDialog = alert.getDialogPane();

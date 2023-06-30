@@ -1,26 +1,51 @@
 package pt.ipvc;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import pt.ipvc.bll.SeedsBLL;
+import pt.ipvc.dal.Seeds;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class seedController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    @FXML
+    private TableView<Seeds> dataView;
+    @FXML
+    private TableColumn<Seeds, String> descriptionSeedsColumn;
+    @FXML
+    private TableColumn<Seeds, String> quantitySeedsColumn;
+    @FXML
+    private TableColumn<Seeds, String> dateSeedsColumn;
+    @FXML
+    private TableColumn<Seeds, String> supplierSeedsColumn;
+
+    public void initialize() {
+        ObservableList<String> tSeed = FXCollections.observableArrayList();
+
+        List<Seeds> seeds = SeedsBLL.index();
+        Collections.sort(seeds, Comparator.comparingInt(seeds1 -> seeds1.getId()));
+        ObservableList<Seeds> data = FXCollections.observableArrayList(seeds);
+
+        dataView.setItems(data);
+        descriptionSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
+        quantitySeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getQuantityRequested())));
+        supplierSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdSupplier())));
+    }
 
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
@@ -92,7 +117,7 @@ public class seedController {
         Stage popupStage = new Stage();
         popupStage.setScene(popupScene);
         popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Adding Seeds..");
+        popupStage.setTitle("Editing Seeds..");
         popupStage.setResizable(false);
         popupStage.show();*/
     }

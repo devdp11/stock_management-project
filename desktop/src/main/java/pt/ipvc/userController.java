@@ -47,7 +47,7 @@ public class userController {
     @FXML
     private TextField searchBar;
 
-     @FXML
+    @FXML
     private void initialize(){
          List<Role> roles = RoleBLL.index();
          ObservableList<String> tUser = FXCollections.observableArrayList();

@@ -31,30 +31,27 @@
    <center>
       <AnchorPane prefHeight="353.0" prefWidth="396.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="27.0" layoutY="90.0" prefHeight="38.0" prefWidth="59.0" text="Email*" textAlignment="CENTER" />
-            <Label layoutX="27.0" layoutY="151.0" prefHeight="38.0" prefWidth="59.0" text="Password*" textAlignment="CENTER" />
-            <TextField fx:id="emailTextField" layoutX="90.0" layoutY="91.0" prefHeight="36.0" prefWidth="278.0" promptText="Email" />
-            <PasswordField fx:id="passwordTextField" layoutX="90.0" layoutY="152.0" prefHeight="36.0" prefWidth="278.0" promptText="Password" />
-            <Label layoutX="27.0" layoutY="211.0" prefHeight="38.0" prefWidth="59.0" text="Role*" textAlignment="CENTER" />
-            <ComboBox fx:id="roleComboBox" layoutX="90.0" layoutY="212.0" prefHeight="36.0" prefWidth="278.0" promptText="Role" />
-            <Button layoutX="230.0" layoutY="404.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="CONFIRM" textFill="#53aa3e">
+            <Label layoutX="27.0" layoutY="140.0" prefHeight="38.0" prefWidth="59.0" text="Email*" textAlignment="CENTER" />
+            <Label layoutX="27.0" layoutY="195.0" prefHeight="38.0" prefWidth="59.0" text="Password*" textAlignment="CENTER" />
+            <TextField fx:id="emailTextField" layoutX="90.0" layoutY="141.0" prefHeight="36.0" prefWidth="278.0" promptText="Email" />
+            <PasswordField fx:id="passwordTextField" layoutX="90.0" layoutY="196.0" prefHeight="36.0" prefWidth="278.0" promptText="Password" />
+            <Label layoutX="27.0" layoutY="250.0" prefHeight="38.0" prefWidth="59.0" text="Role*" textAlignment="CENTER" />
+            <ComboBox fx:id="roleComboBox" layoutX="90.0" layoutY="251.0" prefHeight="36.0" prefWidth="278.0" promptText="Role" />
+            <Button layoutX="150.0" layoutY="416.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="CONFIRM" textFill="#53aa3e">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Label layoutX="27.0" layoutY="272.0" prefHeight="38.0" prefWidth="59.0" text="Street" textAlignment="CENTER" />
-            <TextField fx:id="streetTextField" layoutX="90.0" layoutY="273.0" prefHeight="36.0" prefWidth="97.0" promptText="Street" />
+            <Label layoutX="27.0" layoutY="307.0" prefHeight="38.0" prefWidth="59.0" text="Street" textAlignment="CENTER" />
+            <TextField fx:id="streetTextField" layoutX="90.0" layoutY="308.0" prefHeight="36.0" prefWidth="97.0" promptText="Street" />
             <TextField fx:id="nameTextField" layoutX="90.0" layoutY="29.0" prefHeight="36.0" prefWidth="278.0" promptText="Name" />
             <Label layoutX="27.0" layoutY="28.0" prefHeight="38.0" prefWidth="59.0" text="Name*" textAlignment="CENTER" />
-            <Label layoutX="200.0" layoutY="272.0" prefHeight="38.0" prefWidth="59.0" text="Adress" textAlignment="CENTER" />
-            <TextField fx:id="adressTextField" layoutX="274.0" layoutY="273.0" prefHeight="36.0" prefWidth="97.0" promptText="Adress" />
-            <TextField fx:id="LocationTextField" layoutX="90.0" layoutY="334.0" prefHeight="36.0" prefWidth="278.0" promptText="Location" />
-            <Label layoutX="21.0" layoutY="333.0" prefHeight="38.0" prefWidth="72.0" text="Location" textAlignment="CENTER" />
-            <Button layoutX="62.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: ff5050;" text="CANCEL" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
+            <Label layoutX="200.0" layoutY="307.0" prefHeight="38.0" prefWidth="59.0" text="Door" textAlignment="CENTER" />
+            <TextField fx:id="doorTextField" layoutX="274.0" layoutY="308.0" prefHeight="36.0" prefWidth="97.0" promptText="Door" />
+            <TextField fx:id="locationTextField" layoutX="90.0" layoutY="362.0" prefHeight="36.0" prefWidth="278.0" promptText="Location" />
+            <Label layoutX="21.0" layoutY="361.0" prefHeight="38.0" prefWidth="72.0" text="Location" textAlignment="CENTER" />
+            <TextField fx:id="phoneTextField" layoutX="91.0" layoutY="84.0" prefHeight="36.0" prefWidth="278.0" promptText="Phone" />
+            <Label layoutX="27.0" layoutY="83.0" prefHeight="38.0" prefWidth="59.0" text="Phone*" textAlignment="CENTER" />
          </children>
       </AnchorPane>
    </center>
