@@ -2,12 +2,14 @@ package pt.ipvc.dal;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+import java.util.Objects;
+
 @Entity
 @NamedQueries({
         @NamedQuery(name = "role.getbydescription", query = "SELECT role FROM Role role WHERE role.description LIKE :description"),
         @NamedQuery(name = "role.index", query = "SELECT role from Role role"),
 })
-
 public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -16,6 +18,9 @@ public class Role {
     @Basic
     @Column(name = "description")
     private String description;
+    @Basic
+    @Column(name = "deleted_on")
+    private Timestamp deletedOn;
 
     public int getId() {
         return id;
@@ -33,23 +38,24 @@ public class Role {
         this.description = description;
     }
 
+    public Timestamp getDeletedOn() {
+        return deletedOn;
+    }
+
+    public void setDeletedOn(Timestamp deletedOn) {
+        this.deletedOn = deletedOn;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Role role = (Role) o;
-
-        if (id != role.id) return false;
-        if (description != null ? !description.equals(role.description) : role.description != null) return false;
-
-        return true;
+        return id == role.id && Objects.equals(description, role.description) && Objects.equals(deletedOn, role.deletedOn);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        return Objects.hash(id, description, deletedOn);
     }
 }

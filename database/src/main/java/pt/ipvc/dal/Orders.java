@@ -3,6 +3,7 @@ package pt.ipvc.dal;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @NamedQueries({
@@ -33,6 +34,9 @@ public class Orders {
     @Basic
     @Column(name = "state")
     private String state;
+    @Basic
+    @Column(name = "deleted_on")
+    private Timestamp deletedOn;
 
     public int getId() {
         return id;
@@ -97,6 +101,15 @@ public class Orders {
     public void setState(String state) {
         this.state = state;
     }
+
+    public Timestamp getDeletedOn() {
+        return deletedOn;
+    }
+
+    public void setDeletedOn(Timestamp deletedOn) {
+        this.deletedOn = deletedOn;
+    }
+
 
     @Override
     public boolean equals(Object o) {

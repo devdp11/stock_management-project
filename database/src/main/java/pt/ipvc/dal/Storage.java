@@ -2,11 +2,11 @@ package pt.ipvc.dal;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
-@NamedQueries({
-})
 public class Storage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,8 +21,13 @@ public class Storage {
     @Basic
     @Column(name = "location")
     private String location;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Stock> stocksById;
+    @Basic
+    @Column(name = "deleted_on")
+    private Timestamp deletedOn;
+    @Basic
+    @Column(name = "name")
+    private String name;
+
 
     public int getId() {
         return id;
@@ -56,35 +61,34 @@ public class Storage {
         this.location = location;
     }
 
+    public Timestamp getDeletedOn() {
+        return deletedOn;
+    }
+
+    public void setDeletedOn(Timestamp deletedOn) {
+        this.deletedOn = deletedOn;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Storage storage = (Storage) o;
-
-        if (id != storage.id) return false;
-        if (street != null ? !street.equals(storage.street) : storage.street != null) return false;
-        if (door != null ? !door.equals(storage.door) : storage.door != null) return false;
-        if (location != null ? !location.equals(storage.location) : storage.location != null) return false;
-
-        return true;
+        return id == storage.id && Objects.equals(street, storage.street) && Objects.equals(door, storage.door) && Objects.equals(location, storage.location) && Objects.equals(deletedOn, storage.deletedOn) && Objects.equals(name, storage.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (street != null ? street.hashCode() : 0);
-        result = 31 * result + (door != null ? door.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
-        return result;
+        return Objects.hash(id, street, door, location, deletedOn, name);
     }
 
-    public Collection<Stock> getStocksById() {
-        return stocksById;
-    }
 
-    public void setStocksById(Collection<Stock> stocksById) {
-        this.stocksById = stocksById;
-    }
 }

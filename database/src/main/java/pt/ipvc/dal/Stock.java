@@ -3,6 +3,7 @@ package pt.ipvc.dal;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
@@ -28,6 +29,9 @@ public class Stock {
     @Basic
     @Column(name = "id_storage")
     private int idStorage;
+    @Basic
+    @Column(name = "deleted_on")
+    private Timestamp deletedOn;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Orders> ordersById;
     @ManyToOne
@@ -81,6 +85,15 @@ public class Stock {
     public void setIdStorage(int idStorage) {
         this.idStorage = idStorage;
     }
+
+    public Timestamp getDeletedOn() {
+        return deletedOn;
+    }
+
+    public void setDeletedOn(Timestamp deletedOn) {
+        this.deletedOn = deletedOn;
+    }
+
 
     @Override
     public boolean equals(Object o) {

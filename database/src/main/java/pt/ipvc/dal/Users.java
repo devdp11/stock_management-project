@@ -2,8 +2,8 @@ package pt.ipvc.dal;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -43,15 +43,13 @@ public class Users {
     @Basic
     @Column(name = "id_role")
     private int idRole;
+    @Basic
+    @Column(name = "deleted_on")
+    private Timestamp deletedOn;
+
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
     private Role roleByIdRole;
-
-    /*@OneToMany(mappedBy = "user")
-    private List<Orders> ordersList;
-
-    @OneToMany(mappedBy = "user")
-    private List<Seeds> seedsList; */
 
     public int getId() {
         return id;
@@ -124,6 +122,15 @@ public class Users {
     public void setIdRole(int idRole) {
         this.idRole = idRole;
     }
+
+    public Timestamp getDeletedOn() {
+        return deletedOn;
+    }
+
+    public void setDeletedOn(Timestamp deletedOn) {
+        this.deletedOn = deletedOn;
+    }
+
 
     @Override
     public boolean equals(Object o) {

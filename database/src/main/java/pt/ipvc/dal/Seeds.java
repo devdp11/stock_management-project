@@ -3,12 +3,13 @@ package pt.ipvc.dal;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "seeds.index", query = "SELECT seeds FROM Seeds seeds"),
-        @NamedQuery(name = "seed.getbydescription", query = "SELECT seeds from Seeds seeds WHERE seeds.description LIKE :description"),
+        @NamedQuery(name = "seeds.getbydescription", query = "SELECT seeds from Seeds seeds WHERE seeds.description LIKE :description"),
+        @NamedQuery(name = "seeds.index", query = "SELECT seeds from Seeds seeds"),
 })
 public class Seeds {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +28,9 @@ public class Seeds {
     @Basic
     @Column(name = "date")
     private String date;
+    @Basic
+    @Column(name = "deleted_on")
+    private Timestamp deletedOn;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Production> productionsById;
 
@@ -69,6 +73,15 @@ public class Seeds {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public Timestamp getDeletedOn() {
+        return deletedOn;
+    }
+
+    public void setDeletedOn(Timestamp deletedOn) {
+        this.deletedOn = deletedOn;
+    }
+
 
     @Override
     public boolean equals(Object o) {

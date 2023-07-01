@@ -23,10 +23,14 @@ public class seedAddController {
     @FXML
     private TextField quantityTextField;
     @FXML
+    private TextField dateTextField;
+
+    @FXML
     private DatePicker datePicker;
 
     @FXML
     private ComboBox<String> supplierComboBox;
+
 
     @FXML
     private void initialize(){
@@ -38,7 +42,7 @@ public class seedAddController {
             boolean descriptionNotExist = SeedsBLL.checkDescription(descriptionTextField.getText());
             if (!descriptionNotExist){
                 ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, " Description already in use | Edit the one that exists!", continueButtonType);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, " Description already not valid | Edit the one that exists!", continueButtonType);
                 alert.setTitle("Alert");
                 alert.setHeaderText(null);
                 DialogPane alertDialog = alert.getDialogPane();
@@ -52,16 +56,17 @@ public class seedAddController {
                 Seeds newSeed = new Seeds();
                 newSeed.setDescription(descriptionTextField.getText());
                 newSeed.setQuantityRequested(Integer.parseInt(String.valueOf(quantityTextField)));
-
+                newSeed.setDate(String.valueOf(datePicker.getValue()));
                 String supplier = supplierComboBox.getSelectionModel().getSelectedItem();
                 Users UserS = UsersBLL.getByRole(supplier);
                 newSeed.setIdSupplier(UserS.getId());
+
 
                 SeedsBLL.create(newSeed);
 
 
                 ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Requested the seed sucessfully!", continueButtonType);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Created the user sucessfully!", continueButtonType);
                 alert.setTitle("Alert");
                 alert.setHeaderText(null);
                 DialogPane alertDialog = alert.getDialogPane();
