@@ -26,7 +26,7 @@ public class Seeds {
     private int quantityRequested;
     @Basic
     @Column(name = "date")
-    private Date date;
+    private String date;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Production> productionsById;
 
@@ -62,11 +62,11 @@ public class Seeds {
         this.quantityRequested = quantityRequested;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -13,7 +13,9 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pt.ipvc.bll.SeedsBLL;
+import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.dal.Seeds;
+import pt.ipvc.dal.Users;
 
 import java.io.IOException;
 import java.util.*;
@@ -44,6 +46,7 @@ public class seedController {
         dataView.setItems(data);
         descriptionSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
         quantitySeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getQuantityRequested())));
+        dateSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDate())));
         supplierSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdSupplier())));
     }
 
@@ -105,9 +108,11 @@ public class seedController {
         Stage popupStage = new Stage();
         popupStage.setScene(popupScene);
         popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Adding Seeds..");
+        popupStage.setTitle("Adding Seed..");
         popupStage.setResizable(false);
         popupStage.show();
+        List<Seeds> seeds = SeedsBLL.index();
+        updateDataView(seeds);
     }
     @FXML
     public void onEditSeedsButtonClick(ActionEvent event) throws IOException {
@@ -121,8 +126,11 @@ public class seedController {
         popupStage.setResizable(false);
         popupStage.show();*/
     }
-    @FXML
-    public void onRemoveSeedsButtonClick(ActionEvent event) throws IOException {
 
+    private void updateDataView(List<Seeds> seeds) {
+        Collections.sort(seeds, Comparator.comparingInt(seeds1 -> seeds1.getId()));
+        ObservableList<Seeds> data = FXCollections.observableArrayList(seeds);
+        dataView.setItems(data);
+        dataView.refresh();
     }
 }
