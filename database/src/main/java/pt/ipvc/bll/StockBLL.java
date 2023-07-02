@@ -7,7 +7,7 @@ import java.util.List;
 public class StockBLL {
 
     public static List<Stock> index() {
-        return Database.query("stock.index").getResultList();
+        return Database.query("stocks.index").getResultList();
     }
 
     public static Stock get(Long id) {

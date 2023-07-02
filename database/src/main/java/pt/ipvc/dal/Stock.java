@@ -8,6 +8,7 @@ import java.util.Collection;
 
 @Entity
 @NamedQueries({
+        @NamedQuery(name = "stocks.index", query = "SELECT stock FROM Stock stock"),
 })
 public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +23,7 @@ public class Stock {
     private int producedQuantity;
     @Basic
     @Column(name = "date")
-    private Date date;
+    private String date;
     @Basic
     @Column(name = "id_production")
     private int idProduction;
@@ -62,11 +63,11 @@ public class Stock {
         this.producedQuantity = producedQuantity;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

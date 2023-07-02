@@ -1,28 +1,58 @@
 package pt.ipvc;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import pt.ipvc.bll.ProductionBLL;
+import pt.ipvc.bll.StockBLL;
+import pt.ipvc.dal.Production;
+import pt.ipvc.dal.Stock;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class productController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    public productController(){
+    @FXML
+    private TableView<Stock> dataView;
+    @FXML
+    private TableColumn<Stock, String> idBatchColumn;
+    @FXML
+    private TableColumn<Stock, String> descriptionBatchColumn;
+    @FXML
+    private TableColumn<Stock, String> quantityBatchColumn;
+    @FXML
+    private TableColumn<Stock, String> dateBatchColumn;
+    @FXML
+    private TableColumn<Stock, String> productionBatchColumn;
+    @FXML
+    private TableColumn<Stock, String> storageBatchColumn;
 
+    public void initialize() {
+        ObservableList<String> tStock = FXCollections.observableArrayList();
+
+        List<Stock> stocks = StockBLL.index();
+        Collections.sort(stocks, Comparator.comparingInt(stock -> stock.getId()));
+        ObservableList<Stock> data = FXCollections.observableArrayList(stocks);
+
+        dataView.setItems(data);
+        idBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getId())));
+        descriptionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
+        quantityBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getProducedQuantity())));
+        dateBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDate())));
+        productionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdProduction())));
+        storageBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdStorage())));
     }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
@@ -89,5 +119,12 @@ public class productController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void updateDataView(List<Stock> stocks) {
+        Collections.sort(stocks, Comparator.comparingInt(stock -> stock.getId()));
+        ObservableList<Stock> data = FXCollections.observableArrayList(stocks);
+        dataView.setItems(data);
+        dataView.refresh();
     }
 }
