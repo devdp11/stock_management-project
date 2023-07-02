@@ -47,9 +47,10 @@
                </font>
             </Button>
             <TextField fx:id="dateTextField" layoutX="112.0" layoutY="249.0" prefHeight="36.0" prefWidth="265.0" promptText="yyyy-mm-dd" />
-            <ComboBox fx:id="seedsComboBox" layoutX="112.0" layoutY="35.0" prefHeight="36.0" prefWidth="265.0" promptText="Seeds" />
+            <ComboBox fx:id="seedsComboBox" layoutX="112.0" layoutY="35.0" onAction="#onSeedsComboBoxSelected" prefHeight="36.0" prefWidth="265.0" promptText="Seeds" />
             <TextField fx:id="seedsQuantityTextField" layoutX="112.0" layoutY="174.0" prefHeight="36.0" prefWidth="265.0" promptText="Seeds Quantity" />
             <Label alignment="CENTER" layoutX="14.0" layoutY="161.0" prefHeight="63.0" prefWidth="97.0" text="Seeds Quantity*" textAlignment="CENTER" />
+            <Label fx:id="quantityLabel" layoutX="114.0" layoutY="153.0" />
          </children>
       </AnchorPane>
    </center>
