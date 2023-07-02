@@ -1,4 +1,5 @@
 package pt.ipvc.bll;
+
 import pt.ipvc.dal.Production;
 import pt.ipvc.database.Database;
 
@@ -10,7 +11,7 @@ public class ProductionBLL {
         return Database.query("productions.index").getResultList();
     }
 
-    public static Production get(Long id) {
+    public static Production getById(int id) {
         return Database.find(Production.class, id);
     }
 
@@ -26,8 +27,8 @@ public class ProductionBLL {
         Database.commitTransaction();
     }
 
-    public static void remove(Long id) {
-        Production entity = get(id);
+    public static void remove(int id) {
+        Production entity = getById(id);
 
         Database.beginTransaction();
         Database.delete(entity);

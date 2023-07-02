@@ -7,6 +7,10 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "storage.index", query = "SELECT storage FROM Storage storage"),
+
+})
 public class Storage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

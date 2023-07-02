@@ -51,7 +51,7 @@ public class productController {
         descriptionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
         quantityBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getProducedQuantity())));
         dateBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDate())));
-        productionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getProductionByIdProduction().getDescription())));
+        productionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getProductionByIdProduction().getDescription()));
         storageBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getStorageByIdStorage().getName())));
     }
     @FXML

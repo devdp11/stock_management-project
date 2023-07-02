@@ -131,15 +131,34 @@ public class productionController {
     }
     @FXML
     public void onRecallButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("production_recall.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene popupScene = new Scene(root);
-        Stage popupStage = new Stage();
-        popupStage.setScene(popupScene);
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Recalling Production..");
-        popupStage.setResizable(false);
-        popupStage.show();
+        Production selectedProduction = dataView.getSelectionModel().getSelectedItem();
+        if (selectedProduction != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("production_recall.fxml"));
+            Parent parent = loader.load();
+            productionRecallController controller = loader.getController();
+            controller.setProduction(dataView.getSelectionModel().getSelectedItem());
+            Scene scene = new Scene(parent);
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            dialogStage.setTitle("Recall Production");
+            dialogStage.setScene(scene);
+            dialogStage.showAndWait();
+            dataView.refresh();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Recall Production");
+            alert.setHeaderText("You must select one Produciton to Recall");
+
+            ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+
+            alert.getButtonTypes().setAll(okButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == okButton) {
+                alert.close();
+            }
+        }
     }
     @FXML
     public void onEditButtonClick(ActionEvent event) throws IOException {
