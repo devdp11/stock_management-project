@@ -141,6 +141,18 @@ public class productionController {
         popupStage.setResizable(false);
         popupStage.show();
     }
+    @FXML
+    public void onEditButtonClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("production_edit.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene popupScene = new Scene(root);
+        Stage popupStage = new Stage();
+        popupStage.setScene(popupScene);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setTitle("Recalling Production..");
+        popupStage.setResizable(false);
+        popupStage.show();
+    }
     private void updateDataView(List<Production> productions) {
         Collections.sort(productions, Comparator.comparingInt(production -> production.getId()));
         ObservableList<Production> data = FXCollections.observableArrayList(productions);
