@@ -30,9 +30,6 @@ public class Orders {
     @Column(name = "date_start")
     private String dateStart;
     @Basic
-    @Column(name = "date_end")
-    private String dateEnd;
-    @Basic
     @Column(name = "state")
     private String state;
     @Basic
@@ -42,6 +39,10 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "id_stock", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
     private Stock stockByIdStock;
+
+    @ManyToOne
+    @JoinColumn(name = "id_client", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
+    private Users clientByIdClient;
 
     public int getId() {
         return id;
@@ -91,14 +92,6 @@ public class Orders {
         this.dateStart = dateStart;
     }
 
-    public String getDateEnd() {
-        return dateEnd;
-    }
-
-    public void setDateEnd(String dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
     public String getState() {
         return state;
     }
@@ -129,7 +122,6 @@ public class Orders {
         if (Double.compare(orders.orderPrice, orderPrice) != 0) return false;
         if (orderQuantity != orders.orderQuantity) return false;
         if (dateStart != null ? !dateStart.equals(orders.dateStart) : orders.dateStart != null) return false;
-        if (dateEnd != null ? !dateEnd.equals(orders.dateEnd) : orders.dateEnd != null) return false;
         if (state != null ? !state.equals(orders.state) : orders.state != null) return false;
 
         return true;
@@ -146,7 +138,6 @@ public class Orders {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + orderQuantity;
         result = 31 * result + (dateStart != null ? dateStart.hashCode() : 0);
-        result = 31 * result + (dateEnd != null ? dateEnd.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
         return result;
     }
@@ -157,5 +148,13 @@ public class Orders {
 
     public void setStockByIdStock(Stock stockByIdStock) {
         this.stockByIdStock = stockByIdStock;
+    }
+
+    public Users getClientByIdClient() {
+        return clientByIdClient;
+    }
+
+    public void setClientByIdClient(Users clientByIdClient) {
+        this.clientByIdClient = clientByIdClient;
     }
 }

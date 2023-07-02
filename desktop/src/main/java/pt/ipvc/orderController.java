@@ -54,17 +54,17 @@ public class orderController {
         ObservableList<Orders> data = FXCollections.observableArrayList(orders);
 
         dataView.setItems(data);
-        productOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getStockByIdStock().getDescription())));
-        clientOrderColumn.setCellValueFactory(d -> {
+        productOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdStock())));
+        clientOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdClient())));
+        /*clientOrderColumn.setCellValueFactory(d -> {
             int clientId = d.getValue().getIdClient();
             String clientName = UsersBLL.getNameById(clientId);
             return new SimpleStringProperty(clientName);
-        });
+        });*/
 
         priceOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderPrice())));
         quantityOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderQuantity())));
         dateStartOrderColum.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDateStart())));
-        dateEndOrderColum.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDateEnd())));
         stateOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getState())));
     }
 
@@ -133,15 +133,34 @@ public class orderController {
     }
 
     public void onEditOrderButtonClick(ActionEvent event) throws IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("order_edit.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene popupScene = new Scene(root);
-        Stage popupStage = new Stage();
-        popupStage.setScene(popupScene);
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Adding Order..");
-        popupStage.setResizable(false);
-        popupStage.show();*/
+        Orders selectedOrder = dataView.getSelectionModel().getSelectedItem();
+        if (selectedOrder != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("order_edit.fxml"));
+            Parent parent = loader.load();
+            orderEditController controller = loader.getController();
+            controller.setOrder(dataView.getSelectionModel().getSelectedItem());
+            Scene scene = new Scene(parent);
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            dialogStage.setTitle("Edit User");
+            dialogStage.setScene(scene);
+            dialogStage.showAndWait();
+            dataView.refresh();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Edit Order");
+            alert.setHeaderText("You must select one order to edit");
+
+            ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+
+            alert.getButtonTypes().setAll(okButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == okButton) {
+                alert.close();
+            }
+        }
     }
     public void onListTotalBilledButtonClick(ActionEvent event) throws IOException {
 

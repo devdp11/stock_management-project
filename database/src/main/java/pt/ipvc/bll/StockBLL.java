@@ -14,6 +14,10 @@ public class StockBLL {
         return Database.find(Stock.class, id);
     }
 
+    public static Stock getbydescription(String description){
+        List<Stock>stocks = Database.query("stock.getbydescription").setParameter("description", description).getResultList();
+        return stocks.isEmpty()? null:stocks.get(0);
+    }
     public static void create(Stock entity) {
         Database.beginTransaction();
         Database.insert(entity);

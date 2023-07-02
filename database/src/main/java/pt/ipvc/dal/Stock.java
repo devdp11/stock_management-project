@@ -8,6 +8,7 @@ import java.util.Collection;
 
 @Entity
 @NamedQueries({
+        @NamedQuery(name = "stock.getbydescription", query = "SELECT stock from Stock stock WHERE stock.description LIKE :description"),
         @NamedQuery(name = "stocks.index", query = "SELECT stock FROM Stock stock"),
 })
 public class Stock {
