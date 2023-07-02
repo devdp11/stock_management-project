@@ -38,6 +38,9 @@ public class Stock {
     @ManyToOne
     @JoinColumn(name = "id_production", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
     private Production productionByIdProduction;
+    @ManyToOne
+    @JoinColumn(name = "id_storage", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
+    private Storage storageByIdStorage;
 
     public int getId() {
         return id;
@@ -138,5 +141,13 @@ public class Stock {
 
     public void setProductionByIdProduction(Production productionByIdProduction) {
         this.productionByIdProduction = productionByIdProduction;
+    }
+
+    public Storage getStorageByIdStorage() {
+        return storageByIdStorage;
+    }
+
+    public void setStorageByIdStorage(Storage storageByIdStorage) {
+        this.storageByIdStorage = storageByIdStorage;
     }
 }

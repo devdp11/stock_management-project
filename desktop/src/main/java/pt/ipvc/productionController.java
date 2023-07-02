@@ -48,7 +48,7 @@ public class productionController {
         ObservableList<Production> data = FXCollections.observableArrayList(productions);
 
         dataView.setItems(data);
-        seedProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdSeeds())));
+        seedProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getSeedByIdSeed().getDescription())));
         descriptionProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
         quantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getWantedQuantity())));
         seedsQuantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getSeedsQuantity())));

@@ -37,6 +37,10 @@ public class Production {
     @Column(name = "deleted_on")
     private Timestamp deletedOn;
 
+    @ManyToOne
+    @JoinColumn(name = "id_seeds", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
+    private Seeds seedByIdSeed;
+
     public int getId() {
         return id;
     }
@@ -131,5 +135,13 @@ public class Production {
         result = 31 * result + (data != null ? data.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
         return result;
+    }
+
+    public Seeds getSeedByIdSeed() {
+        return seedByIdSeed;
+    }
+
+    public void setSeedByIdSeed(Seeds seedByIdSeed) {
+        this.seedByIdSeed = seedByIdSeed;
     }
 }

@@ -51,8 +51,8 @@ public class productController {
         descriptionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
         quantityBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getProducedQuantity())));
         dateBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDate())));
-        productionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdProduction())));
-        storageBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdStorage())));
+        productionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getProductionByIdProduction().getDescription())));
+        storageBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getStorageByIdStorage().getName())));
     }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {

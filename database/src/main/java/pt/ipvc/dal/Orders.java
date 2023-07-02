@@ -39,6 +39,10 @@ public class Orders {
     @Column(name = "deleted_on")
     private Timestamp deletedOn;
 
+    @ManyToOne
+    @JoinColumn(name = "id_stock", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
+    private Stock stockByIdStock;
+
     public int getId() {
         return id;
     }
@@ -145,5 +149,13 @@ public class Orders {
         result = 31 * result + (dateEnd != null ? dateEnd.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
         return result;
+    }
+
+    public Stock getStockByIdStock() {
+        return stockByIdStock;
+    }
+
+    public void setStockByIdStock(Stock stockByIdStock) {
+        this.stockByIdStock = stockByIdStock;
     }
 }

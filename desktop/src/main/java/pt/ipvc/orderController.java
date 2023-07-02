@@ -54,7 +54,7 @@ public class orderController {
         ObservableList<Orders> data = FXCollections.observableArrayList(orders);
 
         dataView.setItems(data);
-        productOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdStock())));
+        productOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getStockByIdStock().getDescription())));
         clientOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdClient())));
         priceOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderPrice())));
         quantityOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderQuantity())));

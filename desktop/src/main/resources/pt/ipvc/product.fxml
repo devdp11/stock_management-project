@@ -63,7 +63,7 @@
                 <TableColumn fx:id="descriptionBatchColumn" prefWidth="125.0" text="DESCRIPTION" />
                   <TableColumn fx:id="quantityBatchColumn" prefWidth="125.0" text="QUANTITY" />
                   <TableColumn fx:id="dateBatchColumn" prefWidth="125.0" text="DATE" />
-                  <TableColumn fx:id="productionBatchColumn" prefWidth="135.0" text="PRODUCTION ID" />
+                  <TableColumn fx:id="productionBatchColumn" prefWidth="135.0" text="PRODUCTION" />
                   <TableColumn fx:id="storageBatchColumn" prefWidth="135.0" text="STORAGE" />
               </columns>
             </TableView>
