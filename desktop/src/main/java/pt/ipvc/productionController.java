@@ -15,8 +15,10 @@ import javafx.stage.Stage;
 import javafx.stage.Modality;
 import pt.ipvc.bll.ProductionBLL;
 import pt.ipvc.bll.SeedsBLL;
+import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.dal.Production;
 import pt.ipvc.dal.Seeds;
+import pt.ipvc.dal.Users;
 
 import java.io.IOException;
 import java.util.*;
@@ -40,21 +42,28 @@ public class productionController {
     @FXML
     private TableColumn<Production, String> stateProductionColumn;
 
+    @FXML
+    private ComboBox<String> stateFilter;
+    @FXML
     public void initialize() {
-        ObservableList<String> tProduction = FXCollections.observableArrayList();
+        ObservableList<String> tProduction = FXCollections.observableArrayList(
+                "All", "In preparation", "Growing up", "Ready to recall");
+
+        stateFilter.setItems(tProduction);
 
         List<Production> productions = ProductionBLL.index();
         Collections.sort(productions, Comparator.comparingInt(production -> production.getId()));
         ObservableList<Production> data = FXCollections.observableArrayList(productions);
 
         dataView.setItems(data);
-        seedProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getSeedByIdSeed().getDescription())));
+        seedProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdSeeds())));
         descriptionProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
         quantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getWantedQuantity())));
         seedsQuantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getSeedsQuantity())));
         dateProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getData())));
         stateProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getState())));
     }
+
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
@@ -135,4 +144,32 @@ public class productionController {
         dataView.setItems(data);
         dataView.refresh();
     }
+
+    @FXML
+    private void onStateFilterSelected(ActionEvent event) {
+        String selectedState = stateFilter.getSelectionModel().getSelectedItem();
+
+        if (selectedState.equals("All")) {
+            List<Production> allProductions = ProductionBLL.index();
+            updateDataView(allProductions);
+        } else {
+            List<Production> filteredProduction = filterProductionByState(selectedState);
+            updateDataView(filteredProduction);
+        }
+    }
+
+    private List<Production> filterProductionByState(String selectedState) {
+        List<Production> allProductions = ProductionBLL.index();
+        List<Production> filteredProduction = new ArrayList<>();
+
+        for (Production production : allProductions) {
+            // Verifique se o estado da produção corresponde ao estado selecionado
+            if (production.getState().equals(selectedState)) {
+                filteredProduction.add(production);
+            }
+        }
+
+        return filteredProduction;
+    }
+
 }
