@@ -59,12 +59,12 @@
          <children>
             <TableView fx:id="listProducts" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
               <columns>
-                <TableColumn prefWidth="125.0" text="ID BATCH" />
+                <TableColumn prefWidth="125.0" text="BATCH ID" />
                 <TableColumn prefWidth="125.0" text="DESCRIPTION" />
                   <TableColumn prefWidth="125.0" text="QUANTITY" />
                   <TableColumn prefWidth="125.0" text="DATE" />
-                  <TableColumn prefWidth="135.0" text="ID PRODUCTION" />
-                  <TableColumn prefWidth="135.0" text="ID STORAGE" />
+                  <TableColumn prefWidth="135.0" text="PRODUCTION ID" />
+                  <TableColumn prefWidth="135.0" text="STORAGE" />
               </columns>
             </TableView>
             <TextField layoutX="605.0" layoutY="40.0" prefHeight="35.0" prefWidth="175.0" promptText="description" />

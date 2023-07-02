@@ -93,7 +93,7 @@ public class seedAddController {
                     SeedsBLL.create(newSeed);
 
                     ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Created the user successfully!", continueButtonType);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Requested the seed successfully!", continueButtonType);
                     alert.setTitle("Alert");
                     alert.setHeaderText(null);
                     DialogPane alertDialog = alert.getDialogPane();

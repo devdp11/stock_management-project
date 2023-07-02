@@ -58,16 +58,14 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="listProducts" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
+            <TableView fx:id="dataView" layoutX="28.0" layoutY="99.0" prefHeight="498.0" prefWidth="770.0">
               <columns>
-                <TableColumn prefWidth="105.0" text="ID PRODUCTION" />
-                <TableColumn text="ID SEEDS" />
-                  <TableColumn prefWidth="94.0" text="DESCRIPTION" />
-                  <TableColumn prefWidth="125.0" text="WANTED QUANTITY" />
-                  <TableColumn prefWidth="115.0" text="SEEDS QUANTITY" />
-                  <TableColumn prefWidth="75.0" text="DATE" />
-                  <TableColumn text="STATE" />
-                  <TableColumn prefWidth="94.0" text="ID MANAGER" />
+                <TableColumn fx:id="seedProductionColumn" prefWidth="128.0" text="SEED" />
+                  <TableColumn fx:id="descriptionProductionColumn" prefWidth="128.0" text="DESCRIPTION" />
+                  <TableColumn fx:id="quantityProductionColumn" prefWidth="128.0" text="WANTED QUANTITY" />
+                  <TableColumn fx:id="seedsQuantityProductionColumn" prefWidth="128.0" text="SEEDS QUANTITY" />
+                  <TableColumn fx:id="dateProductionColumn" prefWidth="128.0" text="DATE" />
+                  <TableColumn fx:id="stateProductionColumn" prefWidth="129.0" text="STATE" />
               </columns>
             </TableView>
             <ComboBox layoutX="605.0" layoutY="40.0" prefHeight="35.0" prefWidth="175.0" promptText="state" />

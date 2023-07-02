@@ -59,15 +59,15 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="listOrders" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
+            <TableView fx:id="dataView" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
                <columns>
-                  <TableColumn fx:id="nameBatchColumn" prefWidth="95.0" text="ID BATCH" />
-                  <TableColumn fx:id="nameOrderColumn" prefWidth="100.0" text="ID CLIENT" />
-                  <TableColumn fx:id="priceColumn" prefWidth="105.0" text="PRICE" />
-                  <TableColumn fx:id="quantityColumn" prefWidth="95.0" text="QUANTITY" />
-                  <TableColumn fx:id="dateStartColum" prefWidth="125.0" text="START DATE" />
-                  <TableColumn fx:id="dateEndColum" prefWidth="125.0" text="END DATE" />
-                  <TableColumn fx:id="stateColumn" prefWidth="125.0" text="STATE" />
+                  <TableColumn fx:id="productOrderColumn" prefWidth="105.0" text="PRODUCT" />
+                  <TableColumn fx:id="clientOrderColumn" prefWidth="110.0" text="CLIENT NAME" />
+                  <TableColumn fx:id="priceOrderColumn" prefWidth="110.0" text="ORDER PRICE" />
+                  <TableColumn fx:id="quantityOrderColumn" prefWidth="120.0" text="ORDER QUANTITY" />
+                  <TableColumn fx:id="dateStartOrderColum" prefWidth="100.0" text="START DATE" />
+                  <TableColumn fx:id="dateEndOrderColum" prefWidth="100.0" text="END DATE" />
+                  <TableColumn fx:id="stateOrderColumn" prefWidth="120.0" text="STATE" />
                </columns>
             </TableView>
             <TextField layoutX="605.0" layoutY="40.0" prefHeight="35.0" prefWidth="175.0" promptText="state" />

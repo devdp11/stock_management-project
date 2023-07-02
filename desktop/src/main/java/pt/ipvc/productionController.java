@@ -1,29 +1,59 @@
 package pt.ipvc;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
+import pt.ipvc.bll.ProductionBLL;
+import pt.ipvc.bll.SeedsBLL;
+import pt.ipvc.dal.Production;
+import pt.ipvc.dal.Seeds;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class productionController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    public productionController(){
+    @FXML
+    private TableView<Production> dataView;
+    @FXML
+    private TableColumn<Production, String> seedProductionColumn;
+    @FXML
+    private TableColumn<Production, String> descriptionProductionColumn;
+    @FXML
+    private TableColumn<Production, String> quantityProductionColumn;
+    @FXML
+    private TableColumn<Production, String> seedsQuantityProductionColumn;
+    @FXML
+    private TableColumn<Production, String> dateProductionColumn;
+    @FXML
+    private TableColumn<Production, String> stateProductionColumn;
 
+    public void initialize() {
+        ObservableList<String> tProduction = FXCollections.observableArrayList();
+
+        List<Production> productions = ProductionBLL.index();
+        Collections.sort(productions, Comparator.comparingInt(production -> production.getId()));
+        ObservableList<Production> data = FXCollections.observableArrayList(productions);
+
+        dataView.setItems(data);
+        seedProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdSeeds())));
+        descriptionProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
+        quantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getWantedQuantity())));
+        seedsQuantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getSeedsQuantity())));
+        dateProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getData())));
+        stateProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getState())));
     }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
@@ -98,5 +128,11 @@ public class productionController {
         popupStage.setTitle("Recalling Production..");
         popupStage.setResizable(false);
         popupStage.show();
+    }
+    private void updateDataView(List<Production> productions) {
+        Collections.sort(productions, Comparator.comparingInt(production -> production.getId()));
+        ObservableList<Production> data = FXCollections.observableArrayList(productions);
+        dataView.setItems(data);
+        dataView.refresh();
     }
 }

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 @Entity
 @NamedQueries({
+        @NamedQuery(name = "orders.index", query = "SELECT orders FROM Orders orders"),
 })
 public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +28,10 @@ public class Orders {
     private int orderQuantity;
     @Basic
     @Column(name = "date_start")
-    private Date dateStart;
+    private String dateStart;
     @Basic
     @Column(name = "date_end")
-    private Date dateEnd;
+    private String dateEnd;
     @Basic
     @Column(name = "state")
     private String state;
@@ -78,19 +79,19 @@ public class Orders {
         this.orderQuantity = orderQuantity;
     }
 
-    public Date getDateStart() {
+    public String getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(String dateStart) {
         this.dateStart = dateStart;
     }
 
-    public Date getDateEnd() {
+    public String getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(String dateEnd) {
         this.dateEnd = dateEnd;
     }
 

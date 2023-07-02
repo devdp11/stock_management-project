@@ -9,15 +9,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
+import pt.ipvc.bll.OrdersBLL;
+import pt.ipvc.bll.ProductionBLL;
 import pt.ipvc.bll.RoleBLL;
 import pt.ipvc.bll.UsersBLL;
+import pt.ipvc.dal.Orders;
+import pt.ipvc.dal.Production;
 import pt.ipvc.dal.Role;
 import pt.ipvc.dal.Users;
 
@@ -28,8 +29,38 @@ public class orderController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    public orderController(){
+    @FXML
+    private TableView<Orders> dataView;
+    @FXML
+    private TableColumn<Orders, String> productOrderColumn;
+    @FXML
+    private TableColumn<Orders, String> clientOrderColumn;
+    @FXML
+    private TableColumn<Orders, String> priceOrderColumn;
+    @FXML
+    private TableColumn<Orders, String> quantityOrderColumn;
+    @FXML
+    private TableColumn<Orders, String> dateStartOrderColum;
+    @FXML
+    private TableColumn<Orders, String> dateEndOrderColum;
+    @FXML
+    private TableColumn<Orders, String> stateOrderColumn;
 
+    public void initialize() {
+        ObservableList<String> tOrder = FXCollections.observableArrayList();
+
+        List<Orders> orders = OrdersBLL.index();
+        Collections.sort(orders, Comparator.comparingInt(orders1 -> orders1.getId()));
+        ObservableList<Orders> data = FXCollections.observableArrayList(orders);
+
+        dataView.setItems(data);
+        productOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdStock())));
+        clientOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdClient())));
+        priceOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderPrice())));
+        quantityOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderQuantity())));
+        dateStartOrderColum.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDateStart())));
+        dateEndOrderColum.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDateEnd())));
+        stateOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getState())));
     }
 
 
@@ -109,5 +140,12 @@ public class orderController {
     }
     public void onListTotalBilledButtonClick(ActionEvent event) throws IOException {
 
+    }
+
+    private void updateDataView(List<Orders> orders) {
+        Collections.sort(orders, Comparator.comparingInt(orders1 -> orders1.getId()));
+        ObservableList<Orders> data = FXCollections.observableArrayList(orders);
+        dataView.setItems(data);
+        dataView.refresh();
     }
 }

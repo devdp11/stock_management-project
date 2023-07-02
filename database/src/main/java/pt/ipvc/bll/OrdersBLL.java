@@ -8,7 +8,7 @@ import java.util.List;
 public class OrdersBLL {
 
     public static List<Orders> index() {
-        return Database.query("Orders.index").getResultList();
+        return Database.query("orders.index").getResultList();
     }
 
     public static Orders get(Long id) {

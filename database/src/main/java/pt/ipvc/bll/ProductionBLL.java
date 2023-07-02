@@ -7,7 +7,7 @@ import java.util.List;
 public class ProductionBLL {
 
     public static List<Production> index() {
-        return Database.query("production.index").getResultList();
+        return Database.query("productions.index").getResultList();
     }
 
     public static Production get(Long id) {
