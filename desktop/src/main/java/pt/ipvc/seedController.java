@@ -54,7 +54,19 @@ public class seedController {
         descriptionSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
         quantitySeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getQuantityRequested())));
         dateSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDate())));
-        supplierSeedsColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdSupplier())));
+        supplierSeedsColumn.setCellValueFactory(d -> {
+            int supplierId = d.getValue().getIdSupplier();
+            List<Users> suppliers = UsersBLL.getByRole("supplier");
+            String supplierName = "";
+            for (Users supplier : suppliers) {
+                if (supplier.getId() == supplierId) {
+                    supplierName = supplier.getName();
+                    break;
+                }
+            }
+            return new SimpleStringProperty(supplierName);
+        });
+
     }
 
     @FXML

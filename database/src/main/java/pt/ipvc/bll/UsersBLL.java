@@ -75,4 +75,13 @@ public class UsersBLL {
         Users users = getByEmail(email);
         return users == null;
     }
+
+    public static String getNameById(int id) {
+        Users user = get(id);
+        if (user != null) {
+            return user.getName();
+        }
+        return null;
+    }
+
 }
