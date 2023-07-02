@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -48,29 +47,30 @@ public class userController {
     private TextField searchBar;
 
     @FXML
-    private void initialize(){
-         List<Role> roles = RoleBLL.index();
-         ObservableList<String> tUser = FXCollections.observableArrayList();
-         for (Role tp: roles){
-             tUser.add(tp.getDescription());
-         }
-         roleFilter.setItems(tUser);
+    private void initialize() {
+        List<Role> roles = RoleBLL.index();
+        ObservableList<String> roleOptions = FXCollections.observableArrayList();
+        roleOptions.add("All");
 
-         List<Users> users = UsersBLL.index();
-         Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
-         ObservableList<Users> data = FXCollections.observableArrayList(users);
+        for (Role role : roles) {
+            roleOptions.add(String.valueOf(role.getId()));
+        }
 
-         dataView.setItems(data);
-         nameUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getName())));
-         phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPhone())));
-         emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getEmail())));
-         passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPassword())));
-         roleUserColumn.setCellValueFactory(d -> {
-             Role role = d.getValue().getRoleByIdRole();
-             String description = (role != null && role.getDescription() != null) ? role.getDescription() : "";
-             return new SimpleStringProperty(description);
-         });
-     }
+        roleFilter.setOnAction(this::onRoleFilterSelected);
+        roleFilter.setItems(roleOptions);
+
+        List<Users> users = UsersBLL.index();
+        Collections.sort(users, Comparator.comparingInt(Users::getId));
+        ObservableList<Users> data = FXCollections.observableArrayList(users);
+
+        dataView.setItems(data);
+        nameUserColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getName()));
+        phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getPhone()));
+        emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getEmail()));
+        passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getPassword()));
+        roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdRole())));
+    }
+
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
@@ -132,9 +132,11 @@ public class userController {
         popupStage.setTitle("Adding User..");
         popupStage.setResizable(false);
         popupStage.show();
+
         List<Users> users = UsersBLL.index();
-        updateDataView(users);
+        updateDataView(users); // Chama o método para atualizar a tabela
     }
+
 
     public void onEditUserButtonClick(ActionEvent event) throws IOException {
         Users selectedUser = dataView.getSelectionModel().getSelectedItem();
@@ -193,4 +195,38 @@ public class userController {
         dataView.setItems(data);
         dataView.refresh();
     }
+
+    private void onRoleFilterSelected(ActionEvent event) {
+        String selectedRole = roleFilter.getSelectionModel().getSelectedItem();
+
+        if (selectedRole.equals("All")) {
+            List<Users> allUsers = UsersBLL.index();
+            updateDataView(allUsers);
+        } else {
+            List<Users> filteredUsers = filterUsersByRole(selectedRole);
+            updateDataView(filteredUsers);
+        }
+    }
+
+
+    private List<Users> filterUsersByRole(String selectedRole) {
+        List<Users> allUsers = UsersBLL.index();
+        List<Users> filteredUsers = new ArrayList<>();
+
+        int selectedRoleId = Integer.parseInt(selectedRole); // Converter para int
+
+        for (Users user : allUsers) {
+            // Verifique se o papel do usuário corresponde ao papel selecionado
+            if (user.getIdRole() == selectedRoleId) {
+                filteredUsers.add(user);
+            }
+        }
+
+        return filteredUsers;
+    }
+
+
+
+
+
 }

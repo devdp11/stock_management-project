@@ -8,4 +8,5 @@ module vegetable.company.database.main {
     opens pt.ipvc.dal to org.hibernate.orm.core;
     exports pt.ipvc.bll;
     exports pt.ipvc.dal;
+
 }

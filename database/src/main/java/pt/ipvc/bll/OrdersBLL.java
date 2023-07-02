@@ -8,7 +8,7 @@ import java.util.List;
 public class OrdersBLL {
 
     public static List<Orders> index() {
-        return Database.query("orders.index").getResultList();
+        return Database.query("Orders.index").getResultList();
     }
 
     public static Orders get(Long id) {
@@ -36,6 +36,6 @@ public class OrdersBLL {
     }
 
     public static int count() {
-        return ((Long) Database.query("orders.count").getSingleResult()).intValue();
+        return ((Long) Database.query("Orders.count").getSingleResult()).intValue();
     }
 }

@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Collection;
 
+
 @Entity
 @NamedQueries({
         @NamedQuery(name = "seeds.getbydescription", query = "SELECT seeds from Seeds seeds WHERE seeds.description LIKE :description"),

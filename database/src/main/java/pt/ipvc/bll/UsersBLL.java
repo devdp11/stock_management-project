@@ -1,6 +1,7 @@
 package pt.ipvc.bll;
 
 
+import jakarta.persistence.TypedQuery;
 import pt.ipvc.dal.Users;
 import pt.ipvc.database.Database;
 
@@ -29,10 +30,14 @@ public class UsersBLL {
         List<Users>users = Database.query("user.getByEmail").setParameter("email", email).getResultList();
         return users.isEmpty()? null:users.get(0);
     }
-    public static Users getByRole(String description){
-        List<Users> users = Database.query("user.getByRole").setParameter("description", description).getResultList();
-        return users.isEmpty() ? null : users.get(0);
+    public static List<Users> getByRole(String description) {
+        TypedQuery<Users> query = Database.getEntityManager()
+                .createNamedQuery("user.getByRole", Users.class)
+                .setParameter("description", description);
+        return query.getResultList();
     }
+
+
 
     public static void create(Users entity) {
         Database.beginTransaction();

@@ -9,10 +9,9 @@ import java.util.Collection;
 @NamedQueries({
         @NamedQuery(name = "users.index", query = "SELECT users FROM Users users"),
         @NamedQuery(name = "user.getByPhone", query = "SELECT users FROM Users users WHERE users.phone LIKE :phone"),
-        @NamedQuery(name = "user.getByEmail", query = "SELECT users FROM Users users WHERE users.email  LIKE :email"),
+        @NamedQuery(name = "user.getByEmail", query = "SELECT users FROM Users users WHERE users.email LIKE :email"),
         @NamedQuery(name = "user.getLogin", query = "SELECT users FROM Users users WHERE users.email LIKE :email AND users.password LIKE :password"),
-        @NamedQuery(name = "user.getByRole", query = "SELECT name FROM Users users WHERE users.roleByIdRole.description LIKE :description"),
-
+        @NamedQuery(name = "user.getByRole", query = "SELECT users FROM Users users WHERE users.roleByIdRole.description LIKE :description"),
 })
 public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +47,7 @@ public class Users {
     private Timestamp deletedOn;
 
     @ManyToOne
-    @JoinColumn(name = "id_role", referencedColumnName = "id", insertable = false, nullable = false, updatable = false)
+    @JoinColumn(name = "id_role", insertable = false, nullable = false, updatable = false)
     private Role roleByIdRole;
 
     public int getId() {
@@ -131,6 +130,16 @@ public class Users {
         this.deletedOn = deletedOn;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "id_role", referencedColumnName = "id", insertable = false, updatable = false)
+    public Role getRoleByIdRole() {
+        return roleByIdRole;
+    }
+
+    public void setRoleByIdRole(Role roleByIdRole) {
+        this.roleByIdRole = roleByIdRole;
+        this.idRole = roleByIdRole.getId();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -164,13 +173,5 @@ public class Users {
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + idRole;
         return result;
-    }
-
-    public Role getRoleByIdRole() {
-        return roleByIdRole;
-    }
-
-    public void setRoleByIdRole(Role roleByIdRole) {
-        this.roleByIdRole = roleByIdRole;
     }
 }

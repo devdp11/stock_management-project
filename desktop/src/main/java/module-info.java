@@ -4,6 +4,7 @@ module vegetable.company.desktop.main {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires vegetable.company.database.main;
+    requires java.sql;
 
     opens pt.ipvc to javafx.fxml;
     exports pt.ipvc;
