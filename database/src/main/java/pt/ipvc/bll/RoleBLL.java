@@ -40,6 +40,10 @@ public class RoleBLL {
                 .getResultStream().findFirst().orElse(null);
     }
 
+    public static Role getById(int id) {
+        return Database.find(Role.class, id);
+    }
+
     public static int count() {
         return ((Long) Database.query("role.count").getSingleResult()).intValue();
     }

@@ -53,7 +53,7 @@ public class userController {
         roleOptions.add("All");
 
         for (Role role : roles) {
-            roleOptions.add(String.valueOf(role.getId()));
+            roleOptions.add(role.getDescription());
         }
 
         roleFilter.setOnAction(this::onRoleFilterSelected);
@@ -68,7 +68,11 @@ public class userController {
         phoneUserColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getPhone()));
         emailUserColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getEmail()));
         passwordUserColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getPassword()));
-        roleUserColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdRole())));
+        roleUserColumn.setCellValueFactory(d -> {
+            int roleId = d.getValue().getIdRole();
+            Role role = RoleBLL.getById(roleId);
+            return new SimpleStringProperty(role.getDescription());
+        });
     }
 
     @FXML
@@ -213,11 +217,9 @@ public class userController {
         List<Users> allUsers = UsersBLL.index();
         List<Users> filteredUsers = new ArrayList<>();
 
-        int selectedRoleId = Integer.parseInt(selectedRole); // Converter para int
 
         for (Users user : allUsers) {
-            // Verifique se o papel do usuário corresponde ao papel selecionado
-            if (user.getIdRole() == selectedRoleId) {
+            if (user.getRoleByIdRole().getDescription().equals(selectedRole)) {
                 filteredUsers.add(user);
             }
         }

@@ -56,7 +56,10 @@ public class productionController {
         ObservableList<Production> data = FXCollections.observableArrayList(productions);
 
         dataView.setItems(data);
-        seedProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getIdSeeds())));
+        seedProductionColumn.setCellValueFactory(d -> {
+            Seeds seed = SeedsBLL.get(d.getValue().getIdSeeds());
+            return new SimpleStringProperty(seed.getDescription());
+        });
         descriptionProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
         quantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getWantedQuantity())));
         seedsQuantityProductionColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getSeedsQuantity())));
@@ -163,7 +166,6 @@ public class productionController {
         List<Production> filteredProduction = new ArrayList<>();
 
         for (Production production : allProductions) {
-            // Verifique se o estado da produção corresponde ao estado selecionado
             if (production.getState().equals(selectedState)) {
                 filteredProduction.add(production);
             }

@@ -47,5 +47,9 @@ public class SeedsBLL {
         Seeds seeds = getbydescription(description);
         return seeds == null;
     }
+
+    public static Seeds get(int id) {
+        return Database.find(Seeds.class, id);
+    }
 }
 
