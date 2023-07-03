@@ -10,7 +10,7 @@ public class StockBLL {
         return Database.query("stocks.index").getResultList();
     }
 
-    public static Stock get(Long id) {
+    public static Stock get(int id) {
         return Database.find(Stock.class, id);
     }
 
@@ -30,7 +30,7 @@ public class StockBLL {
         Database.commitTransaction();
     }
 
-    public static void remove(Long id) {
+    public static void remove(Integer id) {
         Stock entity = get(id);
 
         Database.beginTransaction();

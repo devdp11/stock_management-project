@@ -13,14 +13,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
-import pt.ipvc.bll.OrdersBLL;
-import pt.ipvc.bll.ProductionBLL;
-import pt.ipvc.bll.RoleBLL;
-import pt.ipvc.bll.UsersBLL;
-import pt.ipvc.dal.Orders;
-import pt.ipvc.dal.Production;
-import pt.ipvc.dal.Role;
-import pt.ipvc.dal.Users;
+import pt.ipvc.bll.*;
+import pt.ipvc.dal.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -54,8 +48,14 @@ public class orderController {
         ObservableList<Orders> data = FXCollections.observableArrayList(orders);
 
         dataView.setItems(data);
-        productOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getStockByIdStock().getDescription()));
-        clientOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getClientByIdClient().getName())));
+        productOrderColumn.setCellValueFactory(d -> {
+            Stock stock = StockBLL.get((d.getValue().getIdStock()));
+            return new SimpleStringProperty(stock.getDescription());
+        });
+        clientOrderColumn.setCellValueFactory(d -> {
+            Users users = UsersBLL.get((d.getValue().getIdClient()));
+            return new SimpleStringProperty(users.getName());
+        });
         priceOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderPrice())));
         quantityOrderColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getOrderQuantity())));
         dateStartOrderColum.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDateStart())));
