@@ -66,7 +66,7 @@ public class productionEditController {
         datePicker.setDisable(true);
         seedsComboBox.setDisable(true);
 
-        List<String> states = Arrays.asList("In preparation", "Growing up", "Ready to recall");
+        List<String> states = Arrays.asList("In preparation", "Growing up", "Ready to recall", "Already recalled");
         ObservableList<String> tState = FXCollections.observableArrayList(states);
         stateComboBox.setItems(tState);
         stateComboBox.setValue(production.getState());

@@ -39,15 +39,23 @@ public class userEditController {
 
         ObservableList<String> tUser = FXCollections.observableArrayList();
 
+        Role role1 = user.getRoleByIdRole();
+        if (role1 != null) {
+            roleComboBox.setValue(role1.getDescription());
+        } else {
+            roleComboBox.setValue("");
+        }
+
         for (Role role : roleList) {
             tUser.add(role.getDescription());
         }
+
         nameTextField.setText(users.getName());
         phoneTextField.setText(String.valueOf(users.getPhone()));
         emailTextField.setText(users.getEmail());
         passwordTextField.setText(users.getPassword());
         roleComboBox.setItems(tUser);
-        roleComboBox.setValue(this.user.getRoleByIdRole().getDescription());
+        //roleComboBox.setValue(this.user.getRoleByIdRole().getDescription());
         streetTextField.setText(users.getStreet() != null ? users.getStreet() : "");
         doorTextField.setText(users.getDoor() != null ? users.getDoor() : "");
         locationTextField.setText(users.getLocation() != null ? users.getLocation() : "");

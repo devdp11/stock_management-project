@@ -60,6 +60,9 @@ public class orderEditController {
         stateComboBox.setItems(tState);
         stateComboBox.setValue(order.getState());
 
+        orderPriceTextField.setEditable(false);
+        orderQuantityTextField.setEditable(false);
+
         List<Users> userList = UsersBLL.getByRole("client");
         ObservableList<String> tUser = FXCollections.observableArrayList();
         for (Users user : userList) {

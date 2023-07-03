@@ -52,7 +52,7 @@ public class productionController {
     @FXML
     public void initialize() {
         ObservableList<String> tProduction = FXCollections.observableArrayList(
-                "All", "In preparation", "Growing up", "Ready to recall");
+                "All", "In preparation", "Growing up", "Ready to recall", "Already recalled");
 
         stateFilter.setItems(tProduction);
 

@@ -1,4 +1,5 @@
 package pt.ipvc.bll;
+import pt.ipvc.dal.Production;
 import pt.ipvc.dal.Stock;
 import pt.ipvc.database.Database;
 
@@ -20,8 +21,15 @@ public class StockBLL {
     }
     public static void create(Stock entity) {
         Database.beginTransaction();
-        Database.insert(entity);
-        Database.commitTransaction();
+
+        try {
+            Database.insert(entity);
+            Database.commitTransaction();
+            Database.getEntityManager().clear();
+        } catch (Exception e) {
+            Database.rollbackTransaction();
+            throw e;
+        }
     }
 
     public static void update(Stock entity) {

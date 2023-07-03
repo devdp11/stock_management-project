@@ -1,5 +1,6 @@
 package pt.ipvc.bll;
 import pt.ipvc.dal.Orders;
+import pt.ipvc.dal.Stock;
 import pt.ipvc.database.Database;
 
 import java.util.List;
@@ -17,8 +18,15 @@ public class OrdersBLL {
 
     public static void create(Orders entity) {
         Database.beginTransaction();
-        Database.insert(entity);
-        Database.commitTransaction();
+
+        try {
+            Database.insert(entity);
+            Database.commitTransaction();
+            Database.getEntityManager().clear();
+        } catch (Exception e) {
+            Database.rollbackTransaction();
+            throw e;
+        }
     }
 
     public static void update(Orders entity) {
