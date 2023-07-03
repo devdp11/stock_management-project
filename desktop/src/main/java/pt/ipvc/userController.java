@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -17,11 +18,14 @@ import java.io.IOException;
 
 
 import pt.ipvc.bll.RoleBLL;
+import pt.ipvc.bll.SeedsBLL;
 import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.dal.Role;
+import pt.ipvc.dal.Seeds;
 import pt.ipvc.dal.Users;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class userController {
@@ -44,8 +48,7 @@ public class userController {
     @FXML
     private ComboBox<String> roleFilter;
     @FXML
-    private TextField searchBar;
-
+    private TextField nameFilter;
     @FXML
     private void initialize() {
         List<Role> roles = RoleBLL.index();
@@ -193,6 +196,17 @@ public class userController {
             }
         }
     }
+
+    @FXML
+    public void filterUsers(KeyEvent event) {
+        String filter = nameFilter.getText().toLowerCase();
+        List<Users> users = UsersBLL.index();
+        List<Users> filteredUsers = users.stream()
+                .filter(users1 -> users1.getName().toLowerCase().contains(filter))
+                .collect(Collectors.toList());
+        updateDataView(filteredUsers);
+    }
+
     private void updateDataView(List<Users> users) {
         Collections.sort(users, Comparator.comparingInt(user -> user.getId()));
         ObservableList<Users> data = FXCollections.observableArrayList(users);
@@ -212,23 +226,15 @@ public class userController {
         }
     }
 
-
     private List<Users> filterUsersByRole(String selectedRole) {
         List<Users> allUsers = UsersBLL.index();
         List<Users> filteredUsers = new ArrayList<>();
-
 
         for (Users user : allUsers) {
             if (user.getRoleByIdRole().getDescription().equals(selectedRole)) {
                 filteredUsers.add(user);
             }
         }
-
         return filteredUsers;
     }
-
-
-
-
-
 }

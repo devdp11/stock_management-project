@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -70,8 +71,9 @@
                   <TableColumn fx:id="stateOrderColumn" prefWidth="120.0" text="STATE" />
                </columns>
             </TableView>
-            <TextField layoutX="605.0" layoutY="40.0" prefHeight="35.0" prefWidth="175.0" promptText="state" />
+            <TextField fx:id="productFilter" layoutX="605.0" layoutY="40.0" onKeyReleased="#filterOrders" prefHeight="35.0" prefWidth="175.0" promptText="product" />
             <Line endX="40.0" endY="467.0" layoutX="773.0" layoutY="148.0" startX="40.0" startY="-119.0" style="-fx-opacity: 0.2px;" />
+            <ComboBox fx:id="stateFilter" layoutX="400.0" layoutY="40.0" onAction="#onStateFilterSelected" prefHeight="35.0" prefWidth="175.0" promptText="state" />
          </children></AnchorPane>
    </center>
 </BorderPane>

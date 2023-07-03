@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pt.ipvc.bll.ProductionBLL;
@@ -18,12 +19,16 @@ import pt.ipvc.dal.Production;
 import pt.ipvc.dal.Stock;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class productController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private TextField descriptionFilter;
     @FXML
     private TableView<Stock> dataView;
     @FXML
@@ -121,6 +126,15 @@ public class productController {
         stage.show();
     }
 
+    @FXML
+    public void filterProducts(KeyEvent event) {
+        String filter = descriptionFilter.getText().toLowerCase();
+        List<Stock> stocks = StockBLL.index();
+        List<Stock> filteredProducts = stocks.stream()
+                .filter(stock -> stock.getDescription().toLowerCase().contains(filter))
+                .collect(Collectors.toList());
+        updateDataView(filteredProducts);
+    }
     private void updateDataView(List<Stock> stocks) {
         Collections.sort(stocks, Comparator.comparingInt(stock -> stock.getId()));
         ObservableList<Stock> data = FXCollections.observableArrayList(stocks);

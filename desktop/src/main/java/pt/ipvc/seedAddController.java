@@ -31,8 +31,6 @@ public class seedAddController {
 
     @FXML
     private TextField quantityTextField;
-    @FXML
-    private TextField dateTextField;
 
     @FXML
     private DatePicker datePicker;
@@ -120,10 +118,6 @@ public class seedAddController {
             }
         }
     }
-
-
-
-
 
     @FXML
     public void onCancelButtonClick(ActionEvent event){

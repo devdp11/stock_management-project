@@ -10,23 +10,28 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
 import pt.ipvc.bll.ProductionBLL;
 import pt.ipvc.bll.SeedsBLL;
+import pt.ipvc.bll.StockBLL;
 import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.dal.Production;
 import pt.ipvc.dal.Seeds;
+import pt.ipvc.dal.Stock;
 import pt.ipvc.dal.Users;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class productionController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
     @FXML
     private TableView<Production> dataView;
     @FXML
@@ -162,16 +167,36 @@ public class productionController {
     }
     @FXML
     public void onEditButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("production_edit.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene popupScene = new Scene(root);
-        Stage popupStage = new Stage();
-        popupStage.setScene(popupScene);
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Recalling Production..");
-        popupStage.setResizable(false);
-        popupStage.show();
+        Production selectedProduction = dataView.getSelectionModel().getSelectedItem();
+        if (selectedProduction != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("production_edit.fxml"));
+            Parent parent = loader.load();
+            productionEditController controller = loader.getController();
+            controller.setProduction(dataView.getSelectionModel().getSelectedItem());
+            Scene scene = new Scene(parent);
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            dialogStage.setTitle("Edit Production State");
+            dialogStage.setScene(scene);
+            dialogStage.showAndWait();
+            dataView.refresh();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Edit Production");
+            alert.setHeaderText("You must select one production to edit");
+
+            ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+
+            alert.getButtonTypes().setAll(okButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == okButton) {
+                alert.close();
+            }
+        }
     }
+
     private void updateDataView(List<Production> productions) {
         Collections.sort(productions, Comparator.comparingInt(production -> production.getId()));
         ObservableList<Production> data = FXCollections.observableArrayList(productions);
@@ -201,7 +226,6 @@ public class productionController {
                 filteredProduction.add(production);
             }
         }
-
         return filteredProduction;
     }
 

@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
@@ -17,7 +18,9 @@ import pt.ipvc.bll.*;
 import pt.ipvc.dal.*;
 
 import java.io.IOException;
+import java.security.Key;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class orderController {
     private Stage stage;
@@ -39,8 +42,16 @@ public class orderController {
     private TableColumn<Orders, String> dateEndOrderColum;
     @FXML
     private TableColumn<Orders, String> stateOrderColumn;
+    @FXML
+    private ComboBox<String> stateFilter;
+    @FXML
+    private TextField productFilter;
 
     public void initialize() {
+        ObservableList<String> tOrder1 = FXCollections.observableArrayList(
+                "All", "Preparing", "Sent", "Received");
+
+        stateFilter.setItems(tOrder1);
         ObservableList<String> tOrder = FXCollections.observableArrayList();
 
         List<Orders> orders = OrdersBLL.index();
@@ -165,5 +176,39 @@ public class orderController {
         ObservableList<Orders> data = FXCollections.observableArrayList(orders);
         dataView.setItems(data);
         dataView.refresh();
+    }
+    @FXML
+    private void onStateFilterSelected(ActionEvent event) {
+        String selectedState = stateFilter.getSelectionModel().getSelectedItem();
+
+        if (selectedState.equals("All")) {
+            List<Orders> allOrders = OrdersBLL.index();
+            updateDataView(allOrders);
+        } else {
+            List<Orders> filteredOrder = filterOrderByState(selectedState);
+            updateDataView(filteredOrder);
+        }
+    }
+
+    private List<Orders> filterOrderByState(String selectedState) {
+        List<Orders> allOrders = OrdersBLL.index();
+        List<Orders> filteredOrder = new ArrayList<>();
+
+        for (Orders orders : allOrders) {
+            if (orders.getState().equals(selectedState)) {
+                filteredOrder.add(orders);
+            }
+        }
+        return filteredOrder;
+    }
+
+    @FXML
+    public void filterOrders(KeyEvent event) {
+        String filter = productFilter.getText().toLowerCase();
+        List<Orders> orders = OrdersBLL.index();
+        List<Orders> filteredOrders = orders.stream()
+                .filter(orders1 -> orders1.getStockByIdStock().getDescription().toLowerCase().contains(filter))
+                .collect(Collectors.toList());
+        updateDataView(filteredOrders);
     }
 }

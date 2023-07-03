@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pt.ipvc.bll.SeedsBLL;
@@ -25,6 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class seedController {
@@ -32,6 +34,8 @@ public class seedController {
     private Scene scene;
     private Parent root;
 
+    @FXML
+    private TextField descriptionFilter;
     @FXML
     private TableView<Seeds> dataView;
     @FXML
@@ -135,15 +139,44 @@ public class seedController {
     }
     @FXML
     public void onEditSeedsButtonClick(ActionEvent event) throws IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("seed_edit.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene popupScene = new Scene(root);
-        Stage popupStage = new Stage();
-        popupStage.setScene(popupScene);
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Editing Seeds..");
-        popupStage.setResizable(false);
-        popupStage.show();*/
+        Seeds selectedSeed = dataView.getSelectionModel().getSelectedItem();
+        if (selectedSeed != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("seed_edit.fxml"));
+            Parent parent = loader.load();
+            seedEditController controller = loader.getController();
+            controller.setSeed(dataView.getSelectionModel().getSelectedItem());
+            Scene scene = new Scene(parent);
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            dialogStage.setTitle("Edit User");
+            dialogStage.setScene(scene);
+            dialogStage.showAndWait();
+            dataView.refresh();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Edit Seed");
+            alert.setHeaderText("You must select one seed to edit");
+
+            ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+
+            alert.getButtonTypes().setAll(okButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == okButton) {
+                alert.close();
+            }
+        }
+    }
+
+    @FXML
+    public void filterSeeds(KeyEvent event) {
+        String filter = descriptionFilter.getText().toLowerCase();
+        List<Seeds> seeds = SeedsBLL.index();
+        List<Seeds> filteredSeeds = seeds.stream()
+                .filter(seed -> seed.getDescription().toLowerCase().contains(filter))
+                .collect(Collectors.toList());
+        updateDataView(filteredSeeds);
     }
 
     private void updateDataView(List<Seeds> seeds) {
