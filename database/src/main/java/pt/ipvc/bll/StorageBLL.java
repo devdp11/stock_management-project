@@ -12,7 +12,7 @@ public class StorageBLL {
         return Database.query("storage.index").getResultList();
     }
 
-    public static Storage get(Long id) {
+    public static Storage get(Integer id) {
         return Database.find(Storage.class, id);
     }
 
@@ -28,7 +28,7 @@ public class StorageBLL {
         Database.commitTransaction();
     }
 
-    public static void remove(Long id) {
+    public static void remove(Integer id) {
         Storage entity = get(id);
 
         Database.beginTransaction();

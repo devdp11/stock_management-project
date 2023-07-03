@@ -1,6 +1,7 @@
 package pt.ipvc.bll;
 
 import pt.ipvc.dal.Production;
+import pt.ipvc.dal.Storage;
 import pt.ipvc.database.Database;
 
 import java.util.List;
@@ -12,6 +13,10 @@ public class ProductionBLL {
     }
 
     public static Production getById(int id) {
+        return Database.find(Production.class, id);
+    }
+
+    public static Production get(Integer id) {
         return Database.find(Production.class, id);
     }
 

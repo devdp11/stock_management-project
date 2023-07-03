@@ -14,9 +14,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pt.ipvc.bll.ProductionBLL;
+import pt.ipvc.bll.SeedsBLL;
 import pt.ipvc.bll.StockBLL;
+import pt.ipvc.bll.StorageBLL;
 import pt.ipvc.dal.Production;
+import pt.ipvc.dal.Seeds;
 import pt.ipvc.dal.Stock;
+import pt.ipvc.dal.Storage;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -53,11 +57,22 @@ public class productController {
 
         dataView.setItems(data);
         idBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getId())));
-        descriptionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDescription())));
+
+        descriptionBatchColumn.setCellValueFactory(d -> {
+            Stock stock = StockBLL.get(d.getValue().getId());
+            return new SimpleStringProperty(stock.getDescription());
+        });
         quantityBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getProducedQuantity())));
         dateBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDate())));
-        productionBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getProductionByIdProduction().getDescription()));
-        storageBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getStorageByIdStorage().getName())));
+        productionBatchColumn.setCellValueFactory(d -> {
+            Production production = ProductionBLL.get(d.getValue().getIdProduction());
+            return new SimpleStringProperty(production.getDescription());
+        });
+        storageBatchColumn.setCellValueFactory(d -> {
+            Storage storage = StorageBLL.get(d.getValue().getIdStorage());
+            return new SimpleStringProperty(storage.getName());
+        });
+        dataView.setItems(data);
     }
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
