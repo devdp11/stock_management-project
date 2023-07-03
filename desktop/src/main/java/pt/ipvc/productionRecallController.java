@@ -18,6 +18,7 @@ import pt.ipvc.bll.*;
 import pt.ipvc.dal.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class productionRecallController {
@@ -29,7 +30,7 @@ public class productionRecallController {
     private TextField producedQuantityTextField;
 
     @FXML
-    private TextField dateTextField;
+    private DatePicker datePicker;
 
     @FXML
     private ComboBox<Storage> storageComboBox;
@@ -67,7 +68,7 @@ public class productionRecallController {
             // Preencher os campos com os dados da produção
             descriptionTextField.setText(retrievedProduction.getDescription());
             producedQuantityTextField.setText(String.valueOf(retrievedProduction.getWantedQuantity()));
-            dateTextField.setText(retrievedProduction.getData());
+            datePicker.setValue(LocalDate.parse(retrievedProduction.getData()));
             // Preencher os outros campos conforme necessário
 
             stock = new Stock(); // Inicializar a variável stock
@@ -86,7 +87,7 @@ public class productionRecallController {
             stock = new Stock();
             stock.setDescription(descriptionTextField.getText());
             stock.setProducedQuantity(Integer.parseInt(producedQuantityTextField.getText()));
-            stock.setDate(dateTextField.getText());
+            stock.setDate(String.valueOf(datePicker.getValue()));
             stock.setIdProduction(production.getId());
 
             // Obter o objeto Storage selecionado a partir do ComboBox
