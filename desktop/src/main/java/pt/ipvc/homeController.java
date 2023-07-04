@@ -3,14 +3,13 @@ package pt.ipvc;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
-import javafx.stage.Modality;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +21,32 @@ public class homeController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    @FXML
+    public void onAboutButtonClick(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About us");
+        alert.setHeaderText("Project2 work made by:");
+
+        Label person1Name = new Label("Diogo Domingos Pinheiro");
+        Label person1CardNumber = new Label("28244");
+
+        Label person2Name = new Label("Pedro Dantas Simões");
+        Label person2CardNumber = new Label("?????");
+
+        VBox vbox = new VBox(10,
+                new HBox(new Label("Student Name: "), person1Name, new Label(" - School Card Number: "), person1CardNumber),
+                new HBox(new Label("Student Name: "), person2Name, new Label(" - School Card Number: "), person2CardNumber));
+        vbox.setPadding(new Insets(10));
+
+        alert.getDialogPane().setContent(vbox);
+
+        ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+
+        alert.showAndWait();
+    }
+
 
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {

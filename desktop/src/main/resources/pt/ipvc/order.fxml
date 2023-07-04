@@ -24,7 +24,7 @@
             </Label>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1045.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icon.png" />
+                  <Image url="@assets/icon.png" />
                </image>
             </ImageView>
          </children>
@@ -62,13 +62,12 @@
          <children>
             <TableView fx:id="dataView" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
                <columns>
-                  <TableColumn fx:id="productOrderColumn" prefWidth="105.0" text="PRODUCT" />
-                  <TableColumn fx:id="clientOrderColumn" prefWidth="110.0" text="CLIENT NAME" />
-                  <TableColumn fx:id="priceOrderColumn" prefWidth="110.0" text="ORDER PRICE" />
-                  <TableColumn fx:id="quantityOrderColumn" prefWidth="120.0" text="ORDER QUANTITY" />
-                  <TableColumn fx:id="dateStartOrderColum" prefWidth="100.0" text="START DATE" />
-                  <TableColumn fx:id="dateEndOrderColum" prefWidth="100.0" text="END DATE" />
-                  <TableColumn fx:id="stateOrderColumn" prefWidth="120.0" text="STATE" />
+                  <TableColumn fx:id="productOrderColumn" prefWidth="128.0" text="PRODUCT" />
+                  <TableColumn fx:id="clientOrderColumn" prefWidth="128.0" text="CLIENT" />
+                  <TableColumn fx:id="quantityOrderColumn" prefWidth="128.0" text="PRODUCT QUANTITY" />
+                  <TableColumn fx:id="priceOrderColumn" prefWidth="128.0" text="ORDER PRICE" />
+                  <TableColumn fx:id="dateStartOrderColum" prefWidth="128.0" text="DATE" />
+                  <TableColumn fx:id="stateOrderColumn" prefWidth="128.0" text="STATE" />
                </columns>
             </TableView>
             <TextField fx:id="productFilter" layoutX="605.0" layoutY="40.0" onKeyReleased="#filterOrders" prefHeight="35.0" prefWidth="175.0" promptText="product" />

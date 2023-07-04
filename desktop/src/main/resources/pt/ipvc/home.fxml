@@ -19,7 +19,7 @@
             </Label>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1045.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../universidade/ASSETS/icon.png" />
+                  <Image url="@assets/icon.png" />
                </image>
             </ImageView>
       </AnchorPane>
@@ -36,6 +36,15 @@
    <center>
       <AnchorPane prefHeight="644.0" prefWidth="912.0" BorderPane.alignment="CENTER">
             <Line endX="40.0" endY="467.0" layoutX="773.0" layoutY="148.0" startX="40.0" startY="-119.0" style="-fx-opacity: 0.2px;" />
+         <ImageView fitHeight="556.0" fitWidth="595.0" layoutX="154.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/teste.png" />
+            </image>
+         </ImageView>
+         <Button layoutX="815.0" layoutY="44.0" mnemonicParsing="false" onAction="#onAboutButtonClick" prefHeight="30.0" prefWidth="201.0" style="-fx-background-color: f4f4f4;" text="About us" textFill="#088b2d">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font></Button>
          </AnchorPane>
    </center>
 </BorderPane>

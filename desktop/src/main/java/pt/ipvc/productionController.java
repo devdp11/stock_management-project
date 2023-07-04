@@ -138,37 +138,50 @@ public class productionController {
     public void onRecallButtonClick(ActionEvent event) throws IOException {
         Production selectedProduction = dataView.getSelectionModel().getSelectedItem();
         if (selectedProduction != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("production_recall.fxml"));
-            Parent parent = loader.load();
-            productionRecallController controller = loader.getController();
-            controller.setProduction(dataView.getSelectionModel().getSelectedItem());
-            Scene scene = new Scene(parent);
-            Stage dialogStage = new Stage();
-            dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            dialogStage.setTitle("Recall Production");
-            dialogStage.setScene(scene);
-            dialogStage.showAndWait();
-            dataView.refresh();
-        }else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            if (selectedProduction.getState().equals("Ready to recall")) {
+                // Código para realizar a operação de recall
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("production_recall.fxml"));
+                Parent parent = loader.load();
+                productionRecallController controller = loader.getController();
+                controller.setProduction(dataView.getSelectionModel().getSelectedItem());
+                Scene scene = new Scene(parent);
+                Stage dialogStage = new Stage();
+                dialogStage.initModality(Modality.APPLICATION_MODAL);
+                dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+                dialogStage.setTitle("Recall Production");
+                dialogStage.setScene(scene);
+                dialogStage.showAndWait();
+                dataView.refresh();
+            } else {
+                // Exibir alerta informando que a produção não está pronta para recall
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Recall Production");
+                alert.setHeaderText("The selected production is not ready for recall.");
+                alert.setContentText("Only productions in 'Ready to recall' state can be recalled.");
+
+                ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+                alert.getButtonTypes().setAll(okButton);
+
+                alert.showAndWait();
+            }
+        } else {
+            // Exibir alerta informando que nenhuma produção foi selecionada
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Recall Production");
-            alert.setHeaderText("You must select one Produciton to Recall");
+            alert.setHeaderText("No production selected.");
+            alert.setContentText("Please select a production to recall.");
 
-            ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-
+            ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
             alert.getButtonTypes().setAll(okButton);
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == okButton) {
-                alert.close();
-            }
+            alert.showAndWait();
         }
     }
+
     @FXML
     public void onEditButtonClick(ActionEvent event) throws IOException {
         Production selectedProduction = dataView.getSelectionModel().getSelectedItem();
-        if (selectedProduction != null) {
+        if (selectedProduction != null && !selectedProduction.getState().equals("Already recalled")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("production_edit.fxml"));
             Parent parent = loader.load();
             productionEditController controller = loader.getController();
@@ -181,10 +194,11 @@ public class productionController {
             dialogStage.setScene(scene);
             dialogStage.showAndWait();
             dataView.refresh();
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Edit Production");
-            alert.setHeaderText("You must select one production to edit");
+            alert.setHeaderText("The selected production state cannot be edited.");
+            alert.setContentText("The production selected already has been recalled.");
 
             ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
 
@@ -196,6 +210,7 @@ public class productionController {
             }
         }
     }
+
 
     private void updateDataView(List<Production> productions) {
         Collections.sort(productions, Comparator.comparingInt(production -> production.getId()));

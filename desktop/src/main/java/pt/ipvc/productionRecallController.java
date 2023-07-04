@@ -99,6 +99,8 @@ public class productionRecallController {
 
                 StockBLL.create(stock);
 
+                production.setState("Already recalled");
+
                 ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Recalled successfully!", continueButtonType);
                 alert.setTitle("Alert");
@@ -115,6 +117,7 @@ public class productionRecallController {
             }
         }
     }
+
 
     @FXML
     public void onCancelButtonClick(ActionEvent event) {

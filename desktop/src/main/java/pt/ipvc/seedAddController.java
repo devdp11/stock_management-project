@@ -52,20 +52,8 @@ public class seedAddController {
     @FXML
     public void onRequestButtonClick(ActionEvent event) {
         if (!descriptionTextField.getText().isEmpty() && !quantityTextField.getText().isEmpty() && datePicker.getValue() != null && !supplierComboBox.getSelectionModel().isEmpty()) {
-            boolean descriptionNotExist = SeedsBLL.checkDescription(descriptionTextField.getText());
-            if (!descriptionNotExist) {
-                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, " Description already not valid | Edit the one that exists!", continueButtonType);
-                alert.setTitle("Alert");
-                alert.setHeaderText(null);
-                DialogPane alertDialog = alert.getDialogPane();
-                alertDialog.getStyleClass().add("alert");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == continueButtonType) {
-                    alert.close();
-                }
-            } else if (descriptionNotExist) {
-                Seeds newSeed = new Seeds();
+
+            Seeds newSeed = new Seeds();
                 newSeed.setDescription(descriptionTextField.getText());
                 newSeed.setQuantityRequested(Integer.parseInt(quantityTextField.getText()));
 
@@ -104,7 +92,6 @@ public class seedAddController {
                     // Lógica para lidar com o fornecedor não encontrado
                     System.out.println("Fornecedor não encontrado!");
                 }
-            }
         } else {
             ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have to input information in the fields!", continueButtonType);

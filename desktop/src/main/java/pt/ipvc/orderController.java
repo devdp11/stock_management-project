@@ -136,10 +136,10 @@ public class orderController {
         popupStage.setResizable(false);
         popupStage.show();
     }
-
+    @FXML
     public void onEditOrderButtonClick(ActionEvent event) throws IOException {
         Orders selectedOrder = dataView.getSelectionModel().getSelectedItem();
-        if (selectedOrder != null) {
+        if (selectedOrder != null && !selectedOrder.getState().equals("Received")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("order_edit.fxml"));
             Parent parent = loader.load();
             orderEditController controller = loader.getController();
@@ -148,14 +148,15 @@ public class orderController {
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            dialogStage.setTitle("Edit User");
+            dialogStage.setTitle("Edit Order");
             dialogStage.setScene(scene);
             dialogStage.showAndWait();
             dataView.refresh();
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Edit Order");
-            alert.setHeaderText("You must select one order to edit");
+            alert.setHeaderText("The selected order cannot be edited.");
+            alert.setContentText("The order selected was already received by the client");
 
             ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
 
@@ -167,10 +168,11 @@ public class orderController {
             }
         }
     }
+
     public void onListTotalBilledButtonClick(ActionEvent event) throws IOException {
 
     }
-
+    @FXML
     private void updateDataView(List<Orders> orders) {
         Collections.sort(orders, Comparator.comparingInt(orders1 -> orders1.getId()));
         ObservableList<Orders> data = FXCollections.observableArrayList(orders);
@@ -189,7 +191,7 @@ public class orderController {
             updateDataView(filteredOrder);
         }
     }
-
+    @FXML
     private List<Orders> filterOrderByState(String selectedState) {
         List<Orders> allOrders = OrdersBLL.index();
         List<Orders> filteredOrder = new ArrayList<>();

@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="302.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icon.png" />
+                  <Image url="@assets/icon.png" />
                </image>
             </ImageView>
             <Label layoutX="21.0" layoutY="34.0" text="Adding Order...">
@@ -31,26 +31,24 @@
    <center>
       <AnchorPane prefHeight="353.0" prefWidth="396.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="29.0" layoutY="65.0" prefHeight="38.0" prefWidth="68.0" text="Product*" textAlignment="CENTER" />
-            <Label layoutX="28.0" layoutY="131.0" prefHeight="38.0" prefWidth="69.0" text="Order price*" textAlignment="CENTER" />
-            <Label layoutX="20.0" layoutY="194.0" prefHeight="38.0" prefWidth="86.0" text="Order Quantity*" textAlignment="CENTER" />
+            <Label layoutX="23.0" layoutY="82.0" prefHeight="38.0" prefWidth="68.0" text="Product*" textAlignment="CENTER" />
+            <Label layoutX="22.0" layoutY="154.0" prefHeight="38.0" prefWidth="69.0" text="Order price*" textAlignment="CENTER" />
+            <Label layoutX="22.0" layoutY="227.0" prefHeight="38.0" prefWidth="97.0" text="Product Quantity*" textAlignment="CENTER" />
             <Button layoutX="132.0" layoutY="521.0" mnemonicParsing="false" onAction="#onAddOrderButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="ORDER" textFill="#53aa3e">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Label layoutX="34.0" layoutY="256.0" prefHeight="38.0" prefWidth="59.0" text="Start date*" textAlignment="CENTER" />
-            <TextField fx:id="orderPriceTextField" layoutX="114.0" layoutY="132.0" prefHeight="36.0" prefWidth="260.0" promptText="Order price" />
-            <TextField fx:id="orderQuantityTextField" layoutX="114.0" layoutY="195.0" prefHeight="36.0" prefWidth="260.0" promptText="Order quantity" />
-            <ComboBox fx:id="productComboBox" layoutX="114.0" layoutY="66.0" onAction="#onProductComboBoxSelected" prefHeight="36.0" prefWidth="260.0" promptText="Product" />
-            <Label layoutX="34.0" layoutY="316.0" prefHeight="38.0" prefWidth="59.0" text="End date" textAlignment="CENTER" />
-            <ComboBox fx:id="stateComboBox" layoutX="114.0" layoutY="380.0" prefHeight="36.0" prefWidth="260.0" promptText="State" />
-            <Label layoutX="34.0" layoutY="379.0" prefHeight="38.0" prefWidth="59.0" text="State*" textAlignment="CENTER" />
-            <Label layoutX="33.0" layoutY="441.0" prefHeight="38.0" prefWidth="59.0" text="Client" textAlignment="CENTER" />
-            <ComboBox fx:id="clientComboBox" layoutX="114.0" layoutY="442.0" prefHeight="36.0" prefWidth="260.0" promptText="Client" />
-            <DatePicker fx:id="dateStartPicker" layoutX="114.0" layoutY="257.0" prefHeight="36.0" prefWidth="260.0" />
-            <DatePicker fx:id="dateEndPicker" layoutX="114.0" layoutY="317.0" prefHeight="36.0" prefWidth="260.0" promptText="Optional" />
-            <Label fx:id="quantityLabel" layoutX="118.0" layoutY="177.0" />
+            <Label layoutX="28.0" layoutY="297.0" prefHeight="38.0" prefWidth="59.0" text="Date*" textAlignment="CENTER" />
+            <TextField fx:id="orderPriceTextField" layoutX="118.0" layoutY="155.0" prefHeight="36.0" prefWidth="260.0" promptText="Order price" />
+            <TextField fx:id="orderQuantityTextField" layoutX="119.0" layoutY="228.0" prefHeight="36.0" prefWidth="260.0" promptText="Product quantity" />
+            <ComboBox fx:id="productComboBox" layoutX="118.0" layoutY="83.0" onAction="#onProductComboBoxSelected" prefHeight="36.0" prefWidth="260.0" promptText="Product" />
+            <ComboBox fx:id="stateComboBox" layoutX="118.0" layoutY="369.0" prefHeight="36.0" prefWidth="260.0" promptText="State" />
+            <Label layoutX="28.0" layoutY="368.0" prefHeight="38.0" prefWidth="59.0" text="State*" textAlignment="CENTER" />
+            <Label layoutX="27.0" layoutY="441.0" prefHeight="38.0" prefWidth="59.0" text="Client" textAlignment="CENTER" />
+            <ComboBox fx:id="clientComboBox" layoutX="118.0" layoutY="442.0" prefHeight="36.0" prefWidth="260.0" promptText="Client" />
+            <DatePicker fx:id="dateStartPicker" layoutX="118.0" layoutY="298.0" prefHeight="36.0" prefWidth="260.0" promptText="Date" />
+            <Label fx:id="quantityLabel" layoutX="125.0" layoutY="210.0" />
          </children>
       </AnchorPane>
    </center>
