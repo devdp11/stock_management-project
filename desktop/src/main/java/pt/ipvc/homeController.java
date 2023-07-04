@@ -32,7 +32,7 @@ public class homeController {
         Label person1CardNumber = new Label("28244");
 
         Label person2Name = new Label("Pedro Dantas Simões");
-        Label person2CardNumber = new Label("?????");
+        Label person2CardNumber = new Label("26895");
 
         VBox vbox = new VBox(10,
                 new HBox(new Label("Student Name: "), person1Name, new Label(" - School Card Number: "), person1CardNumber),
