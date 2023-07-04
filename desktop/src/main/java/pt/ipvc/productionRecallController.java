@@ -99,6 +99,7 @@ public class productionRecallController {
 
                 StockBLL.create(stock);
 
+                //stock.getProductionByIdProduction().setState("Already Recalled");
                 production.setState("Already recalled");
 
                 ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
