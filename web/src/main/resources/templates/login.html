@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>VegetaMag - Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="@{/main.css}" rel="stylesheet">
+</head>
+<body class="bc-color">
+
+<div>
+    <div>
+        <h2>Login</h2>
+        <form th:action="@{/login}" method="post" th:object="${user}">
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="text" th:field="*{email}" placeholder="Enter your email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" th:field="*{password}" placeholder="Enter your password">
+            </div>
+            <div th:if="${errorMessage}">
+                <label th:text="${errorMessage}"></label>
+            </div>
+            <div>
+                <button type="submit">Sign In</button>
+                <a href="/register">Create an Account</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+</script>
+
+</body>
+</html>
