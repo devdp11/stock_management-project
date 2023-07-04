@@ -60,6 +60,7 @@ public class orderEditController {
         stateComboBox.setItems(tState);
         stateComboBox.setValue(order.getState());
 
+        productComboBox.setDisable(true);
         orderPriceTextField.setEditable(false);
         orderQuantityTextField.setEditable(false);
 
