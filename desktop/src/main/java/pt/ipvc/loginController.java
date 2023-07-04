@@ -31,7 +31,7 @@ public class loginController {
 
         if(email.isEmpty() || password.isEmpty()){
             ButtonType returnButtonType = new ButtonType("Return", ButtonBar.ButtonData.OK_DONE);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have to fill the email & password fields to log in!", returnButtonType);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have to fill the email & password fields in order to log in!", returnButtonType);
             alert.setTitle("Alert");
             alert.setHeaderText(null);
             DialogPane alertDialog = alert.getDialogPane();
@@ -42,7 +42,7 @@ public class loginController {
             }
         } else if(UsersBLL.checkLogin(email, password)){
             Users users = UsersBLL.getLogin(email, password);
-            if (users.getIdRole() == 1 || users.getIdRole() == 2) {
+            if (users.getIdRole() == 1 || users.getIdRole() == 2 /*|| users.getRoleByIdRole().getDescription().equals("admin") || users.getRoleByIdRole().getDescription().equals("manager")*/) {
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -50,7 +50,7 @@ public class loginController {
                 stage.show();
             }else {
                 ButtonType returnButtonType = new ButtonType("Return", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "That user cannot acess this application!", returnButtonType);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "The user cannot acess this application!", returnButtonType);
                 alert.setTitle("Alert");
                 alert.setHeaderText(null);
                 DialogPane alertDialog = alert.getDialogPane();
