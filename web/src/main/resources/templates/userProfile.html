@@ -1,129 +1,287 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>VegetaMag - User Profile</title>
+    <link rel="stylesheet" href="userProfile.css">
     <style>
-        header {
-            width: 45cm;
-            height: 2.5cm;
-            padding-left: 0;
+
+
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-data {
+            margin-bottom: 20px;
+        }
+
+        .profile-data label {
+            font-weight: bold;
+        }
+
+        .profile-data span {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .edit-button {
             background-color: #088B2D;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        h2 {
-            position: relative;
-            top: 25px;
-            left: 50px;
+
+        .edit-button:hover {
+            background-color: #065c1f;
         }
-        .a-class {
-            position: relative;
-            margin-left: 50px;
-            bottom: 15px;
+
+
+        .edit-form {
+            display: none;
         }
-        .a-teste {
-            margin-left: 400px;
+
+        .edit-form .profile-data span {
+            display: none;
         }
+
+        .edit-form .edit-button {
+            display: none;
+        }
+
+        .edit-form .edit-input {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .edit-form .save-button {
+            display: inline-block;
+            background-color: #088B2D;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .edit-form .cancel-button {
+            display: inline-block;
+            background-color: #999;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .buttons {
+            padding: 10px;
+            background-color: rgba(147, 145, 145, 0.91);
+            border-radius: 10px;
+            margin-left: 20px;
+            width: 160px;
+            border-color: black;
+            font-size: 15px;
+
+        }
+
+        .logout-button {
+            margin-left: 100px;
+        }
+
+        .buttons:hover {
+            background-color: #299d02;
+            animation-name: wiggle;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes wiggle {
+            0% { transform: rotate(0); }
+            25% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0); }
+        }
+
+        .header {
+            display: flex;
+            background-color: #088B2D;
+            height: 100px;
+            align-items: center;
+        }
+
+        .divbuttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .edit-form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .edit-form label {
+            color: rgb(26, 100, 2);
+            margin-bottom: 10px;
+        }
+
+        .edit-form .edit-input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .edit-form .save-button,
+        .edit-form .cancel-button {
+            background-color: #088B2D;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .edit-form .save-button:hover,
+        .edit-form .cancel-button:hover {
+            background-color: #065c1f;
+        }
+
+
     </style>
 </head>
+<body>
 
-<body class="bc-color">
-<header>
-    <h2>VegetaMag - Personal Profile:</h2>
-    <a class="a-teste a-class" href="/register">Create an Account</a>
-    <a class="a-class" href="/home">Home</a>
-    <a class="a-class" href="/userProfile">Check Profile</a>
-    <a class="a-class" href="/userOrders">Check Order History</a>
-    <a class="a-class" href="/login">Logout</a>
-</header>
-
-<form method="post" th:object="${user}" th:action="@{/editProfile}">
-    <div>
-
-        <div>
-            <div>
-                <a class="mt-8">Name</a>
-                <input type="text"
-                       th:field="*{name}"
-                       placeholder="Name"
-                       class="border rounded px-6 w-6/6 bg-bege"
-                       th:classappend="${#fields.hasErrors('name')} ? 'border-red-500' : 'border-oliveira'"/>
-            </div>
+<div class="header">
+    <header>
+        <div class="divbuttons">
+            <h2 style="margin: 20px">VegetaMag Products for sale:</h2>
+            <button class="buttons" onclick="location.href='/register'">Create an Account</button>
+            <button class="buttons" onclick="location.href='/home'">Home</button>
+            <button class="buttons" onclick="location.href='/userProfile'">Check Profile</button>
+            <button class="buttons" onclick="location.href='/userOrders'">Check Order History</button>
+            <button class="buttons logout-button" onclick="location.href='/login'">Logout</button>
         </div>
+    </header>
+</div>
 
-        <div>
-            <div>
-                <a>Email</a>
-                <input type="email"
-                       th:field="*{email}"
-                       placeholder="Email"
-                       class="border rounded px-6 w-6/6 bg-bege"
-                       th:classappend="${#fields.hasErrors('email')} ? 'border-red-500' : 'border-oliveira'"/>
-            </div>
-        </div>
-
-        <div>
-            <div>
-                <a>Phone</a>
-                <input type="tel"
-                       pattern="[0-9]{9}"
-                       th:field="*{phone}"
-                       placeholder="phone"
-                       class="border rounded px-6 w-6/6 bg-bege"
-                       th:classappend="${#fields.hasErrors('phone')} ? 'border-red-500' : 'border-oliveira'"/>
-            </div>
-        </div>
-
-        <div>
-            <div>
-                <a>Password</a>
-                <input type="password"
-                       th:field="*{password}"
-                       placeholder="Password"
-                       class="border rounded px-6 w-6/6 bg-bege"
-                       th:classappend="${#fields.hasErrors('password')} ? 'border-red-500' : 'border-oliveira'"/>
-            </div>
-        </div>
-
-        <div>
-            <div>
-                <a>Street</a>
-                <input type="text"
-                       th:field="*{street}"
-                       placeholder="Street"
-                       class="border rounded px-6 w-6/6 bg-bege"
-                       th:classappend="${#fields.hasErrors('street')} ? 'border-red-500' : 'border-oliveira'"/>
-            </div>
-        </div>
-
-
-        <div>
-                <a>Door</a>
-                <input type="tel"
-                       th:field="*{door}"
-                       placeholder="Door"
-                       class="border rounded px-6 w-2/3 bg-bege"
-                       th:classappend="${#fields.hasErrors('door')} ? 'border-red-500' : 'border-oliveira'"/>
-        </div>
-
-        <div>
-            <div>
-                <a>Location</a>
-                <input type="text"
-                       th:field="*{location}"
-                       placeholder="Location"
-                       class="border rounded px-6 w-6/6 bg-bege"
-                       th:classappend="${#fields.hasErrors('location')} ? 'border-red-500' : 'border-oliveira'"/>
-            </div>
-        </div>
-
-        <div>
-            <button>Edit</button>
-        </div>
-
+<div class="container">
+    <div class="profile-data">
+        <label>Name:</label>
+        <span th:text="${user.getName()}"></span>
     </div>
 
-</form>
+    <div class="profile-data">
+        <label>Email:</label>
+        <span th:text="${user.getEmail()}"></span>
+    </div>
+
+    <div class="profile-data">
+        <label>Phone:</label>
+        <span th:text="${user.getPhone()}"></span>
+    </div>
+
+    <div class="profile-data">
+        <label>Password:</label>
+        <span>********</span>
+    </div>
+
+    <div class="profile-data">
+        <label>Street:</label>
+        <span th:text="${user.getStreet()}"></span>
+    </div>
+
+    <div class="profile-data">
+        <label>Door:</label>
+        <span th:text="${user.getDoor()}"></span>
+    </div>
+
+    <div class="profile-data">
+        <label>Location:</label>
+        <span th:text="${user.getLocation()}"></span>
+    </div>
+
+    <button class="edit-button" onclick="showEditForm()">Edit</button>
+
+    <form class="edit-form" method="post" th:object="${user}" th:action="@{/editProfile}">
+        <div>
+            <div>
+                <label>Name:</label>
+                <input type="text" th:field="*{name}" class="edit-input"/>
+            </div>
+
+            <div>
+                <label>Email:</label>
+                <input type="email" th:field="*{email}" class="edit-input" />
+            </div>
+
+            <div>
+                <label>Phone:</label>
+                <input type="tel" pattern="[0-9]{9}" th:field="*{phone}" class="edit-input" />
+            </div>
+
+            <div>
+                <label>Password:</label>
+                <input type="password" th:field="*{password}" class="edit-input"/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
+            </div>
+
+            <div>
+                <label>Street:</label>
+                <input type="text" th:field="*{street}" class="edit-input" />
+            </div>
+
+            <div>
+                <label>Door:</label><br>
+                <input type="tel" th:field="*{door}" class="edit-input" />
+            </div>
+
+            <div>
+                <label>Location:</label>
+                <input type="text" th:field="*{location}" class="edit-input" />
+            </div>
+
+            <button class="save-button" type="submit">Save</button>
+            <button class="cancel-button" type="button" onclick="cancelEditForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function showEditForm() {
+        document.querySelector('.profile-data').style.display = 'none';
+        document.querySelector('.edit-button').style.display = 'none';
+        document.querySelector('.edit-form').style.display = 'block';
+    }
+
+    function cancelEditForm() {
+        document.querySelector('.profile-data').style.display = 'block';
+        document.querySelector('.edit-button').style.display = 'block';
+        document.querySelector('.edit-form').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>

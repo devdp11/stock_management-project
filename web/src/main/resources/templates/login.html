@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>VegetaMag - Login</title>
+    <link rel="stylesheet" href="login.css">
     <style>
         body {
             background-color: rgba(244, 244, 244, 0.39);
@@ -19,12 +20,10 @@
             margin: 0 auto;
             padding: 20px;
             background-color: rgba(86, 141, 3, 0.6);
+            background-image: url('/assets/Home3.png'); background-position: center; background-size: cover;
             border: 2px solid #ccc;
             border-radius: 10px;
             text-align: center;
-            background-image: url('static/assets/Home3.png');
-            background-size: cover;
-            background-position: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -66,10 +65,12 @@
             color: #ff0000;
             margin-top: 10px;
         }
+
+
     </style>
 </head>
 <body>
-<div class="login-container">
+<div class="login-container" >
     <h2>Welcome to VegetaMag!</h2>
     <form th:action="@{/login}" method="post" th:object="${user}">
         <div style="width: 350px;">

@@ -46,6 +46,11 @@ public class UserProfileController {
             result.getAllErrors().forEach(System.out::println);
             return "userProfile";
         }
+        if (user.getPassword().isEmpty()) {
+            result.rejectValue("password", "error.user", "Password cannot be empty!");
+            // Exibir mensagem de erro
+            return "userProfile";
+        }
 
         String userName = (String) session.getAttribute("userName");
         Users users = UsersBLL.getByName(userName);
@@ -59,31 +64,34 @@ public class UserProfileController {
 
         if (emailExists) {
             result.rejectValue("email", "error.user", "Email already in use!");
-
         } else if (phoneExists) {
-            result.rejectValue("telemovel", "error.user", "Phone already in use!");
+            result.rejectValue("phone", "error.user", "Phone already in use!");
         } else {
             Users currentUser = UsersBLL.getByName(userName);
             currentUser.setName(user.getName());
             currentUser.setEmail(user.getEmail());
             currentUser.setPhone(user.getPhone());
-            currentUser.setPassword(user.getPassword());
             currentUser.setDoor(user.getDoor());
             currentUser.setStreet(user.getStreet());
             currentUser.setLocation(user.getLocation());
 
-            if(!user.getPassword().isBlank())
+            if (user.getPassword().isBlank()) {
+                result.rejectValue("password", "error.user", "Password cannot be empty!");
+                model.addAttribute("user", user);
+                return "userProfile";
+            } else {
                 currentUser.setPassword(user.getPassword());
-
+            }
 
             UsersBLL.update(currentUser);
 
             return "login";
-
         }
 
         return "userProfile";
     }
+
+
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
