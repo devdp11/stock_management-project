@@ -20,7 +20,7 @@
             margin: 0 auto;
             padding: 20px;
             background-color: rgba(86, 141, 3, 0.6);
-            background-image: url('/assets/Home3.png'); background-position: center; background-size: cover;
+            background-image: url('../static/assets/icons/Home3.png'); background-position: center; background-size: cover;
             border: 2px solid #ccc;
             border-radius: 10px;
             text-align: center;
@@ -49,12 +49,14 @@
         }
 
         .login-container button {
+            position: relative;
             background-color: #1e7900;
             color: #fff;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            top: 5px;
         }
 
         .login-container button:hover {
@@ -63,7 +65,12 @@
 
         .error-message {
             color: #ff0000;
-            margin-top: 10px;
+            margin-top: 20px;
+        }
+
+        .a-class {
+            position: relative;
+            top: 15px;
         }
 
 
@@ -77,11 +84,19 @@
             <input class="input-spacing" type="text" th:field="*{email}" placeholder="Email" required><br>
             <input class="input-spacing" type="password" th:field="*{password}" placeholder="Password" required><br>
             <button type="submit">Log In</button>
+            <br>
+            <a class="a-class" href="/register">Create an Account</a>
         </div>
     </form>
-    <div class="error-message">
-        Invalid username or password.
+    <div class="error-message" th:if="${errorMessage}">
+        <label th:text="${errorMessage}"></label>
     </div>
+
+    <script>
+        var errorMessage = /*[[${errorMessage}]]*/ '';
+        if (errorMessage) { alert(errorMessage) }
+    </script>
+
 </div>
 </body>
 </html>

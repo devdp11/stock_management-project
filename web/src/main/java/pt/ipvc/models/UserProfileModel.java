@@ -12,7 +12,7 @@ public class UserProfileModel {
     @NotBlank
     @Email
     public String email;
-    @Size(min = 6, message = "Password must have at least 6 characters")
+    //@Size(min = 6, message = "Password must have at least 6 characters")
     public String password;
     public String street;
     public String door;

@@ -43,6 +43,10 @@ public class RegisterController {
             result.rejectValue("error.user", "You have to fill all the fields");
             model.addAttribute("errorMessage", "You have to fill all the fields");
             return "register";
+        } else if (user.getPassword().length() < 6) {
+            result.rejectValue("password", "error.user", "The password must have at least 6 characters!");
+            model.addAttribute("errorMessage", "The password must have at least 6 characters!");
+            return "register";
         } else if (emailNotExist && phoneNotExist) {
             Users newUser = new Users();
             newUser.setName(user.getName());
@@ -50,6 +54,7 @@ public class RegisterController {
             newUser.setPhone(user.getPhone());
             newUser.setPassword(user.getPassword());
             newUser.setRoleByIdRole(RoleBLL.get(4));
+
             UsersBLL.create(newUser);
 
 

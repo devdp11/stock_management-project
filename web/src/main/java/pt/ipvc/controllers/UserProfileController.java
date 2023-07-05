@@ -62,11 +62,19 @@ public class UserProfileController {
         boolean emailExists = !users.getEmail().equals(user.getEmail()) && UsersBLL.checkEmail(user.getEmail());
         boolean phoneExists = !String.valueOf(users.getPhone()).equals(user.getPhone()) && UsersBLL.checkPhone(String.valueOf(user.getPhone()));
 
-        if (emailExists) {
-            result.rejectValue("email", "error.user", "Email already in use!");
+        if (user.getPassword().isBlank()) {
+            result.rejectValue("password", "error.user", "To edit the user, you have to put the password!");
+            model.addAttribute("errorMessage", "To edit the user, you have to put the password!");
+            return "userProfile";
         } else if (phoneExists) {
             result.rejectValue("phone", "error.user", "Phone already in use!");
-        } else {
+            model.addAttribute("errorMessage", "The phone is already in use!");
+            return "userProfile";
+        } else if (emailExists) {
+            result.rejectValue("email", "error.user", "Email already in use!");
+            model.addAttribute("errorMessage", "The email is already in use!");
+            return "userProfile";
+        } else if (!emailExists && !phoneExists && !user.getPassword().isBlank()) {
             Users currentUser = UsersBLL.getByName(userName);
             currentUser.setName(user.getName());
             currentUser.setEmail(user.getEmail());
@@ -74,24 +82,14 @@ public class UserProfileController {
             currentUser.setDoor(user.getDoor());
             currentUser.setStreet(user.getStreet());
             currentUser.setLocation(user.getLocation());
-
-            if (user.getPassword().isBlank()) {
-                result.rejectValue("password", "error.user", "Password cannot be empty!");
-                model.addAttribute("user", user);
-                return "userProfile";
-            } else {
-                currentUser.setPassword(user.getPassword());
-            }
+            currentUser.setPassword(user.getPassword());
 
             UsersBLL.update(currentUser);
 
-            return "login";
+            return "redirect:/login";
         }
-
         return "userProfile";
     }
-
-
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {

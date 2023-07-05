@@ -169,6 +169,10 @@
             background-color: #065c1f;
         }
 
+        .error-message {
+            color: #ff0000;
+            margin-top: 20px;
+        }
 
     </style>
 </head>
@@ -234,20 +238,15 @@
 
             <div>
                 <label>Email:</label>
+                <br>
                 <input type="email" th:field="*{email}" class="edit-input" />
             </div>
 
             <div>
                 <label>Phone:</label>
-                <input type="tel" pattern="[0-9]{9}" th:field="*{phone}" class="edit-input" />
+                <input type="tel" pattern="[0-9]{9}" th:field="*{phone}" class="edit-input"/>
             </div>
-
-            <div>
-                <label>Password:</label>
-                <input type="password" th:field="*{password}" class="edit-input"/>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
-            </div>
-
+            
             <div>
                 <label>Street:</label>
                 <input type="text" th:field="*{street}" class="edit-input" />
@@ -263,7 +262,13 @@
                 <input type="text" th:field="*{location}" class="edit-input" />
             </div>
 
-            <button class="save-button" type="submit">Save</button>
+            <div>
+                <label>Password:</label> <label style="color: red">(Password is Required to updated to user)</label>
+                <input type="password" th:field="*{password}" class="edit-input"/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
+            </div>
+
+            <button class="save-button" onclick="location.href='/userProfile'" type="submit">Save</button>
             <button class="cancel-button" type="button" onclick="cancelEditForm()">Cancel</button>
         </div>
     </form>
@@ -275,6 +280,9 @@
         document.querySelector('.edit-button').style.display = 'none';
         document.querySelector('.edit-form').style.display = 'block';
     }
+
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+    if (errorMessage) { alert(errorMessage) }
 
     function cancelEditForm() {
         document.querySelector('.profile-data').style.display = 'block';
