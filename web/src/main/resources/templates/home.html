@@ -21,14 +21,15 @@
             list-style-type: none;
             margin: 0;
             padding: 0;
+
         }
 
         .stock-box {
-            width: 300px;
+            width: 200px;
             margin: 5px;
             padding: 5px;
             float: left;
-            height: 300px;
+            height: 200px;
             background-color: #f2f2f2;
             border-radius: 10px;
             padding: 20px;
@@ -37,16 +38,25 @@
             justify-content: space-between;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             background-image: url('/assets/Home3.png'); background-position: center; background-size: cover;
+            backdrop-filter: blur(20px);
+
         }
 
         .stock-info {
             font-size: 16px;
             text-align: left;
             margin-top: 20px;
+
+
+
         }
 
         .stock-info label {
             font-weight: bold;
+            margin: 10px;
+        }
+        .stock-info span {
+            margin: 10px;
         }
 
         .order-button {
@@ -102,6 +112,12 @@
             display: flex;
             align-items: center;
         }
+        .labelblur{
+            backdrop-filter: blur(100px);
+            display: flex;
+
+
+        }
 
     </style>
 </head>
@@ -125,12 +141,18 @@
         <li th:each="stock : ${stocks}">
             <div class="stock-box">
                 <div class="stock-info">
+                    <div class="labelblur">
                     <label>Description:</label>
-                    <span th:text="${stock.description}"></span> <br>
+                    <span  th:text="${stock.description}"></span>
+                    </div>
+                    <div class="labelblur">
                     <label>Stock Quantity:</label>
                     <span th:text="${stock.producedQuantity}"></span> <br>
+                    </div>
+                        <div class="labelblur">
                     <label>Batch Date:</label>
                     <span th:text="${stock.date}"></span> <br>
+                        </div>
                 </div>
                 <button class="order-button" th:data-id="${stock.id}">Order</button>
             </div>
