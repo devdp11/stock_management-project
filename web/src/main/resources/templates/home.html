@@ -3,19 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>VegetaMag - Home</title>
+    <style>
+        header {
+            width: 45cm;
+            height: 2.5cm;
+            padding-left: 0;
+            background-color: #088B2D;
+        }
+        h2 {
+            position: relative;
+            top: 25px;
+            left: 50px;
+        }
+        a {
+            position: relative;
+            margin-left: 50px;
+            bottom: 15px;
+        }
+        .a-teste {
+            margin-left: 400px;
+        }
+        .stock-container {
+            overflow: hidden;
+        }
+
+        .stock-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .stock-box {
+            /* Largura maior para acomodar mais conteúdo */
+            width: 300px;
+
+            /* Margem e padding reduzidos */
+            margin: 5px;
+            padding: 5px;
+
+            /* Outras propriedades CSS existentes */
+            float: left;
+            height: 200px;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stock-info {
+            /* Tamanho da fonte menor para tornar o texto mais compacto */
+            font-size: 16px;
+
+            /* Outras propriedades CSS existentes */
+            text-align: left;
+            margin-top: 110px;
+        }
+
+        .order-button {
+            /* Adicione o seguinte código para centralizar o botão */
+            display: block;
+            margin: 0 auto;
+
+            /* Outras propriedades CSS existentes */
+            margin-top: auto;
+            margin-bottom: 5px;
+        }
+
+    </style>
 </head>
 <body>
 
+<header>
+    <h2>VegetaMag Products for sale:</h2>
+    <a class="a-teste" href="/register">Create an Account</a>
+    <a href="/home">Home</a>
+    <a href="/userProfile">Check Profile</a>
+    <a href="/userOrders">Check Order History</a>
+    <a href="/login">Logout</a>
+</header>
 
-<h2 class="flex items-center justify-center text-3xl mt-16">VegetaMag Products for sale:</h2>
-<ul class="flex flex-wrap mt-16 mb-24">
-    <li th:each="stock : ${stocks}">
-        <div class="flex flex-col items-center">
-            <span th:text="${stock.description}"></span>
-
-        </div>
-    </li>
-</ul>
+<div class="stock-container">
+    <ul class="stock-list">
+        <li th:each="stock : ${stocks}">
+            <div class="stock-box">
+                <div class="stock-info">
+                    <label>Description:</label>
+                    <span th:text="${stock.description}"></span> <br>
+                    <label>Stock Quantity:</label>
+                    <span th:text="${stock.producedQuantity}"></span> <br>
+                    <label>Batch Date:</label>
+                    <span th:text="${stock.date}"></span> <br>
+                </div>
+                <button class="order-button" th:data-id="${stock.id}">Order</button>
+            </div>
+        </li>
+    </ul>
+</div>
 
 </body>
 </html>

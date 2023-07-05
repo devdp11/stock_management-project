@@ -4,13 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>VegetaMag - User Profile</title>
+    <style>
+        header {
+            width: 45cm;
+            height: 2.5cm;
+            padding-left: 0;
+            background-color: #088B2D;
+        }
+        h2 {
+            position: relative;
+            top: 25px;
+            left: 50px;
+        }
+        .a-class {
+            position: relative;
+            margin-left: 50px;
+            bottom: 15px;
+        }
+        .a-teste {
+            margin-left: 400px;
+        }
+    </style>
 </head>
 
 <body class="bc-color">
+<header>
+    <h2>VegetaMag - Personal Profile:</h2>
+    <a class="a-teste a-class" href="/register">Create an Account</a>
+    <a class="a-class" href="/home">Home</a>
+    <a class="a-class" href="/userProfile">Check Profile</a>
+    <a class="a-class" href="/userOrders">Check Order History</a>
+    <a class="a-class" href="/login">Logout</a>
+</header>
 
 <form method="post" th:object="${user}" th:action="@{/editProfile}">
     <div>
-        <h2>User Profile</h2>
 
         <div>
             <div>

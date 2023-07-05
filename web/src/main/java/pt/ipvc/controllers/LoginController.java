@@ -28,14 +28,22 @@ public class LoginController {
             return "login";
         }
 
-        if (UsersBLL.checkLogin(user.getEmail(), user.getPassword())) {
-            Users currentUser = UsersBLL.getLogin(user.getEmail(), user.getPassword());
-            session.setAttribute("userName", currentUser.getName());
-            return "redirect:/register";
+        Users currentUser = UsersBLL.getLogin(user.getEmail(), user.getPassword());
+
+        if (currentUser != null) {
+            if (currentUser.getIdRole() == 4) {
+                session.setAttribute("userName", currentUser.getName());
+                return "redirect:/home";
+            } else {
+                result.rejectValue("password", "error.user", "User cannot access this app");
+                model.addAttribute("errorMessage", "User cannot access this app");
+                return "login";
+            }
         } else {
             result.rejectValue("password", "error.user", "Invalid email or password");
             model.addAttribute("errorMessage", "Invalid email or password");
             return "login";
         }
     }
+
 }

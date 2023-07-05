@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "orders.index", query = "SELECT orders FROM Orders orders"),
+        @NamedQuery(name = "orders.getUserOrdersByUserId", query = "SELECT orders FROM Orders orders WHERE orders.idClient = :userId"),
 })
 public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

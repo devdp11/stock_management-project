@@ -1,6 +1,8 @@
 package pt.ipvc.bll;
+import jakarta.persistence.TypedQuery;
 import pt.ipvc.dal.Orders;
 import pt.ipvc.dal.Stock;
+import pt.ipvc.dal.Users;
 import pt.ipvc.database.Database;
 
 import java.util.List;
@@ -14,6 +16,12 @@ public class OrdersBLL {
 
     public static Orders get(Long id) {
         return Database.find(Orders.class, id);
+    }
+
+    public List<Orders> getUserOrders(int userId) {
+        TypedQuery<Orders> query = Database.getEntityManager().createNamedQuery("orders.getUserOrdersByUserId", Orders.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
     }
 
     public static void create(Orders entity) {

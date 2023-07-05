@@ -63,35 +63,9 @@ public class userEditController {
     @FXML
     public void onConfirmButtonClick(ActionEvent event)throws IOException {
         if (user != null) {
-            boolean phoneNotExist = UsersBLL.checkPhone(phoneTextField.getText());
-            boolean emailNotExist = UsersBLL.checkEmail(emailTextField.getText());
 
             String roleUser = roleComboBox.getSelectionModel().getSelectedItem();
             Role role_user = RoleBLL.getbydescription(roleUser);
-
-            if (!phoneNotExist) {
-                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Phone number not valid!", continueButtonType);
-                alert.setTitle("Alert");
-                alert.setHeaderText(null);
-                DialogPane alertDialog = alert.getDialogPane();
-                alertDialog.getStyleClass().add("alert");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == continueButtonType) {
-                    alert.close();
-                }
-            } else if (!emailNotExist) {
-                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Email not valid!", continueButtonType);
-                alert.setTitle("Alert");
-                alert.setHeaderText(null);
-                DialogPane alertDialog = alert.getDialogPane();
-                alertDialog.getStyleClass().add("alert");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == continueButtonType) {
-                    alert.close();
-                }
-            } else if (phoneNotExist && emailNotExist) {
 
                 user.setName(nameTextField.getText());
                 user.setPhone(String.valueOf(Integer.parseInt(phoneTextField.getText())));
@@ -117,7 +91,6 @@ public class userEditController {
                 }
             }
         }
-    }
     @FXML
     public void onCancelButtonClick(ActionEvent event){
     }

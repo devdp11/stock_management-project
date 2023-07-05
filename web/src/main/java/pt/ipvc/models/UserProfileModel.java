@@ -2,6 +2,7 @@ package pt.ipvc.models;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class UserProfileModel {
     @NotBlank
@@ -11,6 +12,7 @@ public class UserProfileModel {
     @NotBlank
     @Email
     public String email;
+    @Size(min = 6, message = "Password must have at least 6 characters")
     public String password;
     public String street;
     public String door;
