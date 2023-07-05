@@ -42,6 +42,8 @@ public class productController {
     @FXML
     private TableColumn<Stock, String> quantityBatchColumn;
     @FXML
+    private TableColumn<Stock, String> priceBatchColumn;
+    @FXML
     private TableColumn<Stock, String> dateBatchColumn;
     @FXML
     private TableColumn<Stock, String> productionBatchColumn;

@@ -25,6 +25,8 @@ public class productionRecallController {
 
     @FXML
     private TextField descriptionTextField;
+    @FXML
+    private TextField priceTextField;
 
     @FXML
     private TextField producedQuantityTextField;
