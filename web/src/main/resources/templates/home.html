@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VegetaMag - Home</title>
+</head>
+<body>
+
+
+<h2 class="flex items-center justify-center text-3xl mt-16">VegetaMag Products for sale:</h2>
+<ul class="flex flex-wrap mt-16 mb-24">
+    <li th:each="stock : ${stocks}">
+        <div class="flex flex-col items-center">
+            <span th:text="${stock.description}"></span>
+
+        </div>
+    </li>
+</ul>
+
+</body>
+</html>
