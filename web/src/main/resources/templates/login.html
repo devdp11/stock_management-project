@@ -1,42 +1,86 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>VegetaMag - Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
-    <link href="@{/main.css}" rel="stylesheet">
-</head>
-<body class="bc-color">
+    <style>
+        body {
+            background-color: rgba(244, 244, 244, 0.39);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-<div>
-    <div>
-        <h2>Login</h2>
-        <form th:action="@{/login}" method="post" th:object="${user}">
-            <div>
-                <label for="email">Email</label>
-                <input id="email" type="text" th:field="*{email}" placeholder="Enter your email">
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input id="password" type="password" th:field="*{password}" placeholder="Enter your password">
-            </div>
-            <div th:if="${errorMessage}">
-                <label th:text="${errorMessage}"></label>
-            </div>
-            <div>
-                <button type="submit">Sign In</button>
-                <a href="/register">Create an Account</a>
-            </div>
-        </form>
+        .login-container {
+            width: 500px;
+            height: 340px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(86, 141, 3, 0.6);
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            background-image: url('static/assets/Home3.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .login-container h2 {
+            color: rgb(26, 100, 2);
+            margin-bottom: 20px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container .input-spacing {
+            margin-bottom: 10px;
+        }
+
+        .login-container button {
+            background-color: #1e7900;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #299d02;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h2>Welcome to VegetaMag!</h2>
+    <form th:action="@{/login}" method="post" th:object="${user}">
+        <div style="width: 350px;">
+            <input class="input-spacing" type="text" th:field="*{email}" placeholder="Email" required><br>
+            <input class="input-spacing" type="password" th:field="*{password}" placeholder="Password" required><br>
+            <button type="submit">Log In</button>
+        </div>
+    </form>
+    <div class="error-message">
+        Invalid username or password.
     </div>
 </div>
-
-<script>
-    var errorMessage = /*[[${errorMessage}]]*/ '';
-    if (errorMessage) {
-        alert(errorMessage);
-    }
-</script>
-
 </body>
 </html>

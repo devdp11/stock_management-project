@@ -3,38 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>VegetaMag - Register</title>
-</head>
-<body class="bc-color">
+    <style>
+        body {
+            background-color: rgba(244, 244, 244, 0.39);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-<div>
-    <div>
-        <h2>Register</h2>
-        <form th:action="@{/register}" method="post" th:object="${user}">
-            <div>
-                <label for="name">Name</label>
-                <input id="name" type="text" th:field="*{name}" placeholder="Enter your name">
-            </div>
-            <div>
-                <label for="phone">Phone</label>
-                <input id="phone" type="tel" th:field="*{phone}" placeholder="Enter your phone">
-            </div>
-            <div>
-                <label for="email">Email</label>
-                <input id="email" type="text" th:field="*{email}" placeholder="Enter your email">
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input id="password" type="password" th:field="*{password}" placeholder="Enter your password">
-            </div>
-            <div th:if="${errorMessage}">
+        .register-container {
+            width: 500px;
+            height: 340px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(86, 141, 3, 0.6);
+            background-image: url('../resources/static/assets/Home3.png');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-container h2 {
+            color: rgb(26, 100, 2);
+            margin-bottom: 20px;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="password"],
+        .register-container input[type="tel"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .register-container .input-spacing {
+            margin-bottom: 10px;
+        }
+
+        .register-container button {
+            background-color: #1e7900;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .register-container button:hover {
+            background-color: #299d02;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="register-container">
+    <h2>Register</h2>
+    <form th:action="@{/register}" method="post" th:object="${user}">
+        <div style="width: 350px;">
+            <input class="input-spacing" type="text" th:field="*{name}" placeholder="Name" required><br>
+            <input class="input-spacing" type="tel" th:field="*{phone}" placeholder="Phone" required><br>
+            <input class="input-spacing" type="text" th:field="*{email}" placeholder="Email" required><br>
+            <input class="input-spacing" type="password" th:field="*{password}" placeholder="Password" required><br>
+            <div th:if="${errorMessage}" class="error-message">
                 <label th:text="${errorMessage}"></label>
             </div>
-            <div>
-                <button type="submit">Register</button>
-            </div>
-        </form>
-    </div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
 </div>
-
 </body>
 </html>
