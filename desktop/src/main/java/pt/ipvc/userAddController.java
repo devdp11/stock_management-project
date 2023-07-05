@@ -71,8 +71,7 @@ public class userAddController {
                 if (result.isPresent() && result.get() == continueButtonType) {
                     alert.close();
                 }
-            }
-            else if (phoneNotExist && emailNotExist){
+            } else if (phoneNotExist && emailNotExist){
                 Users newUser = new Users();
                 newUser.setName(usernameTextField.getText());
                 newUser.setPhone(phoneTextField.getText());
@@ -94,7 +93,6 @@ public class userAddController {
                     alert.close();
                 }
             }
-
         } else {
             ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have to input information in the fields!", continueButtonType);

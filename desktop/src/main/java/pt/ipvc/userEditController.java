@@ -63,31 +63,58 @@ public class userEditController {
     @FXML
     public void onConfirmButtonClick(ActionEvent event)throws IOException {
         if (user != null) {
+            boolean phoneNotExist = UsersBLL.checkPhone(phoneTextField.getText());
+            boolean emailNotExist = UsersBLL.checkEmail(emailTextField.getText());
 
             String roleUser = roleComboBox.getSelectionModel().getSelectedItem();
             Role role_user = RoleBLL.getbydescription(roleUser);
 
-            user.setName(nameTextField.getText());
-            user.setPhone(String.valueOf(Integer.parseInt(phoneTextField.getText())));
-            user.setEmail(emailTextField.getText());
-            user.setPassword(passwordTextField.getText());
-            user.setRoleByIdRole(role_user);
-            user.setStreet(streetTextField.getText());
-            user.setDoor(doorTextField.getText());
-            user.setLocation(locationTextField.getText());
+            if (!phoneNotExist) {
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Phone number not valid!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == continueButtonType) {
+                    alert.close();
+                }
+            } else if (!emailNotExist) {
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Email not valid!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == continueButtonType) {
+                    alert.close();
+                }
+            } else if (phoneNotExist && emailNotExist) {
+
+                user.setName(nameTextField.getText());
+                user.setPhone(String.valueOf(Integer.parseInt(phoneTextField.getText())));
+                user.setEmail(emailTextField.getText());
+                user.setPassword(passwordTextField.getText());
+                user.setRoleByIdRole(role_user);
+                user.setStreet(streetTextField.getText());
+                user.setDoor(doorTextField.getText());
+                user.setLocation(locationTextField.getText());
 
 
-            UsersBLL.update(user);
+                UsersBLL.update(user);
 
-            ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Edited the user sucessfully!", continueButtonType);
-            alert.setTitle("Alert");
-            alert.setHeaderText(null);
-            DialogPane alertDialog = alert.getDialogPane();
-            alertDialog.getStyleClass().add("alert");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == continueButtonType) {
-                alert.close();
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Edited the user sucessfully!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == continueButtonType) {
+                    alert.close();
+                }
             }
         }
     }
