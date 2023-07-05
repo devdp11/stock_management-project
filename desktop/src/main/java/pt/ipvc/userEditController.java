@@ -67,30 +67,30 @@ public class userEditController {
             String roleUser = roleComboBox.getSelectionModel().getSelectedItem();
             Role role_user = RoleBLL.getbydescription(roleUser);
 
-            user.setName(nameTextField.getText());
-            user.setPhone(String.valueOf(Integer.parseInt(phoneTextField.getText())));
-            user.setEmail(emailTextField.getText());
-            user.setPassword(passwordTextField.getText());
-            user.setRoleByIdRole(role_user);
-            user.setStreet(streetTextField.getText());
-            user.setDoor(doorTextField.getText());
-            user.setLocation(locationTextField.getText());
+                user.setName(nameTextField.getText());
+                user.setPhone(String.valueOf(Integer.parseInt(phoneTextField.getText())));
+                user.setEmail(emailTextField.getText());
+                user.setPassword(passwordTextField.getText());
+                user.setRoleByIdRole(role_user);
+                user.setStreet(streetTextField.getText());
+                user.setDoor(doorTextField.getText());
+                user.setLocation(locationTextField.getText());
 
 
-            UsersBLL.update(user);
+                UsersBLL.update(user);
 
-            ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Edited the user sucessfully!", continueButtonType);
-            alert.setTitle("Alert");
-            alert.setHeaderText(null);
-            DialogPane alertDialog = alert.getDialogPane();
-            alertDialog.getStyleClass().add("alert");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == continueButtonType) {
-                alert.close();
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Edited the user sucessfully!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == continueButtonType) {
+                    alert.close();
+                }
             }
         }
-    }
     @FXML
     public void onCancelButtonClick(ActionEvent event){
     }

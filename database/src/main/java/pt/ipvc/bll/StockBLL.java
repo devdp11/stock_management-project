@@ -1,4 +1,6 @@
 package pt.ipvc.bll;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import pt.ipvc.dal.Production;
 import pt.ipvc.dal.Stock;
 import pt.ipvc.database.Database;
@@ -19,6 +21,15 @@ public class StockBLL {
         List<Stock>stocks = Database.query("stock.getbydescription").setParameter("description", description).getResultList();
         return stocks.isEmpty()? null:stocks.get(0);
     }
+
+    public static Stock getById(int id) {
+        TypedQuery<Stock> query = Database.getEntityManager().createNamedQuery("stocks.getById", Stock.class);
+        query.setParameter("idStock", id);
+        List<Stock> stocks = query.getResultList();
+        return stocks.isEmpty() ? null : stocks.get(0);
+    }
+
+
     public static void create(Stock entity) {
         Database.beginTransaction();
 

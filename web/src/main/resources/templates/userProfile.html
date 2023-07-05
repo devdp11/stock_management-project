@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VegetaMag - User Profile</title>
+    <style>
+        header {
+            width: 45cm;
+            height: 2.5cm;
+            padding-left: 0;
+            background-color: #088B2D;
+        }
+        h2 {
+            position: relative;
+            top: 25px;
+            left: 50px;
+        }
+        .a-class {
+            position: relative;
+            margin-left: 50px;
+            bottom: 15px;
+        }
+        .a-teste {
+            margin-left: 400px;
+        }
+    </style>
+</head>
+
+<body class="bc-color">
+<header>
+    <h2>VegetaMag - Personal Profile:</h2>
+    <a class="a-teste a-class" href="/register">Create an Account</a>
+    <a class="a-class" href="/home">Home</a>
+    <a class="a-class" href="/userProfile">Check Profile</a>
+    <a class="a-class" href="/userOrders">Check Order History</a>
+    <a class="a-class" href="/login">Logout</a>
+</header>
+
+<form method="post" th:object="${user}" th:action="@{/editProfile}">
+    <div>
+
+        <div>
+            <div>
+                <a class="mt-8">Name</a>
+                <input type="text"
+                       th:field="*{name}"
+                       placeholder="Name"
+                       class="border rounded px-6 w-6/6 bg-bege"
+                       th:classappend="${#fields.hasErrors('name')} ? 'border-red-500' : 'border-oliveira'"/>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <a>Email</a>
+                <input type="email"
+                       th:field="*{email}"
+                       placeholder="Email"
+                       class="border rounded px-6 w-6/6 bg-bege"
+                       th:classappend="${#fields.hasErrors('email')} ? 'border-red-500' : 'border-oliveira'"/>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <a>Phone</a>
+                <input type="tel"
+                       pattern="[0-9]{9}"
+                       th:field="*{phone}"
+                       placeholder="phone"
+                       class="border rounded px-6 w-6/6 bg-bege"
+                       th:classappend="${#fields.hasErrors('phone')} ? 'border-red-500' : 'border-oliveira'"/>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <a>Password</a>
+                <input type="password"
+                       th:field="*{password}"
+                       placeholder="Password"
+                       class="border rounded px-6 w-6/6 bg-bege"
+                       th:classappend="${#fields.hasErrors('password')} ? 'border-red-500' : 'border-oliveira'"/>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <a>Street</a>
+                <input type="text"
+                       th:field="*{street}"
+                       placeholder="Street"
+                       class="border rounded px-6 w-6/6 bg-bege"
+                       th:classappend="${#fields.hasErrors('street')} ? 'border-red-500' : 'border-oliveira'"/>
+            </div>
+        </div>
+
+
+        <div>
+                <a>Door</a>
+                <input type="tel"
+                       th:field="*{door}"
+                       placeholder="Door"
+                       class="border rounded px-6 w-2/3 bg-bege"
+                       th:classappend="${#fields.hasErrors('door')} ? 'border-red-500' : 'border-oliveira'"/>
+        </div>
+
+        <div>
+            <div>
+                <a>Location</a>
+                <input type="text"
+                       th:field="*{location}"
+                       placeholder="Location"
+                       class="border rounded px-6 w-6/6 bg-bege"
+                       th:classappend="${#fields.hasErrors('location')} ? 'border-red-500' : 'border-oliveira'"/>
+            </div>
+        </div>
+
+        <div>
+            <button>Edit</button>
+        </div>
+
+    </div>
+
+</form>
+
+</body>
+</html>

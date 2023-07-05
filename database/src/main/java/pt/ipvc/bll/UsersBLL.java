@@ -36,7 +36,9 @@ public class UsersBLL {
                 .setParameter("description", description);
         return query.getResultList();
     }
-
+    public static Users getByName(String name) { List<Users> users = Database.query("user.getByName").setParameter("name", name).getResultList();
+        return users.isEmpty() ? null : users.get(0);
+    }
 
 
     public static void create(Users entity) {

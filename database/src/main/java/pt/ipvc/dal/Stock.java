@@ -10,6 +10,7 @@ import java.util.Collection;
 @NamedQueries({
         @NamedQuery(name = "stock.getbydescription", query = "SELECT stock from Stock stock WHERE stock.description LIKE :description"),
         @NamedQuery(name = "stocks.index", query = "SELECT stock FROM Stock stock"),
+        @NamedQuery(name = "stocks.getById", query = "SELECT stock FROM Stock stock WHERE stock.id = :idStock"),
 })
 public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

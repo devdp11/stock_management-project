@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Orders</title>
+    <style>
+        header {
+            width: 45cm;
+            height: 2.5cm;
+            padding-left: 0;
+            background-color: #088B2D;
+        }
+        h2 {
+            position: relative;
+            top: 25px;
+            left: 50px;
+        }
+        a {
+            position: relative;
+            margin-left: 50px;
+            bottom: 15px;
+        }
+        .a-teste {
+            margin-left: 400px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h2>VegetaMag - Order History:</h2>
+    <a class="a-teste" href="/register">Create an Account</a>
+    <a href="/home">Home</a>
+    <a href="/userProfile">Check Profile</a>
+    <a href="/userOrders">Check Order History</a>
+    <a href="/login">Logout</a>
+</header>
+<table>
+    <tr>
+        <th rowspan="2">Quantity</th>
+        <th rowspan="2">Price</th>
+        <th rowspan="2">Product Description</th>
+        <th rowspan="2">Date</th>
+        <th rowspan="2">State</th>
+    </tr>
+    <tr>
+        <!-- Adicione esta linha para exibir os rótulos dos cabeçalhos -->
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.orderQuantity}"></td>
+        <td th:text="${order.orderPrice}"></td>
+        <td th:text="${order.productDescription}"></td>
+        <td th:text="${order.dateStart}"></td>
+        <td th:text="${order.state}"></td>
+    </tr>
+</table>
+</body>
+</html>
