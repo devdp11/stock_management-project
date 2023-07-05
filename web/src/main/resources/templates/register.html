@@ -20,7 +20,7 @@
             margin: 0 auto;
             padding: 20px;
             background-color: rgba(86, 141, 3, 0.6);
-            background-image: url('../resources/static/assets/Home3.png');
+            background-image: url('../resources/static/assets/icons/Home3.png');
             background-size: cover;
             background-position: center;
             border: 2px solid #ccc;
@@ -65,7 +65,7 @@
 
         .error-message {
             color: #ff0000;
-            margin-top: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -78,12 +78,19 @@
             <input class="input-spacing" type="tel" th:field="*{phone}" placeholder="Phone" required><br>
             <input class="input-spacing" type="text" th:field="*{email}" placeholder="Email" required><br>
             <input class="input-spacing" type="password" th:field="*{password}" placeholder="Password" required><br>
-            <div th:if="${errorMessage}" class="error-message">
-                <label th:text="${errorMessage}"></label>
-            </div>
             <button type="submit">Register</button>
         </div>
     </form>
+
+    <div class="error-message" th:if="${errorMessage}">
+        <label th:text="${errorMessage}"></label>
+    </div>
+
+    <script>
+        var errorMessage = /*[[${errorMessage}]]*/ '';
+        if (errorMessage) { alert(errorMessage) }
+    </script>
+
 </div>
 </body>
 </html>

@@ -33,10 +33,15 @@ public class RegisterController {
 
         if (!emailNotExist) {
             result.rejectValue("email", "error.user", "The email is already in use!");
+            model.addAttribute("errorMessage", "The email is already in use!");
+            return "register";
         } else if (!phoneNotExist) {
             result.rejectValue("phone", "error.user", "The phone is already in use!");
+            model.addAttribute("errorMessage", "The phone is already in use!");
+            return "register";
         } else if (user.getName().isBlank() || user.getEmail().isBlank() || user.getPhone().isBlank() || user.getPassword().isBlank()) {
-            result.reject("error.user", "You have to fill all the fields");
+            result.rejectValue("error.user", "You have to fill all the fields");
+            model.addAttribute("errorMessage", "You have to fill all the fields");
             return "register";
         } else if (emailNotExist && phoneNotExist) {
             Users newUser = new Users();
