@@ -29,6 +29,10 @@ public class StockBLL {
         return stocks.isEmpty() ? null : stocks.get(0);
     }
 
+    public static Stock getPriceById(int id){
+        List<Stock>stocks = Database.query("stocks.getPriceById").setParameter("id", id).getResultList();
+        return stocks.isEmpty()? null:stocks.get(0);
+    }
 
     public static void create(Stock entity) {
         Database.beginTransaction();

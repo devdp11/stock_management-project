@@ -1,6 +1,7 @@
 package pt.ipvc.bll;
 
 
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import pt.ipvc.dal.Users;
 import pt.ipvc.database.Database;
@@ -40,6 +41,15 @@ public class UsersBLL {
         return users.isEmpty() ? null : users.get(0);
     }
 
+    public static int getIdByName(String name) {
+        try {
+            TypedQuery<Integer> query = Database.getEntityManager().createNamedQuery("user.getIdByName", Integer.class);
+            query.setParameter("name", name);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return 0; // ou qualquer outro valor padrão adequado
+        }
+    }
 
     public static void create(Users entity) {
         Database.beginTransaction();
