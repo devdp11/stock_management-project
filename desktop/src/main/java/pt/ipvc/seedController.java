@@ -149,7 +149,7 @@ public class seedController {
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            dialogStage.setTitle("Edit User");
+            dialogStage.setTitle("Editing Seed..");
             dialogStage.setScene(scene);
             dialogStage.showAndWait();
             dataView.refresh();

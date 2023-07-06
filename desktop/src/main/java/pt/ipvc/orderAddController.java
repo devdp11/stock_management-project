@@ -105,10 +105,22 @@ public class orderAddController {
                         alert.close();
                     }
                 } else {
-                    System.out.println("Client not found!");
+                    ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Client not found!", continueButtonType);
+                    alert.setTitle("Alert");
+                    alert.setHeaderText(null);
+                    DialogPane alertDialog = alert.getDialogPane();
+                    alertDialog.getStyleClass().add("alert");
+                    Optional<ButtonType> result = alert.showAndWait();
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid quantity format!");
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Invalid quantity format!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
             }
         }
     }
