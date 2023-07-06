@@ -48,7 +48,6 @@ public class UserProfileController {
         }
         if (user.getPassword().isEmpty()) {
             result.rejectValue("password", "error.user", "Password cannot be empty!");
-            // Exibir mensagem de erro
             return "userProfile";
         }
 

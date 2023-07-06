@@ -88,19 +88,19 @@
 </div>
 <table>
     <tr>
-        <th>Quantity</th>
-        <th>Total Price</th>
-        <th>Price per Unit</th>
         <th>Product Description</th>
+        <th>Quantity</th>
+        <th>Price per Unit</th>
+        <th>Total Price</th>
         <th>Date</th>
         <th>State</th>
     </tr>
 
     <tr th:each="order : ${orders}">
-        <td th:text="${order.orderQuantity}"></td>
-        <td th:text="${order.orderPrice}"></td>
-        <td th:text="${order.priceUnity}"></td>
         <td th:text="${order.productDescription}"></td>
+        <td th:text="${order.orderQuantity}"></td>
+        <td th:text="${order.priceUnity}"></td>
+        <td th:text="${order.orderPrice}"></td>
         <td th:text="${order.dateStart}"></td>
         <td th:text="${order.state}"></td>
     </tr>
