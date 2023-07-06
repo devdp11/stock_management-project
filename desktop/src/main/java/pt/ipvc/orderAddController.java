@@ -125,12 +125,6 @@ public class orderAddController {
         }
     }
 
-
-    @FXML
-    public void onCancelButtonClick(ActionEvent event){
-        System.out.println("Cancel Button was Clicked");
-    }
-
     @FXML
     public void onProductComboBoxSelected(ActionEvent event) {
         String selectedProduct = String.valueOf(productComboBox.getSelectionModel().getSelectedItem());

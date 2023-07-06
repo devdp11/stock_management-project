@@ -85,11 +85,6 @@ public class productionScheduleController {
     }
 
     @FXML
-    public void onCancelButtonClick(ActionEvent event) {
-        System.out.println("Cancel Button was Clicked");
-    }
-
-    @FXML
     public void onSeedsComboBoxSelected(ActionEvent event) {
         String selectedSeed = seedsComboBox.getSelectionModel().getSelectedItem();
         Seeds seed = SeedsBLL.getbydescription(selectedSeed);

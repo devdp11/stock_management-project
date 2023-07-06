@@ -127,12 +127,6 @@ public class productionRecallController {
         }
     }
 
-
-    @FXML
-    public void onCancelButtonClick(ActionEvent event) {
-        System.out.println("Cancel Button was Clicked");
-    }
-
     private Storage getSelectedStorageById(int id) {
         List<Storage> storages = StorageBLL.index();
         for (Storage storage : storages) {

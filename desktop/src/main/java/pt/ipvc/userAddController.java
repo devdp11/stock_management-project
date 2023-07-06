@@ -107,8 +107,4 @@ public class userAddController {
         }
 
     }
-    @FXML
-    public void onCancelButtonClick(ActionEvent event){
-
-    }
 }

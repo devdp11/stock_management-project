@@ -110,9 +110,4 @@ public class seedAddController {
             }
         }
     }
-
-    @FXML
-    public void onCancelButtonClick(ActionEvent event){
-        System.out.println("Cancel Button was Clicked");
-    }
 }

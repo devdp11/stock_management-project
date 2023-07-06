@@ -89,9 +89,6 @@ public class userEditController {
                 if (result.isPresent() && result.get() == continueButtonType) {
                     alert.close();
                 }
-            }
         }
-    @FXML
-    public void onCancelButtonClick(ActionEvent event){
     }
 }
