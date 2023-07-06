@@ -22,11 +22,6 @@ public class homeController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private Users currentUser;
-
-    public void setCurrentUser(Users currentUser) {
-        this.currentUser = currentUser;
-    }
 
     @FXML
     public void onAboutButtonClick(ActionEvent event) {
@@ -52,8 +47,6 @@ public class homeController {
 
         alert.showAndWait();
     }
-
-
     @FXML
     public void onHomeButtonClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
@@ -64,24 +57,11 @@ public class homeController {
     }
     @FXML
     public void onUsersButtonClick(ActionEvent event) throws IOException {
-        if (currentUser.getIdRole() == 1) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user.fxml")));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            ButtonType returnButtonType = new ButtonType("Return", ButtonBar.ButtonData.OK_DONE);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Only authorized users can acess this page!", returnButtonType);
-            alert.setTitle("Alert");
-            alert.setHeaderText(null);
-            DialogPane alertDialog = alert.getDialogPane();
-            alertDialog.getStyleClass().add("alert");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == returnButtonType) {
-                alert.close();
-            }
-        }
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user.fxml")));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     public void onProductsButtonClick(ActionEvent event) throws IOException{

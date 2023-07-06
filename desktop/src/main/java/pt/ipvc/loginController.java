@@ -43,10 +43,7 @@ public class loginController {
         } else if(UsersBLL.checkLogin(email, password)){
             Users currentUser = UsersBLL.getLogin(email, password);
             if (currentUser.getIdRole() == 1 || currentUser.getIdRole() == 2 /*|| users.getRoleByIdRole().getDescription().equals("admin") || users.getRoleByIdRole().getDescription().equals("manager")*/) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-                Parent root = loader.load();
-                homeController controller = loader.getController();
-                controller.setCurrentUser(currentUser);
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
