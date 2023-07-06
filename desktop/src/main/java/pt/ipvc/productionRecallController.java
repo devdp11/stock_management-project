@@ -89,6 +89,7 @@ public class productionRecallController {
             stock = new Stock();
             stock.setDescription(descriptionTextField.getText());
             stock.setProducedQuantity(Integer.parseInt(producedQuantityTextField.getText()));
+            stock.setPrice(Double.parseDouble(priceTextField.getText()));
             stock.setDate(String.valueOf(datePicker.getValue()));
             stock.setIdProduction(production.getId());
 

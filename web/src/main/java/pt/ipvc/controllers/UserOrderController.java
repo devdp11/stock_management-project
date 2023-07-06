@@ -36,8 +36,11 @@ public class UserOrderController {
             Stock stock = StockBLL.getById(order.getIdStock());
             if (stock != null) {
                 userOrderModel.setProductDescription(stock.getDescription());
+                userOrderModel.setPriceUnity(stock.getPrice());
             } else {
                 userOrderModel.setProductDescription("");
+                userOrderModel.setPriceUnity(Double.valueOf(""));
+
             }
 
             userOrderModel.setIdClient(order.getIdClient());

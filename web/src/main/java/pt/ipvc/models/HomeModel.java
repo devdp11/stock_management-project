@@ -6,6 +6,8 @@ public class HomeModel {
     @NotBlank
     private String description;
     @NotBlank
+    private Double price;
+    @NotBlank
     private int producedQuantity;
     @NotBlank
     private String date;
@@ -18,6 +20,13 @@ public class HomeModel {
         this.description = description;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
     public int getProducedQuantity() {
         return producedQuantity;
     }

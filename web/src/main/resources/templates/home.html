@@ -25,11 +25,11 @@
         }
 
         .stock-box {
-            width: 200px;
+            width: 250px;
             margin: 5px;
             padding: 5px;
             float: left;
-            height: 200px;
+            height: 250px;
             background-color: #f2f2f2;
             border-radius: 10px;
             padding: 20px;
@@ -37,7 +37,7 @@
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            background-image: url('/assets/Home3.png'); background-position: center; background-size: cover;
+            background-image: url('../resources/static/assets/icons/Home3.png'); background-position: center; background-size: cover;
             backdrop-filter: blur(20px);
 
         }
@@ -115,9 +115,14 @@
         .labelblur{
             backdrop-filter: blur(100px);
             display: flex;
-
-
         }
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
 
     </style>
 </head>
@@ -146,6 +151,10 @@
                     <span  th:text="${stock.description}"></span>
                     </div>
                     <div class="labelblur">
+                        <label>Price per Unity:</label>
+                        <span  th:text="${stock.price}"></span>
+                    </div>
+                    <div class="labelblur">
                     <label>Stock Quantity:</label>
                     <span th:text="${stock.producedQuantity}"></span> <br>
                     </div>
@@ -154,11 +163,34 @@
                     <span th:text="${stock.date}"></span> <br>
                         </div>
                 </div>
-                <button class="order-button" th:data-id="${stock.id}">Order</button>
+                <button class="order-button" th:data-id="${stock.id}" onclick="showOrderForm(this)">Order</button>
+                <form class="order-form" th:id="'order-form-' + ${stock.id}" style="display: none;">
+                    <div class="centered-container">
+                        <input type="number" name="quantity" placeholder="Quantity" required>
+                        <button type="submit">Place Order</button>
+                    </div>
+                </form>
             </div>
         </li>
     </ul>
 </div>
+
+<script>
+    function showOrderForm(button) {
+        var stockId = button.getAttribute('data-id');
+        var formId = 'order-form-' + stockId;
+
+        var orderForms = document.getElementsByClassName('order-form');
+        for (var i = 0; i < orderForms.length; i++) {
+            orderForms[i].style.display = 'none';
+        }
+
+        var orderForm = document.getElementById(formId);
+        if (orderForm) {
+            orderForm.style.display = 'block';
+        }
+    }
+</script>
 
 </body>
 </html>

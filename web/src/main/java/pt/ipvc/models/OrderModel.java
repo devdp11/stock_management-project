@@ -1,32 +1,21 @@
 package pt.ipvc.models;
 
-public class UserOrderModel {
+public class OrderModel {
 
-
-    public String productDescription;
-    public double priceUnity;
+    public int idStock;
     public int idClient;
     public double orderPrice;
     public int orderQuantity;
     public String dateStart;
     public String state;
 
-    public String getProductDescription() {
-        return productDescription;
+    public int getIdStock() {
+        return idStock;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setIdStock(int idStock) {
+        this.idStock = idStock;
     }
-
-    public Double getPriceUnity() {
-        return priceUnity;
-    }
-
-    public void setPriceUnity(Double priceUnity) {
-        this.priceUnity = priceUnity;
-    }
-
     public int getIdClient() {
         return idClient;
     }

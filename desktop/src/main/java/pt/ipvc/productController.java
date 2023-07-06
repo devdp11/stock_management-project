@@ -65,6 +65,7 @@ public class productController {
             return new SimpleStringProperty(stock.getDescription());
         });
         quantityBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getProducedQuantity())));
+        priceBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getPrice())));
         dateBatchColumn.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getDate())));
         productionBatchColumn.setCellValueFactory(d -> {
             Production production = ProductionBLL.get(d.getValue().getIdProduction());

@@ -33,6 +33,9 @@ public class Stock {
     @Column(name = "id_storage")
     private int idStorage;
     @Basic
+    @Column(name = "price")
+    private double price;
+    @Basic
     @Column(name = "deleted_on")
     private Timestamp deletedOn;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -90,6 +93,13 @@ public class Stock {
 
     public void setIdStorage(int idStorage) {
         this.idStorage = idStorage;
+    }
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public Timestamp getDeletedOn() {

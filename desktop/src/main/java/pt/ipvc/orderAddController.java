@@ -57,54 +57,62 @@ public class orderAddController {
     }
 
     @FXML
-    public void onAddOrderButtonClick(ActionEvent event){
+    public void onAddOrderButtonClick(ActionEvent event) {
         Orders newOrder = new Orders();
 
         String selectedProduct = productComboBox.getSelectionModel().getSelectedItem();
         Stock stock = StockBLL.getbydescription(selectedProduct);
         if (stock != null) {
             newOrder.setIdStock(stock.getId());
-        }
 
-        newOrder.setOrderPrice(Double.parseDouble(orderPriceTextField.getText()));
-        newOrder.setOrderQuantity(Integer.valueOf(orderQuantityTextField.getText()));
+            try {
+                double orderQuantity = Double.parseDouble(orderQuantityTextField.getText());
+                double productPrice = stock.getPrice();
+                double orderPrice = orderQuantity * productPrice;
 
-        LocalDate localDate = dateStartPicker.getValue();
-        Date sqlDate = Date.valueOf(localDate);
-        newOrder.setDateStart(sqlDate.toString());
+                newOrder.setOrderPrice(orderPrice);
+                newOrder.setOrderQuantity((int) orderQuantity);
 
-        newOrder.setState(stateComboBox.getValue());
+                LocalDate localDate = dateStartPicker.getValue();
+                Date sqlDate = Date.valueOf(localDate);
+                newOrder.setDateStart(sqlDate.toString());
 
-        String client = clientComboBox.getSelectionModel().getSelectedItem();
-        List<Users> clients = UsersBLL.getByRole("client");
+                newOrder.setState(stateComboBox.getValue());
 
-        Users userS = null;
-        for (Users clientUser : clients) {
-            if (clientUser.getName().equals(client)) {
-                userS = clientUser;
-                break;
+                String client = clientComboBox.getSelectionModel().getSelectedItem();
+                List<Users> clients = UsersBLL.getByRole("client");
+
+                Users userS = null;
+                for (Users clientUser : clients) {
+                    if (clientUser.getName().equals(client)) {
+                        userS = clientUser;
+                        break;
+                    }
+                }
+
+                if (userS != null) {
+                    newOrder.setIdClient(userS.getId());
+                    OrdersBLL.create(newOrder);
+
+                    ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Added an order successfully!", continueButtonType);
+                    alert.setTitle("Alert");
+                    alert.setHeaderText(null);
+                    DialogPane alertDialog = alert.getDialogPane();
+                    alertDialog.getStyleClass().add("alert");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == continueButtonType) {
+                        alert.close();
+                    }
+                } else {
+                    System.out.println("Client not found!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid quantity format!");
             }
-        }
-
-        if (userS != null) {
-            newOrder.setIdClient(userS.getId());
-            OrdersBLL.create(newOrder);
-
-            ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Added a order successfully!", continueButtonType);
-            alert.setTitle("Alert");
-            alert.setHeaderText(null);
-            DialogPane alertDialog = alert.getDialogPane();
-            alertDialog.getStyleClass().add("alert");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == continueButtonType) {
-                alert.close();
-            }
-        } else {
-            // Lógica para lidar com o fornecedor não encontrado
-            System.out.println("Fornecedor não encontrado!");
         }
     }
+
 
     @FXML
     public void onCancelButtonClick(ActionEvent event){
