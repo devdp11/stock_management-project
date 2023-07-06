@@ -181,12 +181,15 @@
 <div class="header">
     <header>
         <div class="divbuttons">
-            <h2 style="margin: 20px">VegetaMag Products for sale:</h2>
+            <h2 style="margin: 20px">VegetaMag - Profile:</h2>
             <button class="buttons" onclick="location.href='/register'">Create an Account</button>
             <button class="buttons" onclick="location.href='/home'">Home</button>
             <button class="buttons" onclick="location.href='/userProfile'">Check Profile</button>
             <button class="buttons" onclick="location.href='/userOrders'">Check Order History</button>
-            <button class="buttons logout-button" onclick="location.href='/login'">Logout</button>
+
+            <form action="/logoutProfile" method="post">
+                <button className="buttons" type="submit">Logout</button>
+            </form>
         </div>
     </header>
 </div>

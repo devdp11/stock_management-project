@@ -91,7 +91,7 @@ public class UserProfileController {
         return "userProfile";
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logoutProfile")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute("userName");

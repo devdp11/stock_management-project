@@ -1,5 +1,6 @@
 package pt.ipvc.controllers;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import pt.ipvc.bll.UsersBLL;
 import pt.ipvc.bll.StockBLL;
 import pt.ipvc.bll.OrdersBLL;
@@ -54,5 +55,13 @@ public class UserOrderController {
         model.addAttribute("orders", userOrderModels);
 
         return "userOrders";
+    }
+
+    @PostMapping("/logoutOrder")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("userName");
+
+        return "redirect:/login";
     }
 }
