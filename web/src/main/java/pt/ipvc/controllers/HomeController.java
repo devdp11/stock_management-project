@@ -35,4 +35,12 @@ public class HomeController {
     public String placeOrder(@ModelAttribute("order") @Valid OrderModel orderModel, BindingResult result, Model model) {
         return "home";
     }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("userName");
+
+        return "redirect:/login";
+    }
 }

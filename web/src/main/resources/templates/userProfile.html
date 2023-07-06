@@ -9,7 +9,6 @@
 
         body {
             background-color: #f2f2f2;
-            font-family: Arial, sans-serif;
         }
 
 
@@ -105,7 +104,7 @@
         }
 
         .logout-button {
-            margin-left: 100px;
+            margin-left: 150px;
         }
 
         .buttons:hover {
@@ -186,9 +185,8 @@
             <button class="buttons" onclick="location.href='/home'">Home</button>
             <button class="buttons" onclick="location.href='/userProfile'">Check Profile</button>
             <button class="buttons" onclick="location.href='/userOrders'">Check Order History</button>
-
             <form action="/logoutProfile" method="post">
-                <button className="buttons" type="submit">Logout</button>
+                <button class="buttons logout-button" type="submit">Logout</button>
             </form>
         </div>
     </header>
@@ -249,7 +247,7 @@
                 <label>Phone:</label>
                 <input type="tel" pattern="[0-9]{9}" th:field="*{phone}" class="edit-input"/>
             </div>
-            
+
             <div>
                 <label>Street:</label>
                 <input type="text" th:field="*{street}" class="edit-input" />
