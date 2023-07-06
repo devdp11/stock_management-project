@@ -37,7 +37,7 @@
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            background-image: url('/assets/Home3.png'); background-position: center; background-size: cover;
+            background-image: url('Home3.png'); background-position: center; background-size: cover;
             backdrop-filter: blur(20px);
 
         }
@@ -196,63 +196,37 @@
                 <div class="stock-info">
                     <div class="labelblur">
                         <label>Description:</label>
-                        <span  th:text="${stock.description}"></span>
+                        <span th:text="${stock.description}"></span>
+                        <span class="id" th:text="${stock.id}"></span>
+                        <span class="idUser" th:text="${userId}"></span>
                     </div>
                     <div class="labelblur">
                         <label>Price per Unity:</label>
-                        <span  th:text="${stock.price}"></span>
+                        <span class="price" th:text="${stock.price}"></span>
                     </div>
                     <div class="labelblur">
                         <label>Stock Quantity:</label>
-                        <span th:text="${stock.producedQuantity}"></span> <br>
+                        <span th:text="${stock.producedQuantity}"></span><br>
                     </div>
                     <div class="labelblur">
                         <label>Batch Date:</label>
-                        <span th:text="${stock.date}"></span> <br>
+                        <span th:text="${stock.date}"></span><br>
                     </div>
                 </div>
-                <button class="order-button" th:data-id="${stock.id}" onclick="toggleOrderForm(this)" style="display: inline;">Order</button>
-
-                <form class="order-form" th:id="'order-form-' + ${stock.id}" onsubmit="return false;">
-                    <div class="centered-container">
-                        <input type="number" name="quantity" placeholder="Quantity">
-                        <button type="submit" onclick="placeOrder(this, '${stock.id}')">Place Order</button>
-                    </div>
-                    <span class="error-message" style="display: none;">Please enter a quantity.</span>
-                </form>
-
+                <input type="number" name="quantity" placeholder="Quantity">
+                <button class="order-button" onclick="placeOrder(this)">Order</button>
             </div>
         </li>
     </ul>
 </div>
 
 <script>
-    function toggleOrderForm(button) {
-        var stockId = button.getAttribute('data-id');
-        var formId = 'order-form-' + stockId;
-
-        var orderForms = document.getElementsByClassName('order-form');
-        for (var i = 0; i < orderForms.length; i++) {
-            orderForms[i].style.display = 'none';
-            var orderButton = orderForms[i].previousElementSibling;
-            orderButton.style.display = 'inline';
-        }
-
-        var orderForm = document.getElementById(formId);
-        if (orderForm) {
-            var orderButton = orderForm.previousElementSibling;
-            orderForm.style.display = orderForm.style.display === 'none' ? 'block' : 'none';
-            orderButton.style.display = orderForm.style.display === 'none' ? 'inline' : 'none';
-        }
-    }
-
-    function placeOrder(button, stockId) {
+    function placeOrder(button) {
         var form = button.parentNode.parentNode;
         var quantityInput = form.querySelector('input[name="quantity"]');
         var quantity = quantityInput.value;
 
         if (quantity === '') {
-            // Exibe uma mensagem de erro para o usuário indicando que a quantidade é necessária
             var errorMessage = document.createElement('span');
             errorMessage.className = 'error-message';
             errorMessage.textContent = 'Please enter a quantity.';
@@ -261,12 +235,64 @@
             return;
         }
 
-        // Realize a lógica para enviar o pedido com a quantidade fornecida para o backend aqui...
+        var price = form.querySelector('.price').textContent;
+        var description = form.querySelector('span').textContent;
+        var id = form.querySelector('.id').textContent;
+        var idUser = form.querySelector('.idUser').textContent;
 
-        // Oculte o formulário de pedido novamente
+        console.log('User ID: ' + idUser);
+        console.log('Product ID: ' + id);
+        console.log('Product Description: ' + description);
+        console.log('Product Price: ' + price);
+        console.log('Quantity: ' + quantity);
+
+        var orderPrice = parseFloat(price) * parseInt(quantity);
+        console.log('Order Price: ' + orderPrice);
+
+        var currentDate = new Date();
+        var date = currentDate.toISOString().split('T')[0];
+        console.log('Date: ' + date);
+
+        var state = 'Preparing';
+        console.log('State: ' + state);
+
+        var orderData = {
+            idStock: id,
+            description: description,
+            price: price,
+            orderQuantity: quantity,
+            orderPrice: orderPrice,
+            dateStart: date,
+            state: state,
+            idClient: idUser
+        };
+
+        fetch('/placeOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTP error, status = ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Order placed successfully:', data);
+            })
+            .catch(error => {
+                console.error('Error placing order:', error);
+            });
+
         form.style.display = 'none';
     }
+
+
 </script>
+
 
 
 

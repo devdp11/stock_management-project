@@ -32,6 +32,7 @@ public class LoginController {
 
         if (currentUser != null) {
             if (currentUser.getIdRole() == 4) {
+                session.setAttribute("userId", currentUser.getId());
                 session.setAttribute("userName", currentUser.getName());
                 return "redirect:/home";
             } else {
