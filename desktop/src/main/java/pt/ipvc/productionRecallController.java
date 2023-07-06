@@ -116,8 +116,13 @@ public class productionRecallController {
                     alert.close();
                 }
             } else {
-                // Lidar com o caso em que o objeto Storage não foi encontrado
-                System.out.println("Selected storage not found!");
+                ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Storage not found!", continueButtonType);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                DialogPane alertDialog = alert.getDialogPane();
+                alertDialog.getStyleClass().add("alert");
+                Optional<ButtonType> result = alert.showAndWait();
             }
         }
     }

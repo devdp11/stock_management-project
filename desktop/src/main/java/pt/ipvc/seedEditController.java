@@ -80,7 +80,7 @@ public class seedEditController {
 
             } else {
                 ButtonType continueButtonType = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Invalid Supplier Selection!", continueButtonType);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Supplier not found!", continueButtonType);
                 alert.setTitle("Alert");
                 alert.setHeaderText(null);
                 DialogPane alertDialog = alert.getDialogPane();

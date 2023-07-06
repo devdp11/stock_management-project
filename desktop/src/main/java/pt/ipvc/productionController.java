@@ -153,7 +153,6 @@ public class productionController {
                 dialogStage.showAndWait();
                 dataView.refresh();
             } else {
-                // Exibir alerta informando que a produção não está pronta para recall
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Recall Production");
                 alert.setHeaderText("The selected production is not ready for recall.");
@@ -165,7 +164,6 @@ public class productionController {
                 alert.showAndWait();
             }
         } else {
-            // Exibir alerta informando que nenhuma produção foi selecionada
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Recall Production");
             alert.setHeaderText("No production selected.");
@@ -181,7 +179,7 @@ public class productionController {
     @FXML
     public void onEditButtonClick(ActionEvent event) throws IOException {
         Production selectedProduction = dataView.getSelectionModel().getSelectedItem();
-        if (selectedProduction != null && !selectedProduction.getState().equals("Already recalled")) {
+        if (selectedProduction != null && selectedProduction.getState().equals("In preparation") || selectedProduction.getState().equals("Growing up") || selectedProduction.getState().equals("Ready to recall")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("production_edit.fxml"));
             Parent parent = loader.load();
             productionEditController controller = loader.getController();
@@ -210,7 +208,6 @@ public class productionController {
             }
         }
     }
-
 
     private void updateDataView(List<Production> productions) {
         Collections.sort(productions, Comparator.comparingInt(production -> production.getId()));

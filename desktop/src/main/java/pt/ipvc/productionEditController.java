@@ -65,11 +65,17 @@ public class productionEditController {
         seedsQuantityTextField.setEditable(false);
         datePicker.setDisable(true);
         seedsComboBox.setDisable(true);
-
-        List<String> states = Arrays.asList("In preparation", "Growing up", "Ready to recall");
-        ObservableList<String> tState = FXCollections.observableArrayList(states);
-        stateComboBox.setItems(tState);
-        stateComboBox.setValue(production.getState());
+        if (production.getState().equals("Ready to recall")){
+            List<String> states = Arrays.asList("Already recalled");
+            ObservableList<String> tState = FXCollections.observableArrayList(states);
+            stateComboBox.setItems(tState);
+            stateComboBox.setValue(production.getState());
+        } else {
+            List<String> states = Arrays.asList("In preparation", "Growing up", "Ready to recall");
+            ObservableList<String> tState = FXCollections.observableArrayList(states);
+            stateComboBox.setItems(tState);
+            stateComboBox.setValue(production.getState());
+        }
     }
 
     @FXML

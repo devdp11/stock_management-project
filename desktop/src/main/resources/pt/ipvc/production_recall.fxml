@@ -31,19 +31,21 @@
    <center>
       <AnchorPane prefHeight="353.0" prefWidth="396.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="39.0" layoutY="42.0" prefHeight="38.0" prefWidth="67.0" text="Description" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="17.0" layoutY="103.0" prefHeight="63.0" prefWidth="112.0" text="Produced Quantity*" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="43.0" layoutY="189.0" prefHeight="38.0" prefWidth="59.0" text="Date*" textAlignment="CENTER" />
-            <TextField fx:id="producedQuantityTextField" layoutX="127.0" layoutY="116.0" prefHeight="36.0" prefWidth="230.0" promptText="Produced Quantity " />
-            <Label alignment="CENTER" layoutX="43.0" layoutY="259.0" prefHeight="38.0" prefWidth="59.0" text="Storage*" textAlignment="CENTER" />
-            <ComboBox fx:id="storageComboBox" layoutX="127.0" layoutY="260.0" prefHeight="36.0" prefWidth="230.0" promptText="Storage" />
-            <Button layoutX="127.0" layoutY="343.0" mnemonicParsing="false" onAction="#onRecallButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="RECALL" textFill="#53aa3e">
+            <Label alignment="CENTER" layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="67.0" text="Description" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="17.0" layoutY="140.0" prefHeight="63.0" prefWidth="112.0" text="Produced Quantity*" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="43.0" layoutY="211.0" prefHeight="38.0" prefWidth="59.0" text="Date*" textAlignment="CENTER" />
+            <TextField fx:id="producedQuantityTextField" layoutX="139.0" layoutY="154.0" prefHeight="36.0" prefWidth="230.0" promptText="Produced Quantity " />
+            <Label alignment="CENTER" layoutX="43.0" layoutY="270.0" prefHeight="38.0" prefWidth="59.0" text="Storage*" textAlignment="CENTER" />
+            <ComboBox fx:id="storageComboBox" layoutX="139.0" layoutY="271.0" prefHeight="36.0" prefWidth="230.0" promptText="Storage" />
+            <Button layoutX="127.0" layoutY="346.0" mnemonicParsing="false" onAction="#onRecallButtonClick" prefHeight="35.0" prefWidth="135.0" style="-fx-border-color: #53AA3E; -fx-background-color: #ffffff; -fx-border-width: 2px;" text="RECALL" textFill="#53aa3e">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <TextField fx:id="descriptionTextField" layoutX="127.0" layoutY="43.0" prefHeight="36.0" prefWidth="230.0" promptText="Description" />
-            <DatePicker fx:id="datePicker" layoutX="127.0" layoutY="190.0" prefHeight="36.0" prefWidth="230.0" promptText="Date" />
+            <TextField fx:id="descriptionTextField" layoutX="139.0" layoutY="35.0" prefHeight="36.0" prefWidth="230.0" promptText="Description" />
+            <DatePicker fx:id="datePicker" layoutX="139.0" layoutY="212.0" prefHeight="36.0" prefWidth="230.0" promptText="Date" />
+            <Label alignment="CENTER" layoutX="29.0" layoutY="93.0" prefHeight="38.0" prefWidth="88.0" text="Price per unit*" textAlignment="CENTER" />
+            <TextField fx:id="priceTextField" layoutX="139.0" layoutY="94.0" prefHeight="36.0" prefWidth="230.0" promptText="Price per Unit" />
          </children>
       </AnchorPane>
    </center>

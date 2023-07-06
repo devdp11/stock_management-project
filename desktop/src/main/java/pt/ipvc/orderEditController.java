@@ -110,7 +110,7 @@ public class orderEditController {
                     }
                 } else {
                     ButtonType continueButtonType = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Invalid Stock Selection!", continueButtonType);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Stock not found!", continueButtonType);
                     alert.setTitle("Alert");
                     alert.setHeaderText(null);
                     DialogPane alertDialog = alert.getDialogPane();
@@ -122,7 +122,7 @@ public class orderEditController {
                 }
             } else {
                 ButtonType continueButtonType = new ButtonType("Try Again", ButtonBar.ButtonData.OK_DONE);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Invalid Client Selection!", continueButtonType);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Client not found!", continueButtonType);
                 alert.setTitle("Alert");
                 alert.setHeaderText(null);
                 DialogPane alertDialog = alert.getDialogPane();

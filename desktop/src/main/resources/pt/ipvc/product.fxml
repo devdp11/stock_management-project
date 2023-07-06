@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipvc.productController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipvc.productController">
    <top>
       <AnchorPane prefHeight="120.0" prefWidth="1014.0" style="-fx-background-color: #088B2D;" BorderPane.alignment="CENTER">
          <children>
@@ -53,12 +59,13 @@
          <children>
             <TableView fx:id="dataView" layoutX="28.0" layoutY="99.0" prefHeight="497.0" prefWidth="769.0">
               <columns>
-                <TableColumn fx:id="idBatchColumn" prefWidth="125.0" text="BATCH ID" />
-                <TableColumn fx:id="descriptionBatchColumn" prefWidth="125.0" text="DESCRIPTION" />
-                  <TableColumn fx:id="quantityBatchColumn" prefWidth="125.0" text="QUANTITY" />
-                  <TableColumn fx:id="dateBatchColumn" prefWidth="125.0" text="DATE" />
-                  <TableColumn fx:id="productionBatchColumn" prefWidth="135.0" text="PRODUCTION" />
-                  <TableColumn fx:id="storageBatchColumn" prefWidth="135.0" text="STORAGE" />
+                <TableColumn fx:id="idBatchColumn" prefWidth="109.0" text="BATCH ID" />
+                <TableColumn fx:id="descriptionBatchColumn" prefWidth="109.0" text="DESCRIPTION" />
+                  <TableColumn fx:id="quantityBatchColumn" prefWidth="109.0" text="QUANTITY" />
+                  <TableColumn fx:id="priceBatchColumn" prefWidth="123.20001220703125" text="PRODUCT PRICE" />
+                  <TableColumn fx:id="dateBatchColumn" prefWidth="96.0" text="DATE" />
+                  <TableColumn fx:id="productionBatchColumn" prefWidth="109.0" text="PRODUCTION" />
+                  <TableColumn fx:id="storageBatchColumn" prefWidth="110.39998779296877" text="STORAGE" />
               </columns>
             </TableView>
             <TextField fx:id="descriptionFilter" layoutX="605.0" layoutY="40.0" onKeyReleased="#filterProducts" prefHeight="35.0" prefWidth="175.0" promptText="description" />

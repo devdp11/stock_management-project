@@ -141,7 +141,7 @@ public class userController {
         popupStage.show();
 
         List<Users> users = UsersBLL.index();
-        updateDataView(users); // Chama o método para atualizar a tabela
+        updateDataView(users);
     }
 
 
@@ -194,6 +194,19 @@ public class userController {
             } else {
                 alert.close();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete User");
+            alert.setHeaderText("You must select one user to delete");
+
+            ButtonType okButton = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+
+            alert.getButtonTypes().setAll(okButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == okButton) {
+                alert.close();
+            }
         }
     }
 
@@ -231,7 +244,8 @@ public class userController {
         List<Users> filteredUsers = new ArrayList<>();
 
         for (Users user : allUsers) {
-            if (user.getRoleByIdRole().getDescription().equals(selectedRole)) {
+            if (user.getRoleByIdRole() != null && user.getRoleByIdRole().getDescription() != null
+                    && user.getRoleByIdRole().getDescription().equals(selectedRole)) {
                 filteredUsers.add(user);
             }
         }

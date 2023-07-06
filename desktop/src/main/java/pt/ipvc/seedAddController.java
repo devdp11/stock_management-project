@@ -89,8 +89,13 @@ public class seedAddController {
                         alert.close();
                     }
                 } else {
-                    // Lógica para lidar com o fornecedor não encontrado
-                    System.out.println("Fornecedor não encontrado!");
+                    ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Supplier not found!", continueButtonType);
+                    alert.setTitle("Alert");
+                    alert.setHeaderText(null);
+                    DialogPane alertDialog = alert.getDialogPane();
+                    alertDialog.getStyleClass().add("alert");
+                    Optional<ButtonType> result = alert.showAndWait();
                 }
         } else {
             ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
