@@ -21,6 +21,10 @@
             font-size: 15px;
         }
 
+        .logout-button {
+            margin-left: 300px;
+        }
+
         .buttons:hover {
             background-color: #299d02;
             animation-name: wiggle;
@@ -74,14 +78,13 @@
 <div class="header">
     <header>
         <div class="divbuttons">
-            <h2 style="margin: 20px">VegetaMag - Order History:</h2>
-            <button class="buttons" onclick="location.href='/register'">Create an Account</button>
-            <button class="buttons" onclick="location.href='/home'">Home</button>
-            <button class="buttons" onclick="location.href='/userProfile'">Check Profile</button>
-            <button class="buttons" onclick="location.href='/userOrders'">Check Order History</button>
+            <h2 style="margin: 20px">VegetaMag - Order History</h2>
 
+            <button class="buttons" onclick="location.href='/home'">Home</button>
+            <button class="buttons" onclick="location.href='/userProfile'">Profile</button>
+            <button class="buttons" onclick="location.href='/userOrders'">Order History</button>
             <form action="/logoutOrder" method="post">
-                <button class="buttons" type="submit">Logout</button>
+                <button class="buttons logout-button" type="submit">Logout</button>
             </form>
         </div>
     </header>

@@ -6,12 +6,9 @@
     <link rel="stylesheet" href="userProfile.css">
     <style>
 
-
         body {
             background-color: #f2f2f2;
         }
-
-
 
         .header h2 {
             margin: 0;
@@ -51,7 +48,6 @@
         .edit-button:hover {
             background-color: #065c1f;
         }
-
 
         .edit-form {
             display: none;
@@ -100,11 +96,10 @@
             width: 160px;
             border-color: black;
             font-size: 15px;
-
         }
 
         .logout-button {
-            margin-left: 100px;
+            margin-left: 300px;
         }
 
         .buttons:hover {
@@ -181,13 +176,12 @@
     <header>
         <div class="divbuttons">
             <h2 style="margin: 20px">VegetaMag - Profile:</h2>
-            <button class="buttons" onclick="location.href='/register'">Create an Account</button>
             <button class="buttons" onclick="location.href='/home'">Home</button>
-            <button class="buttons" onclick="location.href='/userProfile'">Check Profile</button>
-            <button class="buttons" onclick="location.href='/userOrders'">Check Order History</button>
+            <button class="buttons" onclick="location.href='/userProfile'">Profile</button>
+            <button class="buttons" onclick="location.href='/userOrders'">Order History</button>
 
             <form action="/logoutProfile" method="post">
-                <button class="buttons" type="submit">Logout</button>
+                <button class="buttons logout-button" type="submit">Logout</button>
             </form>
         </div>
     </header>

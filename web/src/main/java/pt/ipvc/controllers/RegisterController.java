@@ -35,6 +35,10 @@ public class RegisterController {
             result.rejectValue("email", "error.user", "The email is already in use!");
             model.addAttribute("errorMessage", "The email is already in use!");
             return "register";
+        } else if (user.getPhone().length() != 9) {
+            result.rejectValue("phone", "error.user", "The phone must have 9 digits!");
+            model.addAttribute("errorMessage", "The phone must have 9 digits!");
+            return "register";
         } else if (!phoneNotExist) {
             result.rejectValue("phone", "error.user", "The phone is already in use!");
             model.addAttribute("errorMessage", "The phone is already in use!");

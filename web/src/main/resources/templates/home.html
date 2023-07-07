@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="home.css">
     <style>
 
-
         a {
             position: relative;
             margin-left: 50px;
@@ -25,11 +24,11 @@
         }
 
         .stock-box {
-            width: 270px;
+            width: 290px;
             margin: 5px;
             padding: 5px;
             float: left;
-            height: 270px;
+            height: 290px;
             background-color: #f2f2f2;
             border-radius: 10px;
             padding: 20px;
@@ -37,26 +36,25 @@
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            background-image: url('Home3.png'); background-position: center; background-size: cover;
             backdrop-filter: blur(20px);
+            border: 4px solid #088B2D;
 
         }
 
         .stock-info {
             font-size: 16px;
             text-align: left;
-            margin-top: 20px;
-
-
 
         }
 
         .stock-info label {
             font-weight: bold;
-            margin: 10px;
+            margin: 10px 5px 10px 10px;
+
         }
         .stock-info span {
-            margin: 10px;
+            margin-bottom: 3px;
+            margin-top: 10px;
         }
 
         .order-button {
@@ -67,9 +65,7 @@
             border-radius: 5px;
             cursor: pointer;
             display: block;
-            margin: 0 auto;
-            margin-top: auto;
-            margin-bottom: 5px;
+
         }
 
         .order-button:hover {
@@ -87,7 +83,8 @@
         }
 
         .logout-button {
-            margin-left: 150px;
+            margin-left: 300px;
+
         }
 
         .buttons:hover {
@@ -119,20 +116,7 @@
         .labelblur{
             backdrop-filter: blur(100px);
             display: flex;
-        }
-        .centered-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        .order-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 5px;
-            display: none;
+            border-bottom: 1px solid black;
         }
 
         .order-form input[type="number"] {
@@ -155,20 +139,24 @@
             background-color: #065c1f;
         }
 
+        .quantity{
+            margin-top: 10px;
+            padding: 5px;
+            border: 2px solid #088B2D;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
         .error-message {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 0, 0, 0.8);
+            color: #fff;
             padding: 10px;
-            margin-top: 5px;
-            color: red;
             border-radius: 5px;
+            text-align: center;
         }
-
-
-
 
     </style>
 </head>
@@ -177,11 +165,10 @@
 <div class="header">
     <header>
         <div class="divbuttons">
-            <h2 style="margin: 20px">VegetaMag Products for sale:</h2>
-            <button class="buttons" onclick="location.href='/register'">Create an Account</button>
+            <h2 style="margin: 20px">VegetaMag - Products for sale:</h2>
             <button class="buttons" onclick="location.href='/home'">Home</button>
-            <button class="buttons" onclick="location.href='/userProfile'">Check Profile</button>
-            <button class="buttons" onclick="location.href='/userOrders'">Check Order History</button>
+            <button class="buttons" onclick="location.href='/userProfile'">Profile</button>
+            <button class="buttons" onclick="location.href='/userOrders'">Order History</button>
             <form action="/logout" method="post">
                 <button class="buttons logout-button" type="submit">Logout</button>
             </form>
@@ -197,8 +184,8 @@
                     <div class="labelblur">
                         <label>Description:</label>
                         <span th:text="${stock.description}"></span>
-                        <span class="id" th:text="${stock.id}"></span>
-                        <span class="idUser" th:text="${userId}"></span>
+                        <span class="id" th:text="${stock.id}" style="display: none;"></span>
+                        <span class="idUser" th:text="${userId}" style="display: none;"></span>
                     </div>
                     <div class="labelblur">
                         <label>Price per Unity:</label>
@@ -213,8 +200,9 @@
                         <span th:text="${stock.date}"></span><br>
                     </div>
                 </div>
-                <input type="number" name="quantity" placeholder="Quantity">
+                <input type="number" name="quantity" placeholder="Quantity" class="quantity">
                 <button class="order-button" onclick="placeOrder(this)">Order</button>
+                <span class="error-message" style="display: none;">Quantity Must Be Greater Than 0.</span>
             </div>
         </li>
     </ul>
@@ -226,13 +214,12 @@
         var quantityInput = form.querySelector('input[name="quantity"]');
         var quantity = quantityInput.value;
 
-        if (quantity === '') {
-            var errorMessage = document.createElement('span');
-            errorMessage.className = 'error-message';
-            errorMessage.textContent = 'Please enter a quantity.';
-            errorMessage.style.color = 'red';
-            form.appendChild(errorMessage);
+        var errorMessage = form.querySelector('.error-message');
+        if (quantity === '' || quantity < 1) {
+            errorMessage.style.display = 'block';
             return;
+        } else {
+            errorMessage.style.display = 'none';
         }
 
         var price = form.querySelector('.price').textContent;
@@ -292,9 +279,5 @@
 
 
 </script>
-
-
-
-
 </body>
 </html>
