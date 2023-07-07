@@ -48,7 +48,7 @@ public class orderEditController {
         if (stock != null) {
             productComboBox.setValue(stock.getDescription());
         } else {
-            productComboBox.setValue(""); // ou defina um valor padrão adequado
+            productComboBox.setValue("");
         }
 
         orderPriceTextField.setText(String.valueOf(order.getOrderPrice()));
@@ -85,10 +85,10 @@ public class orderEditController {
         if (order != null) {
             int clientId = getSelectedClientId();
 
-            if (clientId != 0) { // Check if a valid client ID is selected
+            if (clientId != 0) {
                 int stockId = getSelectedStockId();
 
-                if (stockId != 0) { // Check if a valid stock ID is selected
+                if (stockId != 0) {
                     order.setIdStock(stockId);
                     order.setOrderPrice(Double.parseDouble(orderPriceTextField.getText()));
                     order.setOrderQuantity(Integer.parseInt(orderQuantityTextField.getText()));

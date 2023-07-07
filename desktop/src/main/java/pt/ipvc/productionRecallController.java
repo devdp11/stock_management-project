@@ -64,19 +64,15 @@ public class productionRecallController {
 
         descriptionTextField.setText(production.getDescription());
 
-        // Buscar a produção pelo ID
         Production retrievedProduction = ProductionBLL.getById(production.getId());
         if (retrievedProduction != null) {
-            // Preencher os campos com os dados da produção
             descriptionTextField.setText(retrievedProduction.getDescription());
             producedQuantityTextField.setText(String.valueOf(retrievedProduction.getWantedQuantity()));
             datePicker.setValue(LocalDate.parse(retrievedProduction.getData()));
-            // Preencher os outros campos conforme necessário
 
-            stock = new Stock(); // Inicializar a variável stock
+            stock = new Stock();
             stock.setIdProduction(retrievedProduction.getId());
             stock.setDescription(retrievedProduction.getDescription());
-            // Outras propriedades do objeto stock
 
             storageComboBox.setValue(getSelectedStorageById(stock.getIdStorage()));
         }
@@ -93,16 +89,13 @@ public class productionRecallController {
             stock.setDate(String.valueOf(datePicker.getValue()));
             stock.setIdProduction(production.getId());
 
-            // Obter o objeto Storage selecionado a partir do ComboBox
             Storage selectedStorage = storageComboBox.getValue();
 
-            // Verificar se o objeto Storage foi encontrado
             if (selectedStorage != null) {
                 stock.setIdStorage(selectedStorage.getId());
 
                 StockBLL.create(stock);
 
-                //stock.getProductionByIdProduction().setState("Already Recalled");
                 production.setState("Already recalled");
 
                 ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);

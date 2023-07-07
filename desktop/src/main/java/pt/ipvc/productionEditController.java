@@ -46,7 +46,6 @@ public class productionEditController {
         if (selectedSeed != null) {
             seedsComboBox.setValue(selectedSeed.getDescription());
 
-            // Atualizar o valor do quantityLabel
             int quantityRequested = selectedSeed.getQuantityRequested();
             quantityLabel.setText("Seed Quantity in stock: " + quantityRequested);
         } else {
@@ -59,7 +58,6 @@ public class productionEditController {
         seedsQuantityTextField.setText(String.valueOf(production.getSeedsQuantity()));
         datePicker.setValue(LocalDate.parse(production.getData()));
 
-        // Tornar os campos somente leitura
         descriptionTextField.setEditable(false);
         wantedQuantityTextField.setEditable(false);
         seedsQuantityTextField.setEditable(false);

@@ -47,7 +47,7 @@ public class UsersBLL {
             query.setParameter("name", name);
             return query.getSingleResult();
         } catch (NoResultException e) {
-            return 0; // ou qualquer outro valor padrão adequado
+            return 0;
         }
     }
 

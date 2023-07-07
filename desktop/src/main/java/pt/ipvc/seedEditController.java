@@ -59,7 +59,7 @@ public class seedEditController {
         if (seed != null) {
             int SupplierId = getSelectedSupplierId();
 
-            if (SupplierId != 0) { // Check if a valid client ID is selected
+            if (SupplierId != 0) {
                 seed.setDescription(descriptionTextField.getText());
                 seed.setQuantityRequested(Integer.parseInt(quantityTextField.getText()));
                 seed.setDate(String.valueOf(datePicker.getValue()));

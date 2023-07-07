@@ -57,7 +57,6 @@ public class seedAddController {
                 newSeed.setDescription(descriptionTextField.getText());
                 newSeed.setQuantityRequested(Integer.parseInt(quantityTextField.getText()));
 
-                // Obtenção da data do datePicker
                 LocalDate localDate = datePicker.getValue();
                 Date sqlDate = Date.valueOf(localDate);
 

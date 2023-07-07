@@ -41,7 +41,6 @@ public class HomeController {
 
         List<Stock> stocks = StockBLL.index();
 
-        // Filtra os produtos com producedQuantity > 0
         List<Stock> filteredStocks = stocks.stream()
                 .filter(stock -> stock.getProducedQuantity() > 0)
                 .collect(Collectors.toList());
@@ -62,24 +61,21 @@ public class HomeController {
 
             Orders newOrder = new Orders();
 
-            // Get the order data from the model
             int idStock = order.getIdStock();
-            int quantity = order.getOrderQuantity(); // Aqui é onde nós utilizamos a quantidade
+            int quantity = order.getOrderQuantity();
             double orderPrice = order.getOrderPrice();
             String dateStart = order.getDateStart();
             String state = order.getState();
 
             newOrder.setIdStock(idStock);
             newOrder.setIdClient(userId);
-            newOrder.setOrderQuantity(quantity); // Isso pressupõe que você tem um método setQuantity em Orders
+            newOrder.setOrderQuantity(quantity);
             newOrder.setOrderPrice(orderPrice);
             newOrder.setDateStart(dateStart);
             newOrder.setState(state);
 
-            // Perform logic to process the order and save it in the database
             OrdersBLL.create(newOrder);
 
-            // Return a response to indicate success
             return new ResponseEntity<>(Collections.singletonMap("message", "Order created successfully."), HttpStatus.CREATED);
     }
 
