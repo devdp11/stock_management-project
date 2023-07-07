@@ -24,6 +24,11 @@ public class OrdersBLL {
         return query.getResultList();
     }
 
+    public static double getTotalOrderPrice() {
+            TypedQuery<Double> query = Database.getEntityManager().createNamedQuery("orders.getTotal", Double.class);
+            return query.getSingleResult();
+    }
+
     public static void create(Orders entity) {
         Database.beginTransaction();
 

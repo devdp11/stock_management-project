@@ -46,6 +46,8 @@ public class orderController {
     private ComboBox<String> stateFilter;
     @FXML
     private TextField productFilter;
+    @FXML
+    private Label totalPrice;
 
     public void initialize() {
         ObservableList<String> tOrder1 = FXCollections.observableArrayList(
@@ -168,9 +170,10 @@ public class orderController {
             }
         }
     }
-
+    @FXML
     public void onListTotalBilledButtonClick(ActionEvent event) throws IOException {
-
+        double totalBilled = OrdersBLL.getTotalOrderPrice();
+        totalPrice.setText("Total Billed: " + totalBilled);
     }
     @FXML
     private void updateDataView(List<Orders> orders) {

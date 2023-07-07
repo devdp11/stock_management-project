@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @NamedQueries({
         @NamedQuery(name = "orders.index", query = "SELECT orders FROM Orders orders"),
         @NamedQuery(name = "orders.getUserOrdersByUserId", query = "SELECT orders FROM Orders orders WHERE orders.idClient = :userId"),
+        @NamedQuery(name = "orders.getTotal", query = "SELECT SUM(orders.orderPrice) FROM Orders orders"),
 })
 public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
